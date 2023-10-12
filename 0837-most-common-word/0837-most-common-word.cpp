@@ -30,7 +30,6 @@ public:
                 res = p.first;
                 iMax = p.second;
             }
-            cout << p.first << " " << p.second << endl;
         }
 
         return res;
