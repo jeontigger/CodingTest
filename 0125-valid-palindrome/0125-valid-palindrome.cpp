@@ -3,25 +3,27 @@ public:
     bool isPalindrome(string s) {
         string str = "";
 
-        for(int i = 0 ; i<s.length() ; i++){
-            if(isdigit(s[i])){
-                str+= s[i];
-            }
-            if(isalpha(s[i])){
-                str+= tolower(s[i]);
-            }
-        }
+        int start = 0;
+        int last = s.length()-1;
 
-        if(str ==""){
-            return true;
-        }
+        while(true){
+            if(last <= start)
+                return true;
+            if(!isalnum(s[start])){
+                start++;
+                continue;
+            }
+            if(!isalnum(s[last])){
+                last--;
+                continue;
+            }
 
-        cout << str << endl;
-        
-        for(int i = 0; i<str.length()/2+1 ; i++){
-            if(str[i]!=str[str.length()-1-i]){
+            if(tolower(s[start]) != tolower(s[last])){
                 return false;
             }
+            
+            start++;
+            last--;
         }
         return true;
     }
