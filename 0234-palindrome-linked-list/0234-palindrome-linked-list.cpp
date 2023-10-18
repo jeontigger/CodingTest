@@ -11,22 +11,19 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        vector<int> nums;
+        string nums = "";
         while(true){
-            nums.push_back(head->val);
+            nums += head->val + '0';
             if(head->next == nullptr){
                 break;
             }
             head = head->next;
-
-
         }
-        for(int i= 0; i<nums.size()/2;i++){
-            if(nums[i] != nums[nums.size()-1-i])
-                {
-                    cout << nums[i] << " " << nums[nums.size()-1-i];
-                    return false;
-                }
+        
+        for(int i = 0; i<nums.length();i++){
+            if(nums[i] != nums[nums.length()-1-i]){
+                return false;
+            }
         }
         return true;
     }
