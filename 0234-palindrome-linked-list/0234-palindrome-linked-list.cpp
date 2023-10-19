@@ -12,6 +12,18 @@ class Solution {
 public:
     bool isPalindrome(ListNode* head) {
         string nums = "";
+        int cnt = 0;
+        ListNode* cntNode = head;
+        while(true){
+            cnt++;
+            if(cntNode->next == nullptr){
+                break;
+            }
+            cntNode = cntNode->next;
+        }
+        nums.reserve(cnt);
+
+
         while(true){
             nums += head->val + '0';
             if(head->next == nullptr){
