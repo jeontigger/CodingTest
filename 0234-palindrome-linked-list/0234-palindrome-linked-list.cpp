@@ -11,32 +11,28 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        string nums = "";
-        int cnt = 0;
-        ListNode* cntNode = head;
-        while(true){
-            cnt++;
-            if(cntNode->next == nullptr){
-                break;
-            }
-            cntNode = cntNode->next;
-        }
-        nums.reserve(cnt);
+        ListNode* reverse = nullptr;
+        ListNode* node;
+        node = head;
 
+        while(node){
+            ListNode* newNode = new ListNode(node->val, reverse);
+            reverse = newNode;
 
-        while(true){
-            nums += head->val + '0';
-            if(head->next == nullptr){
-                break;
-            }
-            head = head->next;
+            node = node->next;
+            
         }
-        
-        for(int i = 0; i<nums.length();i++){
-            if(nums[i] != nums[nums.length()-1-i]){
+
+        node = head;
+        while(node){
+            if(node->val != reverse->val){
                 return false;
+            }else{
+                node = node->next;
+                reverse = reverse->next;
             }
         }
         return true;
+
     }
 };
