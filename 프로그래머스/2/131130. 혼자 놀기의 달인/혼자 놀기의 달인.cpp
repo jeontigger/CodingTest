@@ -9,6 +9,7 @@ int solution(vector<int> cards) {
     int answer = 0;
     
     vector<int> cnts;
+    cnts.push_back(0);
     for(int i = 0; i < cards.size();i++){
         int curIdx = cards[i] - 1;
         if(cards[i] == 0)
@@ -26,15 +27,9 @@ int solution(vector<int> cards) {
         cnts.push_back(cnt);
     }
     
-    if(cnts.size() <= 1)
-        return 0;
+    sort(cnts.begin(), cnts.end(), greater<int>());
     
-    auto iter = max_element(cnts.begin(), cnts.end());
-    int max1 = *iter;
-    cnts.erase(iter);
-    int max2 = *max_element(cnts.begin(), cnts.end());
-    
-    answer = max1 * max2;
+    answer = cnts[0] * cnts[1];
     
     return answer;
 }
