@@ -23,16 +23,18 @@ int solution(int x, int y, int n) {
         if(data.val == y){
             return data.cnt;
         }
+        
         if(data.val > y || visited[data.val]) continue;
         visited[data.val] = true;
-
         
+        // if(data.val == y){
+        //     return data.cnt;
+        // }
+
         q.push({data.val + n, data.cnt+1});
         q.push({data.val * 2, data.cnt+1});
         q.push({data.val * 3, data.cnt+1});
     }
-    
-    
     
     return -1;
 }
