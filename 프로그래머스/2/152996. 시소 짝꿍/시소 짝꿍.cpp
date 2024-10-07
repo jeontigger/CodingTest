@@ -7,44 +7,35 @@ using namespace std;
 
 long long solution(vector<int> weights) {
     long long answer = 0;
-//     vector<int> cnts(1001, 0);
-    
-//     for(int i: weights){
-//         cnts[i]++;
-//     }
-    
-//     for(int i = 100; i < cnts.size(); i++){
-//         float ratio;
-//         ratio = i;
-//         answer += cnts[i] * (cnts[ratio]-1) / 2;
-//         ratio = i * 4.f/3;
-//         if((i * 4) % 3== 0)
-//             answer += cnts[i] * (cnts[ratio]);
-//         ratio = i * 1.5f;
-//         if((i * 3) % 2 == 0)
-//             answer += cnts[i] * (cnts[ratio]);
-//         ratio = i * 2.f;
-//         answer += cnts[i] * (cnts[ratio]);
-//     }
-    
-    sort(weights.begin(), weights.end());
-    
-    for(int i = 0 ; i < weights.size(); i++){
-        for(int j = i + 1 ; j < weights.size(); j++){
-            float ratio = (float)weights[j] / weights[i];
-            if(ratio > 2) break;
-            
-            if(ratio == 1){
-                answer++;
-            }else if(ratio == 4.f/3){
-                answer++;
-            }else if(ratio == 1.5){
-                answer++;
-            }else if(ratio == 2){
-                answer++;
-            }
-        }
+
+    vector<long long> arr(2001,0);
+
+    for(const auto v : weights)
+    {
+        arr[v]++;
     }
-    
+
+    for(int i = 100; i <= 1000; ++i)
+    {
+        if(arr[i] == 0)
+        {
+            continue;
+        }
+
+        answer += arr[i]*(arr[i]-1) / 2;
+
+        answer += arr[i] * arr[2 * i];
+
+        if((i * 3) % 2 == 0)
+        {
+            answer += arr[i] * arr[i * 3 / 2];
+        }
+
+        if((i * 4) % 3 == 0)
+        {
+            answer += arr[i] * arr[i * 4 / 3];
+        }   
+    }
+
     return answer;
 }
