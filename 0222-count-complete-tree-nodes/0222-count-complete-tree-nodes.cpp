@@ -11,15 +11,12 @@
  */
 class Solution {
 public:
-    int BinarySearch(TreeNode* root){
+    int countNodes(TreeNode* root) {
         if(root == nullptr) return 0;
 
         int sum = 1;
-        sum += BinarySearch(root->left);
-        sum += BinarySearch(root->right);
+        sum += countNodes(root->left);
+        sum += countNodes(root->right);
         return sum;
-    }
-    int countNodes(TreeNode* root) {
-        return BinarySearch(root);
     }
 };
