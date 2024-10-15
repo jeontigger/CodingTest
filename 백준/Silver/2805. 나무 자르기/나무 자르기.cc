@@ -1,65 +1,54 @@
+
 #include <iostream>
 #include <vector>
-#include <list>
-#include <algorithm>
-#include <queue>
 
 using namespace std;
 
-void input(int& m, vector<int>& vec) {
-    int n;
-    cin >> n;
-    cin >> m;
-    vec.resize(n);
-    for (int i = 0; i < n; i++) {
-        cin >> vec[i];
-    }
-}
+void Input(vector<int>& logs, int& target) {
+	int m;
 
-void GetNextIdx(int& idx, const vector<int>& vec) {
-    int i = idx + 1;
-    for (; i < vec.size() - 1; i++) {
-        if (vec[i] != vec[i + 1]) {
-            break;
-        }
-    }
-    idx = i;
-    return;
-}
+	cin >> m >> target;
 
-void solution(int targetlen, vector<int> vec) {
+	logs.resize(m);
 
-    sort(vec.begin(), vec.end(), greater<int>());
+	for (int i = 0; i < m; i++) {
+		cin >> logs[i];
+	}
+};
 
-    long long maxValue = vec[0];
+bool IsPossible(const vector<int>& logs, int target, int len) {
 
-    for (int i = 0; i < vec.size() - 1; i++) {
-        vec[i] = vec[i] - vec[i + 1];
-    }
+	int sum = 0;
+	for (int i = 0; i < logs.size(); i++) {
+		if (logs[i] > len) {
+			sum += logs[i] - len;
+		}
+		if (sum >= target) return true;
+	}
 
-    long long sum = 0;
-    long long prevSum = sum;
-    long long cnt = 0;
-    for (int i = 0; i < vec.size(); i++) {
-        prevSum = sum;
-        for (int j = 0; j < vec[i]; j++) {
-            sum = (i + 1) * (j + 1)+ prevSum;
-            cnt++;
-            if (targetlen <= sum) {
-                cout << maxValue - cnt << endl;
-                return;
-            }
-        }
-        //cout << maxValue - cnt << " " << sum << endl;
-    }
-    return;
+	return false;
 }
 
 int main()
 {
-    int m;
-    vector<int> vec;
+	int target;
+	vector<int> logs;
 
-    input(m, vec);
-    solution(m, vec);
+	Input(logs, target);
+
+	int left = 0, right = 1000000000;
+
+	while (left <= right) {
+		int mid = (left + right) / 2;
+
+		if (IsPossible(logs, target, mid)) {
+			left = mid + 1;
+		}
+		else {
+			right = mid - 1;
+		}
+	}
+
+	cout << right << endl;
+
 }
