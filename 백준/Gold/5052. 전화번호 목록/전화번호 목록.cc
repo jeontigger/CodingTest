@@ -1,65 +1,94 @@
-#include <bits/stdc++.h>
+#include <vector>
+#include <iostream>
+#include <string>
+#include <algorithm>
+
 using namespace std;
 
-struct Trie {
-	Trie *node[10];
+class Trie {
+private:
+	Trie* nums[10];
 	bool finish;
+
+public:
 	Trie() {
-		finish=false;
-		for(int i=0; i<10; i++) {
-			node[i]=NULL;
+		for (int i = 0; i < 10; i++) {
+			nums[i] = nullptr;
+		}
+		finish = false;
+	};
+	~Trie() {
+		for (int i = 0; i < 10; i++) {
+			if (nums[i]) delete nums[i];
 		}
 	}
-	
-	void insert(char *str) {
-		if(*str==NULL) {
-			finish=true;
+
+	void Insert(const char* str) {
+		if (*str == NULL) {
+			finish = true;
 			return;
 		}
-		int cur = *str-'0';
-		if(node[cur] == NULL) node[cur] = new Trie();
-		node[cur]->insert(str+1);
+
+		if (nums[*str - '0'] != nullptr) {
+			// 중복
+			nums[*str - '0']->Insert(str + 1);
+		}
+		else {
+			// 첫 기입
+			nums[*str - '0'] = new Trie;
+			nums[*str - '0']->Insert(str + 1);
+		}
 	}
-	
-	bool find(char *str) {
-		if(*str==NULL) {
+
+	bool HasPrev(const char* str) {
+		if (*str == NULL) {
 			return false;
 		}
-		
-		if(finish==true) {
-			return true;
+
+		if (finish) return true;
+
+		if (nums[*str - '0'] != nullptr) {
+			// 중복
+			return nums[*str - '0']->HasPrev(str + 1);
 		}
-		
-		int cur = *str-'0';
-		if(node[cur]==NULL) return false;
-		return node[cur]->find(str+1);
+		else {
+			// 첫 기입
+			return false;
+		}
 	}
 };
 
-char input[100000][11];
-vector<string> book;
 
 int main() {
-	int tc;
-	cin >> tc;
-	while(tc--) {
-		int n;
-		string str;
-		cin >> n;
-		Trie *root = new Trie();
-		for(int i=0; i<n; i++) {
-			cin >> input[i];
-			book.push_back(input[i]);
-			root->insert(input[i]);
+
+	int testCnt = 0;
+	cin >> testCnt;
+
+	for (int i = 0; i < testCnt; i++) {
+		int inputCnt;
+		cin >> inputCnt;
+
+		Trie t;
+		vector<string> inputs;
+		for (int j = 0; j < inputCnt; j++) {
+			string str;
+			cin >> str;
+			t.Insert(str.c_str());
+			inputs.push_back(str);
 		}
-		for(int i=0; i<n; i++) {
-			if(root->find(input[i])) {
-				cout << "NO\n";
+
+		bool isConsist = true;
+		for (int j = 0; j < inputCnt; j++) {
+			if (t.HasPrev(inputs[j].c_str())) {
+				cout << "NO" << endl;
+				isConsist = false;
 				break;
 			}
-			else if(i==n-1) {
-				cout << "YES\n";
-			}
+		}
+		if (isConsist) {
+			cout << "YES" << endl;
 		}
 	}
+
+	return 0;
 }
