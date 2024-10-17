@@ -15,7 +15,7 @@ struct Edge {
 
 struct cmp {
 	bool operator()(const Edge& e1, const Edge& e2) {
-		return e1.weight != e2.weight ? e1.weight > e2.weight : e1.to > e2.to;
+		return e1.weight > e2.weight;
 	}
 };
 
@@ -26,37 +26,36 @@ void Input(vector<vector<Edge>>& edges, int& start) {
 
 	edges.resize(V);
 	for (int i = 0; i < E; i++) {
-		int from, to, w;
-		cin >> from >> to >> w;
-		edges[from - 1].push_back({ w, to - 1 });
+		int f, t, w;
+		cin >> f >> t >> w;
+		edges[f - 1].push_back({ w, t - 1 });
 	}
+
 }
 
-void Dijkstra(vector<vector<Edge>>& edges, int& start) {
+void Dijkstra(vector<vector<Edge>>& edges, int start) {
 
+	priority_queue<Edge, vector<Edge>, cmp> pq;
 	vector<int> dist(edges.size(), INF);
-	priority_queue < Edge, vector<Edge>, cmp> pq;
 
-	pq.push({ 0, start });
 	dist[start] = 0;
+	pq.push({ 0, start });
 
 	while (!pq.empty()) {
-		Edge edge = pq.top();
+		int curNode = pq.top().to;
+		int curWeight = pq.top().weight;
 		pq.pop();
 
-		int from = edge.to;
-		int weight = edge.weight;
+		if (dist[curNode] < curWeight) continue;
 
-		if (dist[from] < weight) continue;
+		for (Edge& edge : edges[curNode]) {
+			int toNode = edge.to;
+			int toWeight = edge.weight;
+			int cost = toWeight + curWeight;
 
-
-
-		for (int i = 0; i < edges[from].size(); i++) {
-			int to = edges[from][i].to;
-			int w = edges[from][i].weight;
-			if (dist[to] > weight + w) {
-				dist[to] = w + weight;
-				pq.push({ w + weight, to });
+			if (dist[toNode] > cost) {
+				dist[toNode] = cost;
+				pq.push({ cost, toNode });
 			}
 		}
 	}
@@ -69,7 +68,6 @@ void Dijkstra(vector<vector<Edge>>& edges, int& start) {
 			cout << i << endl;
 		}
 	}
-
 }
 
 int main() {
@@ -77,8 +75,8 @@ int main() {
 	vector<vector<Edge>> edges;
 	int start;
 	Input(edges, start);
-
 	Dijkstra(edges, start);
+
 
 	return 0;
 }
