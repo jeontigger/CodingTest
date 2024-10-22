@@ -1,144 +1,78 @@
-#pragma once
-#include <iostream>
 #include <vector>
-#include <list>
+#include <iostream>
+#include <string>
 #include <algorithm>
 #include <queue>
-#include <string>
-#include <unordered_set>
+#include <cmath>
 
 using namespace std;
-int g_row;
-int g_col;
-int g_nrow[4] = { 0, 1, 0, -1 };
-int g_ncol[4] = { 1, 0, -1, 0 };
 
-int g_cnt = 0;
-int g_target = 0;
-vector<vector<int>> g_dp;
-vector<vector<int>> g_visited;
+#define INF 1e9
 
-#pragma region FUNC
 
-struct fData {
-    int row;
-    int col;
-
-    fData(int _r, int _c) : row(_r), col(_c) {}
-
-    friend ostream& operator<< (ostream& os, fData data);
-};
-
-ostream& operator<<(ostream& os, fData data)
-{
-    os << data.row << " " << data.col << endl;
-    return os;
+void PrintVec(const vector<int>& v) {
+	for (int i : v) {
+		cout << i << " ";
+	}
+	cout << endl;
 }
 
-
-template<typename T>
-void printVec(vector<T>& vec) {
-    for (size_t i = 0; i < vec.size(); i++)
-    {
-        cout << vec[i] << " ";
-    }
-    cout << endl;
+void PrintVec(const vector<vector<int>>& vec) {
+	for (auto& v : vec) {
+		PrintVec(v);
+	}
 }
 
-template <typename T>
-void printDoubleVec(vector<vector<T>>& vec) {
-    for (size_t i = 0; i < vec.size(); i++)
-    {
-        printVec(vec[i]);
-    }
+int g_nrow[] = { 0, 1, 0, -1 };
+int g_ncol[] = { 1, 0, -1, 0 };
+int g_maxValue = 0;
+int DFS(const vector<vector<int>>& maps, int row, int col, vector<vector<int>>& dp) {
+	if (dp[row][col] != 0) return dp[row][col];
+
+	int n = maps.size();
+
+	for (int i = 0; i < 4; i++) {
+		int nrow = row + g_nrow[i];
+		int ncol = col + g_ncol[i];
+
+		int depth = 1;
+		if (0 <= nrow && nrow < n && 0 <= ncol && ncol < n) {
+			if (maps[row][col] < maps[nrow][ncol]) {
+				depth += DFS(maps, nrow, ncol, dp);
+			}
+		}
+
+		dp[row][col] = max(dp[row][col], depth);
+		g_maxValue = max(g_maxValue, dp[row][col]);
+	}
+
+	return dp[row][col];
 }
 
-template<typename T>
-void inputVec(vector<T>& vec, int n) {
-    vec.resize(n);
-    for (size_t i = 0; i < vec.size(); i++)
-    {
-        cin >> vec[i];
-    }
-}
+int main() {
 
-template<typename T>
-void inputDoubleVec(vector<vector<T>>& vec, int r, int c) {
-    vec.resize(r);
-    for (size_t i = 0; i < r; i++)
-    {
-        inputVec(vec[i], c);
-    }
-}
-#pragma endregion
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
 
-void input(vector<vector<int>>& vec) {
-    int n;
-    cin >> n;
-    inputDoubleVec(vec, n, n);
-    
-    vector<vector<int>> tmp(n, vector<int>(n, 0));
-    g_dp = tmp;
-    g_visited = tmp;
-}
-int maxDepth = 0;
-int dfs(vector<vector<int>>& bamboos, int _row, int _col, int depth);
+	int n;
+	cin >> n;
 
-void solution(vector<vector<int>>& maps) {
-    //printDoubleVec(maps);
+	vector<vector<int>> maps(n, vector<int>(n));
+	vector<vector<int>> dp(n, vector<int>(n, 0));
 
-    for (size_t i = 0; i < maps.size(); i++)
-    {
-        for (size_t j = 0; j < maps[i].size(); j++)
-        {
-            dfs(maps, i, j, 1);
-        }
-    }
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			cin >> maps[i][j];
+		}
+	}
 
-    //dfs(maps, 2, 2, 1);
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			DFS(maps, i, j, dp);
+		}
+	}
 
-    //printDoubleVec(g_dp);
+	cout << g_maxValue;
 
-    cout << maxDepth << endl;
-}
-
-int main()
-{
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-
-    vector<vector<int>> maps;
-    input(maps);
-    solution(maps);
-
-}
-
-int dfs(vector<vector<int>>& bamboos, int _row, int _col, int depth)
-{
-    if (g_visited[_row][_col] == true)
-        return 0;
-    
-    if (g_dp[_row][_col] != 0)
-        return g_dp[_row][_col];
-
-    g_visited[_row][_col] = true;
-    for (size_t i = 0; i < 4; i++)
-    {
-        int nrow = _row + g_nrow[i];
-        int ncol = _col + g_ncol[i];
-
-        int sum = 1;
-        if (0 <= nrow && nrow < bamboos.size() && 0 <= ncol && ncol < bamboos[0].size()) {
-            if(bamboos[_row][_col] < bamboos[nrow][ncol])
-                sum += dfs(bamboos, nrow, ncol, depth+1);
-        }
-
-        g_dp[_row][_col] = max(g_dp[_row][_col], sum);
-        maxDepth = max(maxDepth, g_dp[_row][_col]);
-    }
-
-    g_visited[_row][_col] = false;
-
-
-    return g_dp[_row][_col];
+	return 0;
 }
