@@ -1,81 +1,89 @@
-#pragma once
-#include <iostream>
 #include <vector>
-#include <list>
+#include <iostream>
+#include <string>
 #include <algorithm>
 #include <queue>
-#include <string>
+#include <cmath>
+#include <stack>
 
 using namespace std;
 
-vector<vector<bool>> g_vec;
-int g_cnt = 0;
+#define INF 1e9
 
-void input() {
-    int n;
-    cin >> n;
 
-    g_vec.resize(n);
-    for (vector<bool>& v : g_vec) {
-        v.resize(n);
-    }
+void PrintVec(const vector<int>& v) {
+	for (int i : v) {
+		printf("%d ", i);
+	}
+	printf("\n");
 }
 
-void Queen(vector<int>& vec, int cnt) {
-    if (cnt == vec.size()) {
-        g_cnt++;
-        return;
-    }
-   
-    for (int i = 0; i < vec.size(); i++)
-    {
-        bool cont = false;
-        for (int j = 0; j < cnt; j++)
-        {
-            if (vec[j] == i) {
-                cont = true;
-                break;
-            }
-        }
+void PrintVec(const vector<vector<int>>& vec) {
+	for (auto& v : vec) {
+		PrintVec(v);
+	}
+}
 
-        if (cont)
-            continue;
+bool CrossQueen(vector<int>& queens, int idx, int depth) {
 
-        for (int j = 0; j < cnt; j++)
-        {
-            if (abs(vec[j] - i) == abs(cnt - j)) {
-                cont = true;
-                break;
-            }
-        }
+	// 좌상단 && 좌하단
+	for (int i = 1; i <= idx; i++) {
+		if (queens[idx - i] == depth - i || queens[idx - i] == depth + i) {
+			return true;
+		}
+	}
 
-        if (cont)
-            continue;
+	// 우상단 && 우하단 
+	for (int i = 1; i < queens.size() - idx; i++) {
+		if (queens[idx + i] == depth - i || queens[idx + i] == depth + i) {
+			return true;
+		}
+	}
 
-        vec[cnt] = i;
-        Queen(vec, cnt + 1);
-    }
+	return false;
+}
+
+bool VerticalQueen(vector<int>& queens, int idx, int depth) { return true; }
+
+int g_res = 0;
+void NQueen(int N, vector<int>& queens, int depth) {
+
+	if (depth == N) {
+		g_res++;
+
+		//PrintVec(queens);
+		return;
+	}
+
+	for (int i = 0; i < N; i++) {
+		// 세로축 제외
+		if (queens[i] != -100) continue;
+
+		// 가로축 제외
+		if (queens[i] == depth) continue;
+
+		// 대각선 제외
+		if (CrossQueen(queens, i, depth)) continue;
+
+		queens[i] = depth;
+		NQueen(N, queens, depth + 1);
+		queens[i] = -100;
+	}
+
 
 }
 
-void solution() {
-    int cnt = 0;
+int main() {
 
-    vector<int> vec;
-    vec.resize(g_vec.size());
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
 
-    Queen(vec, 0);
+	int N;
+	cin >> N;
 
-    cout << g_cnt << endl;
-    return;
-}
+	vector<int> queens(N, -100);
+	NQueen(N, queens, 0);
 
-
-int main()
-{
-
-    input();
-
-    solution();
-
+	cout << g_res << endl;
+	return 0;
 }
