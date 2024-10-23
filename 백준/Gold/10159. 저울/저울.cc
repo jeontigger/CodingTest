@@ -29,26 +29,13 @@ int g_ncol[] = { 1, 0, -1, 0 };
 
 void DFS(vector<vector<vector<int>>>& nodes, vector<bool>& visited, int curNode, bool increase) {
 
+	for (int i = 0; i < nodes[curNode][increase].size(); i++) {
+		int nextNode = nodes[curNode][increase][i];
 
-	if (increase) {
-		for (int i = 0; i < nodes[curNode][1].size(); i++) {
-			int nextNode = nodes[curNode][1][i];
-
-			if (visited[nextNode]) continue;
-			visited[nextNode] = true;
-			DFS(nodes, visited, nextNode, increase);
-		}
+		if (visited[nextNode]) continue;
+		visited[nextNode] = true;
+		DFS(nodes, visited, nextNode, increase);
 	}
-	else {
-		for (int i = 0; i < nodes[curNode][0].size(); i++) {
-			int nextNode = nodes[curNode][0][i];
-
-			if (visited[nextNode]) continue;
-			visited[nextNode] = true;
-			DFS(nodes, visited, nextNode, increase);
-		}
-	}
-
 }
 
 int main() {
