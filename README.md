@@ -25,6 +25,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Sliding Window
 |  |
 | ------- |
+| [0076-minimum-window-substring](https://github.com/jeontigger/CodingTest/tree/master/0076-minimum-window-substring) |
 | [0209-minimum-size-subarray-sum](https://github.com/jeontigger/CodingTest/tree/master/0209-minimum-size-subarray-sum) |
 | [0239-sliding-window-maximum](https://github.com/jeontigger/CodingTest/tree/master/0239-sliding-window-maximum) |
 ## Prefix Sum
@@ -47,6 +48,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0022-generate-parentheses](https://github.com/jeontigger/CodingTest/tree/master/0022-generate-parentheses) |
+| [0076-minimum-window-substring](https://github.com/jeontigger/CodingTest/tree/master/0076-minimum-window-substring) |
 ## Dynamic Programming
 |  |
 | ------- |
@@ -67,4 +69,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0239-sliding-window-maximum](https://github.com/jeontigger/CodingTest/tree/master/0239-sliding-window-maximum) |
+## Hash Table
+|  |
+| ------- |
+| [0076-minimum-window-substring](https://github.com/jeontigger/CodingTest/tree/master/0076-minimum-window-substring) |
 <!---LeetCode Topics End-->
