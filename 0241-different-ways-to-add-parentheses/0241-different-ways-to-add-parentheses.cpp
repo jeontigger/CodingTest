@@ -1,34 +1,40 @@
 class Solution {
 public:
-    vector<int> diffWaysToCompute(string input) {
-        vector<int> result;
-        
-        for(int i = 0; i < input.length(); i++){
-            char c = input[i];
+    vector<int> GetResults(string expression) {
+        vector<int> res;
+        bool justOne = true;
+        for (int i = 0; i < expression.size(); i++) {
+            if (expression[i] == '+' || expression[i] == '-' ||
+                expression[i] == '*') {
+                justOne = false;
+                // cout << expression.substr(0, i) << " " <<
+                // expression.substr(i+1) << endl;
+                auto r1 = GetResults(expression.substr(0, i));
+                auto r2 = GetResults(expression.substr(i + 1));
 
-            if(c == '+' || c == '-' || c == '*'){
-                auto lefts = diffWaysToCompute(input.substr(0, i));
-                auto rights = diffWaysToCompute(input.substr(i+1));
-
-                for(int left : lefts){
-                    for(int right : rights){
-                        if(c=='+'){
-                            result.push_back(left+right);
-                        }else if (c == '-'){
-                            result.push_back(left-right);
-                        }else if(c == '*'){
-                            result.push_back(left*right);
+                for (int i1 : r1) {
+                    for (int i2 : r2) {
+                        if (expression[i] == '+') {
+                            res.push_back(i1 + i2);
+                        }else if(expression[i] == '-'){
+                            res.push_back(i1 - i2);
+                        }else{
+                            res.push_back(i1 * i2);
                         }
                     }
                 }
             }
         }
 
-        if(result.empty()){
-            result.push_back(stoi(input));
+        if (justOne) {
+            // cout << stoi(expression) << " ";
+            return {stoi(expression)};
         }
 
+        return res;
+    }
 
-        return result;
+    vector<int> diffWaysToCompute(string expression) {
+        return GetResults(expression);
     }
 };
