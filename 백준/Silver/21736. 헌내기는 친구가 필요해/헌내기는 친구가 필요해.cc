@@ -1,77 +1,76 @@
-#pragma once
-#include <iostream>
 #include <vector>
-#include <list>
+#include <iostream>
+#include <string>
 #include <algorithm>
 #include <queue>
-#include <string>
+#include <cmath>
+#include <stack>
 
 using namespace std;
 
-pair<int, int> doyeonPos;
-void input(vector<vector<char>>& vec) {
-    int row, col;
-    cin >> row >> col;
+#define INF 1e9
 
-    vec.resize(row);
-    for (size_t i = 0; i < row; i++)
-    {
-        vec[i].resize(col);
-        for (size_t j = 0; j < col; j++)
-        {
-            cin >> vec[i][j];
-            if (vec[i][j] == 'I') {
-                doyeonPos = { i, j };
-            }
-        }
-    }
+template<typename T>
+void PrintVec(const vector<T>& v) {
+	for (T i : v) {
+		cout << i << " ";
+	}
+	cout << endl;
 }
 
-int nRow[4] = {0, 1, 0, -1};
-int nCol[4] = {1, 0, -1, 0};
-
-void solution(vector<vector<char>>& grid) {
-    list<pair<int, int>> q;
-
-    q.push_back(doyeonPos);
-    grid[doyeonPos.first][doyeonPos.second] = 'X';
-    
-    int cnt = 0;
-    while (!q.empty()) {
-        auto pos = q.front();
-        q.pop_front();
-
-        for (size_t i = 0; i < 4; i++)
-        {
-            int nextRow = pos.first + nRow[i];
-            int nextCol = pos.second + nCol[i];
-
-            if (0 <= nextRow && nextRow < grid.size() && 0 <= nextCol && nextCol < grid[0].size()) {
-                if (grid[nextRow][nextCol] != 'X') {
-                    if (grid[nextRow][nextCol] == 'P') {
-                        cnt++;
-                    }
-                    grid[nextRow][nextCol] = 'X';
-                    q.push_back({ nextRow, nextCol });
-                }
-            }
-        }
-    }
-
-    if (cnt == 0) {
-        cout << "TT" << endl;
-    }
-    else {
-        cout << cnt << endl;
-    }
+template<typename T>
+void PrintVec(const vector<vector<T>>& vec) {
+	for (auto& v : vec) {
+		PrintVec(v);
+	}
 }
 
+int g_nrow[] = { 0, 1, 0, -1 };
+int g_ncol[] = { 1, 0, -1, 0 };
 
-int main()
-{
-    vector<vector<char>> grid;
-    input(grid);
+int DFS(vector<vector<char>>& maps, int row, int col) {
+	int res = 0;
 
-    solution(grid);
+	for (int i = 0; i < 4; i++) {
+		int nrow = row + g_nrow[i];
+		int ncol = col + g_ncol[i];
 
+		if (0 <= nrow && nrow < maps.size() && 0 <= ncol && ncol < maps[0].size()) {
+			if (maps[nrow][ncol] == 'O' || maps[nrow][ncol] == 'P') {
+				if (maps[nrow][ncol] == 'P') {
+					res++;
+				}
+				maps[nrow][ncol] = 'X';
+				res += DFS(maps, nrow, ncol);
+			}
+		}
+	}
+	return res;
+}
+
+int main() {
+
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+
+	int n, m;
+	cin >> n >> m;
+
+	vector<vector<char>> maps(n, vector<char>(m));
+
+	int row = 0, col = 0;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			cin >> maps[i][j];
+			if (maps[i][j] == 'I') {
+				row = i;
+				col = j;
+			}
+		}
+	}
+
+	int res = DFS(maps, row, col);
+	res == 0 ? cout << "TT" : cout << res;
+
+	return 0;
 }
