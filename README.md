@@ -7,6 +7,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0069-sqrtx](https://github.com/jeontigger/CodingTest/tree/master/0069-sqrtx) |
+| [0241-different-ways-to-add-parentheses](https://github.com/jeontigger/CodingTest/tree/master/0241-different-ways-to-add-parentheses) |
 ## Binary Search
 |  |
 | ------- |
@@ -50,10 +51,12 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0022-generate-parentheses](https://github.com/jeontigger/CodingTest/tree/master/0022-generate-parentheses) |
 | [0076-minimum-window-substring](https://github.com/jeontigger/CodingTest/tree/master/0076-minimum-window-substring) |
+| [0241-different-ways-to-add-parentheses](https://github.com/jeontigger/CodingTest/tree/master/0241-different-ways-to-add-parentheses) |
 ## Dynamic Programming
 |  |
 | ------- |
 | [0022-generate-parentheses](https://github.com/jeontigger/CodingTest/tree/master/0022-generate-parentheses) |
+| [0241-different-ways-to-add-parentheses](https://github.com/jeontigger/CodingTest/tree/master/0241-different-ways-to-add-parentheses) |
 ## Backtracking
 |  |
 | ------- |
@@ -87,4 +90,12 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0169-majority-element](https://github.com/jeontigger/CodingTest/tree/master/0169-majority-element) |
+## Recursion
+|  |
+| ------- |
+| [0241-different-ways-to-add-parentheses](https://github.com/jeontigger/CodingTest/tree/master/0241-different-ways-to-add-parentheses) |
+## Memoization
+|  |
+| ------- |
+| [0241-different-ways-to-add-parentheses](https://github.com/jeontigger/CodingTest/tree/master/0241-different-ways-to-add-parentheses) |
 <!---LeetCode Topics End-->
