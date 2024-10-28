@@ -27,33 +27,23 @@ void PrintVec(const vector<vector<T>>& vec) {
 
 vector<int> root;
 
-class UF {
-public:
-
-	UF(int n) {
-		root.resize(n + 1);
-		for (int i = 0; i < root.size(); i++) {
-			root[i] = i;
-		}
-	}
-
-	int Find(int n) {
-		while (n != root[n]) {
-			n = root[n];
-		}
-
+int Find(int n) {
+	if (root[n] == n) {
 		return n;
 	}
-
-	void Union(int a, int b) {
-		a = Find(a);
-		b = Find(b);
-
-		if (a == b) return;
-
-		root[b] = a;
+	else {
+		return root[n] = Find(root[n]);
 	}
-};
+}
+
+void Union(int a, int b) {
+	a = Find(a);
+	b = Find(b);
+
+	if (a == b) return;
+
+	root[max(a, b)] = min(a, b);
+}
 
 int main() {
 
@@ -62,18 +52,18 @@ int main() {
 
 	int n, m;
 	cin >> n >> m;
-
-	UF uf(n);
+	root.resize(n + 1);
+	for (int i = 0; i < root.size(); i++) {
+		root[i] = i;
+	}
 	int c, v1, v2;
 	for (int i = 0; i < m; i++) {
 		cin >> c >> v1 >> v2;
 		if (c == 0) {
-			uf.Union(v1, v2);
+			Union(v1, v2);
 		}
 		else {
-			v1 = uf.Find(v1);
-			v2 = uf.Find(v2);
-			if (v1 == v2) {
+			if (Find(v1) == Find(v2)) {
 				printf("YES\n");
 			}
 			else {
