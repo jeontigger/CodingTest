@@ -47,14 +47,9 @@ void Union(string s1, string s2) {
 	s2 = Find(s2);
 
 	if (s1 == s2) return;
-	if (nodes[s1] < nodes[s2]) {
-		roots[s1] = s2;
-		nodes[s2] += nodes[s1];
-	}
-	else {
-		roots[s2] = s1;
-		nodes[s1] += nodes[s2];
-	}
+
+	roots[s1] = s2;
+	nodes[s2] += nodes[s1];
 }
 
 int main() {
