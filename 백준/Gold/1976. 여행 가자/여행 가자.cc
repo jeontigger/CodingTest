@@ -1,125 +1,91 @@
-#pragma once
-#include <iostream>
 #include <vector>
-#include <list>
+#include <iostream>
+#include <string>
 #include <algorithm>
 #include <queue>
-#include <string>
-#include <unordered_set>
-#include <limits.h>
+#include <cmath>
+#include <stack>
 
 using namespace std;
-int g_row;
-int g_col;
-int g_nrow[4] = { 0, 1, 0, -1 };
-int g_ncol[4] = { 1, 0, -1, 0 };
 
-int g_cnt = 0;
-int g_target = 0;
-vector<int> g_dp;
-
-#pragma region FUNC
-
-struct fData {
-    int row;
-    int col;
-    int cnt;
-    bool b;
-    fData(int _cnt, int _row, int _col, bool _b) { cnt = _cnt; row = _row; col = _col; b = _b; }
-    friend ostream& operator <<(ostream& os, const fData& data);
-};
-
-ostream& operator<<(ostream& os, fData data)
-{
-    os << data.row << " " << data.col << endl;
-    return os;
-}
-
+//#define INF 1e9
 
 template<typename T>
-void printVec(vector<T>& vec) {
-    for (size_t i = 0; i < vec.size(); i++)
-    {
-        cout << vec[i] << " ";
-    }
-    cout << endl;
-}
-
-template <typename T>
-void printDoubleVec(vector<vector<T>>& vec) {
-    for (size_t i = 0; i < vec.size(); i++)
-    {
-        printVec(vec[i]);
-    }
+void PrintVec(const vector<T>& v) {
+	for (T i : v) {
+		cout << i << " ";
+	}
+	cout << endl;
 }
 
 template<typename T>
-void inputVec(vector<T>& vec, int n) {
-    vec.resize(n);
-    for (size_t i = 0; i < vec.size(); i++)
-    {
-        cin >> vec[i];
-    }
+void PrintVec(const vector<vector<T>>& vec) {
+	for (auto& v : vec) {
+		PrintVec(v);
+	}
 }
 
-template<typename T>
-void inputDoubleVec(vector<vector<T>>& vec, int r, int c) {
-    vec.resize(r);
-    for (size_t i = 0; i < r; i++)
-    {
-        inputVec(vec[i], c);
-    }
-}
-#pragma endregion
+vector<int> root;
 
-void input(vector<vector<int>>& graph, vector<int>& sequence) {
-    int row, col;
-    cin >> row >> col;
-    inputDoubleVec(graph, row, row);
-    inputVec(sequence, col);
+int Find(int n) {
+	if (n == root[n]) {
+		return n;
+	}
+	else {
+		return root[n] = Find(root[n]);
+	}
 }
 
-void solution(vector<vector<int>>& graph, vector<int>& sequence) {
-    
-    vector<int> check(graph.size());
-    check[sequence.front()-1] = true;
+void Union(int a, int b) {
+	a = Find(a);
+	b = Find(b);
 
-    list<int> q;
-    q.push_back(sequence.front() - 1);
-    while (!q.empty()) {
-        int idx = q.front();
-        q.pop_front();
-        for (int i = 0; i < graph[idx].size(); i++) {
-            if (graph[idx][i] == 1 && !check[i]) {
-                q.push_back(i);
-                check[i] = true;
-            }
-        }
-    }
-    
-    //printVec(check);
+	if (a == b)return;
 
-    for (int i = 0; i < sequence.size(); i++) {
-        int idx = sequence[i] - 1;
-        if (!check[idx]) {
-            cout << "NO" << endl;
-            return;
-        }
-    }
-
-    cout << "YES" << endl;
-    return;
+	root[max(a, b)] = min(a, b);
 }
 
+int main() {
 
-int main()
-{
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
 
-    vector<vector<int>> graph;
-    vector<int> sequence;
-    input(graph, sequence);
-    solution(graph, sequence);
+	int n, m;
+	cin >> n >> m;
 
+	root.resize(n);
+	for (int i = 0; i < n; i++) {
+		root[i] = i;
+	}
+
+
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			int v;
+			cin >> v;
+			if (v == 1) {
+				Union(i, j);
+			}
+		}
+	}
+
+	int v;
+	cin >> v;
+	v--;
+	int prev = Find(v);
+	for (int i = 1; i < m; i++) {
+		cin >> v;
+		v--;
+		if (prev != Find(v)) {
+			cout << "NO" << endl;
+			return 0;
+		}
+		else {
+			prev = Find(v);
+		}
+	}
+
+	cout << "YES" << endl;
+
+	return 0;
 }
