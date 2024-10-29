@@ -30,8 +30,8 @@ unordered_map<string, string> roots;
 unordered_map<string, int> nodes;
 
 string Find(string str) {
-	if (str == roots[str]) {
-		return roots[str];
+	if (roots.find(str) == roots.end()) {
+		return str;
 	}
 	else {
 		return roots[str] = Find(roots[str]);
@@ -56,24 +56,22 @@ int main() {
 
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
+	cout.tie(NULL);
 
 	int T, F;
+	string s1, s2;
 	cin >> T;
 	while (T) {
 		T--;
-
 		cin >> F;
 		roots.clear();
 		nodes.clear();
 		for (int i = 0; i < F; i++) {
-			string s1, s2;
 			cin >> s1 >> s2;
-			if (roots[s1] == "") {
-				roots[s1] = s1;
+			if (!nodes[s1]) {
 				nodes[s1] = 1;
 			}
-			if (roots[s2] == "") {
-				roots[s2] = s2;
+			if (!nodes[s2]) {
 				nodes[s2] = 1;
 			}
 
