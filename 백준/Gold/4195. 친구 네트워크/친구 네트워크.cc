@@ -76,7 +76,7 @@ int main() {
 			}
 
 			Union(s1, s2);
-			cout << Count(s1) << endl;
+			cout << Count(s1) << '\n';
 		}
 	}
 
