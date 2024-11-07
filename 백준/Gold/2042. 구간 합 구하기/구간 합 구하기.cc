@@ -59,7 +59,7 @@ int main() {
 		cin >> nums[i];
 	}
 
-	fenwick.resize(N * 2 + 1);
+	fenwick.resize(N + 1);
 
 	// init
 	for (int i = 1; i <= N; i++) {
