@@ -1,3 +1,4 @@
+
 #include <vector>
 #include <iostream>
 #include <string>
@@ -26,46 +27,22 @@ void PrintVec(const vector<vector<T>>& vec) {
 	}
 }
 
-void Init(vector<long long>& segtree, const vector<long long>& arr, long long node, long long start, long long end) {
-	if (start == end) {
-		segtree[node] = arr[start];
-		return;
-	}
+vector<long long> fenwick;
 
-	int mid = (start + end) / 2;
-	Init(segtree, arr, node * 2, start, mid);
-	Init(segtree, arr, node * 2 + 1, mid + 1, end);
-	segtree[node] = segtree[node * 2] + segtree[node * 2 + 1];
+void Update(int idx, long long value) {
+	while (idx < fenwick.size()) {
+		fenwick[idx] += value;
+		idx = idx + (idx & -idx);
+	}
 }
 
-long long Sum(const vector<long long>& segtree, long long node, long long start, long long end, long long left, long long right) {
-	if (start > right || end < left) {
-		return 0;
+long long Sum(int idx) {
+	long long sum = 0;
+	while (idx > 0) {
+		sum += fenwick[idx];
+		idx = idx - (idx & -idx);
 	}
-	if (left <= start && end <= right) {
-		return segtree[node];
-	}
-
-	long long mid = (start + end) / 2;
-	long long lsum = Sum(segtree, node * 2, start, mid, left, right);
-	long long rsum = Sum(segtree, node * 2 + 1, mid + 1, end, left, right);
-	return lsum + rsum;
-}
-
-void Change(vector<long long>& segtree, long long node, long long start, long long end, long long idx, long long val) {
-	if (start > idx || end < idx) {
-		return;
-	}
-
-	if (start == end) {
-		segtree[node] = val;
-		return;
-	}
-
-	int mid = (start + end) / 2;
-	Change(segtree, node * 2, start, mid, idx, val);
-	Change(segtree, node * 2 + 1, mid + 1, end, idx, val);
-	segtree[node] = segtree[node * 2] + segtree[node * 2 + 1];
+	return sum;
 }
 
 int main() {
@@ -77,26 +54,29 @@ int main() {
 	int N, M, K;
 	cin >> N >> M >> K;
 
-	vector<long long> nums(N);
-	for (int i = 0; i < N; i++) {
+	vector<long long> nums(N + 1);
+	for (int i = 1; i <= N; i++) {
 		cin >> nums[i];
 	}
 
+	fenwick.resize(N * 2 + 1);
+
+	// init
+	for (int i = 1; i <= N; i++) {
+		Update(i, nums[i]);
+	}
 
 	long long a, b, c;
-	vector<long long> segtree(4 * N);
-
-	Init(segtree, nums, 1, 0, N - 1);
-
 	for (int i = 0; i < M + K; i++) {
 		cin >> a >> b >> c;
 		if (a == 1) {
-			// b번째를 c로 수 바꾸기
-			Change(segtree, 1, 0, N - 1, b - 1, c);
+			// update
+			Update(b, c - nums[b]);
+			nums[b] = c;
 		}
 		else {
-			// b번째부터 c번째까지 수의 합 구하기 - 이거만 출력
-			cout << Sum(segtree, 1, 0, N - 1, b - 1, c - 1) << " ";
+			// sum
+			cout << Sum(c) - Sum(b - 1) << '\n';
 		}
 	}
 
