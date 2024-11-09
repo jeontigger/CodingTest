@@ -6,6 +6,7 @@
 #include <cmath>
 #include <stack>
 #include <unordered_map>
+#include <set>
 
 using namespace std;
 
@@ -26,19 +27,15 @@ void PrintVec(const vector<vector<T>>& vec) {
 	}
 }
 
-struct Data {
-	int delay;
+struct Node {
 	int in;
-};
-
-struct Build {
-	int time;
-	int node;
+	int idx;
+	int delay;
 };
 
 struct cmp {
-	bool operator()(const Build& b1, const Build& b2) {
-		return b1.time > b2.time;
+	bool operator()(const Node& n1, const Node& n2) {
+		return n1.delay > n2.delay;
 	}
 };
 
@@ -50,55 +47,63 @@ int main() {
 
 	int T;
 	cin >> T;
+
 	int N, K;
-	while (T) {
-		T--;
+	while (T--) {
 		cin >> N >> K;
 
-		vector<vector<int>> edges(N + 1);
-		vector<Data> nodes(N + 1);
-		for (int i = 0; i < N; i++) {
-			cin >> nodes[i + 1].delay;
-		}
-
-		int f, t;
-		for (int i = 0; i < K; i++) {
-			cin >> f >> t;
-			nodes[t].in++;
-			edges[f].push_back(t);
-		}
-
-		int W;
-		cin >> W;
-
-
-		priority_queue < Build, vector<Build>, cmp> pq;
+		vector<Node> buildings(N + 1);
 		for (int i = 1; i <= N; i++) {
-			if (nodes[i].in == 0) {
-				pq.push({ nodes[i].delay, i });
+			cin >> buildings[i].delay;
+			buildings[i].idx = i;
+		}
+
+		vector<vector<int>>edges(N + 1);
+
+		int v1, v2;
+		for (int i = 0; i < K; i++) {
+			cin >> v1 >> v2;
+			edges[v1].push_back(v2);
+			buildings[v2].in++;
+		}
+
+		int target;
+		cin >> target;
+
+		priority_queue<Node, vector<Node>, cmp> pq;
+
+		for (int i = 1; i < N + 1; i++) {
+			if (buildings[i].in == 0) {
+				pq.push(buildings[i]);
 			}
 		}
 
+		vector<bool>visited(N + 1);
+
 		while (!pq.empty()) {
-			Build build = pq.top();
+			Node node = pq.top();
 			pq.pop();
 
-			if (build.node == W) {
-				cout << build.time << endl;
+			if (node.idx == target) {
+				cout << node.delay << endl;
 				break;
 			}
 
-			for (int i = 0; i < edges[build.node].size(); i++) {
-				int nextNode = edges[build.node][i];
-				nodes[nextNode].in--;
-				if (nodes[nextNode].in == 0) {
-					pq.push({ build.time + nodes[nextNode].delay, nextNode });
+			if (visited[node.idx])continue;
+			visited[node.idx] = true;
+
+			for (int i = 0; i < edges[node.idx].size(); i++) {
+				int nextNode = edges[node.idx][i];
+				if (visited[nextNode]) continue;
+
+				buildings[nextNode].in--;
+				if (buildings[nextNode].in == 0) {
+					pq.push({ 0, nextNode, node.delay + buildings[nextNode].delay });
 				}
 			}
 		}
+
 	}
-
-
 
 	return 0;
 }
