@@ -36,13 +36,13 @@ int main() {
 	int N;
 	cin >> N;
 	vector<int> nums(N);
-	unordered_map<int, bool> m;
+	vector<bool> exist(1000001);
 
 	int maxValue = 0;
 	for (int i = 0; i < N; i++) {
 		cin >> nums[i];
 		maxValue = max(nums[i], maxValue);
-		m[nums[i]] = true;
+		exist[nums[i]] = true;
 	}
 
 	vector<int> score(1000001);
@@ -51,7 +51,7 @@ int main() {
 		int curNum = nums[i];
 
 		for (int j = curNum * 2; j < maxValue + 1; j += curNum) {
-			if (m[j]) {
+			if (exist[j]) {
 				score[curNum]++;
 				score[j]--;
 			}
