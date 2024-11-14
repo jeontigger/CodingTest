@@ -5,10 +5,13 @@
 #include <queue>
 #include <cmath>
 #include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
 
-//#define INF 1e9
+#define INF 1e9
 
 template<typename T>
 void PrintVec(const vector<T>& v) {
@@ -29,11 +32,16 @@ int main() {
 
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
+	cout.tie(NULL);
 
 	string s;
+	getline(cin, s);
 
+	stringstream iss(s);
+	string word;
 	int cnt = 0;
-	while (cin >> s) {
+	while (iss >> word) {
+		//cout << word << endl;
 		cnt++;
 	}
 
@@ -41,3 +49,4 @@ int main() {
 
 	return 0;
 }
+
