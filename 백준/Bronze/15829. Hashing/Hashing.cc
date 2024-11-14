@@ -28,15 +28,6 @@ void PrintVec(const vector<vector<T>>& vec) {
 	}
 }
 
-long long mypow(int n) {
-	long long res = 1;
-	for (int i = 0; i < n; i++) {
-		res = (res * 31) % 1234567891;
-	}
-
-	return res;
-}
-
 int main() {
 
 	ios::sync_with_stdio(false);
@@ -49,13 +40,19 @@ int main() {
 	cin >> str;
 
 	long long sum = 0;
-	for (int i = 0; i < str.size(); i++) {
-		//cout << ((str[i] - 'a' + 1) * mypow(i)) % 1234567891 << endl;
-
-		sum += ((str[i] - 'a' + 1) * mypow(i)) % 1234567891;
+	vector<long long> pows(50);
+	pows[0] = 1;
+	for (int i = 1; i < 50; i++) {
+		pows[i] = (pows[i - 1] * (long long)31) % 1234567891;
 	}
 
-	cout << sum;
+
+
+	for (int i = 0; i < str.size(); i++) {
+		sum += ((str[i] - 'a' + 1) * pows[i]) % 1234567891;
+	}
+
+	cout << sum % 1234567891;
 
 	return 0;
 }
