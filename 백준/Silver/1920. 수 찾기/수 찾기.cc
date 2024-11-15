@@ -5,6 +5,9 @@
 #include <queue>
 #include <cmath>
 #include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
 
@@ -25,61 +28,53 @@ void PrintVec(const vector<vector<T>>& vec) {
 	}
 }
 
-int g_nrow[] = { 0, 1, 0, -1 };
-int g_ncol[] = { 1, 0, -1, 0 };
+struct Pos {
+	int x;
+	int y;
+};
 
-int Find(vector<int>& nums, int input) {
-
-	if (nums[0] > input || nums.back() < input) {
-		return 0;
-	}
-
-	int left = 0;
-	int right = nums.size() - 1;
-
-	while (left <= right) {
-		int mid = (right + left) / 2;
-
-		if (nums[mid] == input) {
-			return 1;
-		}
-		else if (nums[mid] > input) {
-			right = mid - 1;
-		}
-		else {
-			left = mid + 1;
-		}
-	}
-
-	return 0;
+bool cmp(const Pos& p1, const Pos& p2) {
+	return p1.y == p2.y ? p1.x < p2.x : p1.y < p2.y;
 }
 
 int main() {
 
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
+	cout.tie(NULL);
 
 	int N;
 	cin >> N;
-	vector<int>nums(N);
+
+	vector<int> A(N);
 	for (int i = 0; i < N; i++) {
-		cin >> nums[i];
+		cin >> A[i];
 	}
+
+	sort(A.begin(), A.end());
 
 	int M;
 	cin >> M;
-	vector<int> inputs(M);
+	int n;
 	for (int i = 0; i < M; i++) {
-		cin >> inputs[i];
+		cin >> n;
+
+		if (A.back() < n) {
+			cout << 0 << " ";
+		}
+		else {
+			int idx = lower_bound(A.begin(), A.end(), n) - A.begin();
+
+			if (A[idx] == n) {
+				cout << 1 << " ";
+			}
+			else {
+				cout << 0 << " ";
+			}
+		}
+
 	}
 
-	sort(nums.begin(), nums.end());
-
-	for (int i = 0; i < M; i++) {
-		int input = inputs[i];
-
-		cout << Find(nums, input) << " ";
-	}
 
 
 	return 0;
