@@ -1,77 +1,73 @@
-#pragma once
-#include <iostream>
 #include <vector>
-#include <list>
+#include <iostream>
+#include <string>
 #include <algorithm>
 #include <queue>
-#include <string>
+#include <cmath>
+#include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
 
-string targetChannel;
+#define INF 1e9
 
-void input(vector<vector<bool>>& vec) {
-    int n;
-    int num;
-
-    cin >> n >> num;
-
-    vec.resize(n);
-    for (size_t i = 0; i < vec.size(); i++)
-    {
-        vec[i].resize(n);
-    }
-
-    for (size_t i = 0; i < num; i++)
-    {
-        int one, two;
-        cin >> one >> two;
-        vec[one - 1][two - 1] = true;
-        vec[two - 1][one - 1] = true;
-    }
-
-
+template<typename T>
+void PrintVec(const vector<T>& v) {
+	for (T i : v) {
+		cout << i << " ";
+	}
+	cout << endl;
 }
 
-void solution(vector<vector<bool>>& graph) {
-    list<int> q;
-
-    vector<bool> check;
-    check.resize(graph.size());
-
-    q.push_back(0);
-    check[0] = true;
-
-    while (!q.empty()) {
-        auto computer = q.front();
-        q.pop_front();
-
-        for (size_t i = 0; i < graph[computer].size(); i++)
-        {
-            if (!check[i] && graph[computer][i]) {
-                q.push_back(i);
-                check[i] = true;
-            }
-        }
-    }
-
-    int res = -1;
-    for (bool b : check) {
-        if (b) {
-            res++;
-        }
-    }
-
-    cout << res << endl;
+template<typename T>
+void PrintVec(const vector<vector<T>>& vec) {
+	for (auto& v : vec) {
+		PrintVec(v);
+	}
 }
 
+int main() {
 
-int main()
-{
-    vector<vector<bool>> graph;
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
 
-    input(graph);
+	int N, M;
+	cin >> N >> M;
+	vector<vector<int>> edges(N + 1);
+	vector<int> visited(N + 1);
+	for (int i = 0; i < M; i++) {
+		int v1, v2;
+		cin >> v1 >> v2;
 
-    solution(graph);
+		edges[v1].push_back(v2);
+		edges[v2].push_back(v1);
+	}
 
+	queue<int> q;
+
+	q.push(1);
+	visited[1] = true;
+
+	int cnt = 0;
+	while (!q.empty()) {
+		int curNode = q.front();
+		q.pop();
+
+		for (int i = 0; i < edges[curNode].size(); i++) {
+			int nextNode = edges[curNode][i];
+			if (visited[nextNode]) continue;
+			visited[nextNode] = true;
+			q.push(nextNode);
+			cnt++;
+		}
+
+	}
+
+	cout << cnt;
+
+
+	return 0;
 }
