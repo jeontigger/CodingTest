@@ -36,33 +36,28 @@ int main() {
 
 	int N;
 	cin >> N;
+
+	vector<vector<int>> dp(N, vector<int>(2));
 	vector<int> steps(N);
 	for (int i = 0; i < N; i++) {
 		cin >> steps[i];
 	}
 
-	if (N <= 1) {
+	if (N == 1) {
 		cout << steps[0];
 		return 0;
 	}
 
-	vector<vector<int>> dp(N, vector<int>(2));
 	dp[0][0] = steps[0];
 	dp[0][1] = steps[0];
-	dp[1][0] = steps[0] + steps[1];
+	dp[1][0] = steps[1] + steps[0];
 	dp[1][1] = steps[1];
 
-
-	for (int i = 2; i < N; i++) {
-
-		// 한 칸 오르기
+	for (int i = 2; i < dp.size(); i++) {
 		dp[i][0] = dp[i - 1][1] + steps[i];
-
-		// 두 칸 오르기
 		dp[i][1] = max(dp[i - 2][0], dp[i - 2][1]) + steps[i];
 	}
 
-	//PrintVec(dp);
 	cout << *max_element(dp.back().begin(), dp.back().end());
 
 	return 0;
