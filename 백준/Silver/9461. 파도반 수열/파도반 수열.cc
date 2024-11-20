@@ -54,7 +54,7 @@ int main() {
 		int N;
 		cin >> N;
 
-		cout << dp[N] << '\n';
+		cout << dp[N] << ' ';
 	}
 
 	return 0;
