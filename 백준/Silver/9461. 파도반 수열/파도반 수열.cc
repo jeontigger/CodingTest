@@ -44,7 +44,7 @@ int main() {
 	dp[3] = 1;
 	dp[4] = 2;
 
-	for (int i = 5; i < dp.size(); i++) {
+	for (int i = 5; i < 101; i++) {
 		dp[i] = dp[i - 1] + dp[i - 5];
 	}
 
@@ -54,7 +54,7 @@ int main() {
 		int N;
 		cin >> N;
 
-		cout << dp[N] << ' ';
+		cout << dp[N] << '\n';
 	}
 
 	return 0;
