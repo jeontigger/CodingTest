@@ -5,10 +5,16 @@
 #include <queue>
 #include <cmath>
 #include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
 
 #define INF 1e9
+
+int g_nrow[] = { 0, 1, 0, -1 };
+int g_ncol[] = { 1, 0, -1, 0 };
 
 template<typename T>
 void PrintVec(const vector<T>& v) {
@@ -25,54 +31,45 @@ void PrintVec(const vector<vector<T>>& vec) {
 	}
 }
 
-int g_nrow[] = { 0, 1, 0, -1 };
-int g_ncol[] = { 1, 0, -1, 0 };
-
-int GetMinValue(string s) {
-
-	vector<int> nums;
-	vector<char> op;
-	int left = 0;
-	for (int i = 0; i < s.size(); i++) {
-		if (s[i] == '+' || s[i] == '-') {
-			nums.push_back(stoi(s.substr(left, i - left)));
-			op.push_back(s[i]);
-			left = i + 1;
-		}
-	}
-	nums.push_back(stoi(s.substr(left)));
-
-	int sum = nums[0];
-	bool minus = false;
-	for (int i = 0; i < op.size(); i++) {
-		if (op[i] == '-') {
-			//if (minus) {
-			//	sum -= nums[i + 1];
-			//}
-			//else {
-			//	sum += nums[i + 1];
-			//}
-			minus = true;
-		}
-		else {
-		}
-
-		minus ? sum -= nums[i + 1] : sum += nums[i + 1];
-
-	}
-
-	return sum;
-}
-
 int main() {
 
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
+	cout.tie(NULL);
 
-	string s;
-	cin >> s;
+	string str;
+	cin >> str;
 
-	cout << GetMinValue(s);
+	vector<int> nums;
+	vector<char> ops;
+
+	int start = 0;
+	for (int i = 0; i < str.size(); i++) {
+		if (str[i] == '+' || str[i] == '-') {
+			nums.push_back(stoi(str.substr(start, i - start)));
+			ops.push_back(str[i]);
+			start = i + 1;
+		}
+	}
+	nums.push_back(stoi(str.substr(start)));
+
+
+	bool minus = false;
+	int sum = 0;
+	for (int i = 0; i < nums.size(); i++) {
+		if (!minus) {
+			sum += nums[i];
+		}
+		else {
+			sum -= nums[i];
+		}
+
+		if (i != nums.size() - 1 && ops[i] == '-') {
+			minus = true;
+		}
+	}
+
+	cout << sum;
 
 
 	return 0;
