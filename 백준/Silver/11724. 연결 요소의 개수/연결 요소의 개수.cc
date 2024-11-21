@@ -28,6 +28,16 @@ void PrintVec(const vector<vector<T>>& vec) {
 	}
 }
 
+void Connected(vector<vector<int>>& edges, vector<bool>& visited, int start) {
+
+	for (int i = 0; i < edges[start].size(); i++) {
+		int next = edges[start][i];
+		if (visited[next]) continue;
+		visited[next] = true;
+		Connected(edges, visited, next);
+	}
+}
+
 int main() {
 
 	ios::sync_with_stdio(false);
@@ -36,7 +46,6 @@ int main() {
 
 	int N, M;
 	cin >> N >> M;
-	vector<bool>visited(N + 1);
 	vector<vector<int>> edges(N + 1);
 
 	for (int i = 0; i < M; i++) {
@@ -46,31 +55,13 @@ int main() {
 		edges[v2].push_back(v1);
 	}
 
+	vector<bool> visited(N + 1);
 	int cnt = 0;
 	for (int i = 1; i < N + 1; i++) {
 		if (visited[i]) continue;
-
-		queue<int> q;
 		cnt++;
-		q.push(i);
 		visited[i] = true;
-		//cout << i << endl;
-		while (!q.empty()) {
-			int curNode = q.front();
-			//cout << curNode << " ";
-			q.pop();
-
-			//if (visited[curNode]) continue;
-
-			for (int j = 0; j < edges[curNode].size(); j++) {
-				int next = edges[curNode][j];
-
-				//cout << curNode << " " << next << endl;
-				if (visited[next]) continue;
-				visited[next] = true;
-				q.push(next);
-			}
-		}
+		Connected(edges, visited, i);
 	}
 
 	cout << cnt;
