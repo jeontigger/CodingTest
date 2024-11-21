@@ -4,63 +4,61 @@
 #include <algorithm>
 #include <queue>
 #include <cmath>
+#include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
 
 #define INF 1e9
 
+int g_nrow[] = { 0, 1, 0, -1 };
+int g_ncol[] = { 1, 0, -1, 0 };
 
-void PrintVec(const vector<int>& v) {
-	for (int i : v) {
+template<typename T>
+void PrintVec(const vector<T>& v) {
+	for (T i : v) {
 		cout << i << " ";
 	}
 	cout << endl;
 }
 
-void PrintVec(const vector<vector<int>>& vec) {
+template<typename T>
+void PrintVec(const vector<vector<T>>& vec) {
 	for (auto& v : vec) {
 		PrintVec(v);
 	}
 }
 
-struct Node {
-	int from;
-	int to;
-};
+void DFS(vector<vector<int>>& edges, int curNode, vector<bool>& visited) {
+	cout << curNode << ' ';
 
-void DFS(int N, int idx, const vector<vector<int>>& graph, vector<bool>& visited) {
-
-	cout << idx << " ";
-	for (int i = 0; i < N; i++) {
-		if (visited[i]) continue;
-
-		if (graph[idx][i] == 1) {
-			visited[i] = true;
-			DFS(N, i, graph, visited);
-		}
+	for (int i = 0; i < edges[curNode].size(); i++) {
+		int next = edges[curNode][i];
+		if (visited[next]) continue;
+		visited[next] = true;
+		DFS(edges, next, visited);
 	}
 }
-
-void BFS(int start, const vector<vector<int>>& graph) {
+void BFS(vector<vector<int>>& edges, int start) {
 	queue<int> q;
 	q.push(start);
-	vector<bool>visited(graph.size());
-	visited[0] = true;
+
+	vector<bool> visited(edges.size());
 	visited[start] = true;
 
 	while (!q.empty()) {
-		int idx = q.front();
-		cout << idx << " ";
+		int curNode = q.front();
 		q.pop();
+		cout << curNode << ' ';
 
-		for (int i = 0; i < graph.size(); i++) {
-			if (visited[i]) continue;
-			if (graph[idx][i] == 1) {
-				visited[i] = true;
-				q.push(i);
-			}
+		for (int i = 0; i < edges[curNode].size(); i++) {
+			int nextNode = edges[curNode][i];
+			if (visited[nextNode]) continue;
+			visited[nextNode] = true;
+			q.push(nextNode);
 		}
-
 	}
 }
 
@@ -68,27 +66,29 @@ int main() {
 
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
+	cout.tie(NULL);
 
-	int N, M, start;
-	cin >> N >> M >> start;
-	start;
-
-	vector<vector<int>> graph(N + 1, vector<int>(N + 1));
-
+	int N, M, V;
+	cin >> N >> M >> V;
+	vector<vector<int>> edges(N + 1);
 	for (int i = 0; i < M; i++) {
-		int from, to;
-		cin >> from >> to;
-		graph[from][to] = 1;
-		graph[to][from] = 1;
+		int v1, v2;
+		cin >> v1 >> v2;
+		edges[v1].push_back(v2);
+		edges[v2].push_back(v1);
+	}
+
+	for (int i = 0; i < N + 1; i++) {
+		sort(edges[i].begin(), edges[i].end());
 	}
 
 	vector<bool> visited(N + 1);
-	visited[start] = true;
-	visited[0] = true;
-	DFS(N + 1, start, graph, visited);
-	cout << endl;
+	visited[V] = true;
+	DFS(edges, V, visited);
+	cout << '\n';
 
-	BFS(start, graph);
+	BFS(edges, V);
+
 
 	return 0;
 }
