@@ -1,57 +1,76 @@
-#pragma once
-#include <iostream>
 #include <vector>
-#include <list>
+#include <iostream>
+#include <string>
 #include <algorithm>
 #include <queue>
-#include <string>
+#include <cmath>
+#include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
 
-void input(vector<int>& inputs) {
+#define INF 1e9
 
-    int n;
-    cin >> n;
-
-    inputs.resize(n);
-    for (size_t i = 0; i < n; i++)
-    {
-        cin >> inputs[i];
-    }
+template<typename T>
+void PrintVec(const vector<T>& v) {
+	for (T i : v) {
+		cout << i << " ";
+	}
+	cout << endl;
 }
 
-
-void solution(vector<int>& inputs) {
-
-
-    priority_queue<int> pq;
-    for (size_t i = 0; i < inputs.size(); i++)
-    {
-        int num = inputs[i];
-        if (num == 0) {
-            if (pq.empty()) {
-                //cout << 0 << endl;
-                printf("0\n");
-            }
-            else {
-                printf("%d\n", pq.top());
-                //cout << pq.top() << endl;
-                pq.pop();
-            }
-        }
-        else {
-            pq.push(num);
-        }
-    }
+template<typename T>
+void PrintVec(const vector<vector<T>>& vec) {
+	for (auto& v : vec) {
+		PrintVec(v);
+	}
 }
 
+bool IsPossible(vector<int>& trees, int curHeight, int target) {
 
-int main()
-{
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
+	long long sum = 0;
+	for (int i = 0; i < trees.size(); i++) {
+		if (trees[i] > curHeight) {
+			sum += trees[i] - curHeight;
+		}
 
-    vector<int> inputs;
-    input(inputs);
-    solution(inputs);
+		if (sum >= target) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+int main() {
+
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int N;
+	cin >> N;
+
+	priority_queue<int> pq;
+	while (N--) {
+		int n;
+		cin >> n;
+
+		if (n == 0) {
+			if (pq.empty()) {
+				cout << 0 << ' ';
+			}
+			else {
+				cout << pq.top() << ' ';
+				pq.pop();
+			}
+		}
+		else {
+			pq.push(n);
+		}
+	}
+
+	return 0;
 }
