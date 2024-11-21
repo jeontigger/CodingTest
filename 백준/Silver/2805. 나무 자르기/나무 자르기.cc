@@ -1,47 +1,68 @@
-
-#include <iostream>
 #include <vector>
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <queue>
+#include <cmath>
+#include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
 
-void Input(vector<int>& logs, int& target) {
-	int m;
+#define INF 1e9
 
-	cin >> m >> target;
-
-	logs.resize(m);
-
-	for (int i = 0; i < m; i++) {
-		cin >> logs[i];
+template<typename T>
+void PrintVec(const vector<T>& v) {
+	for (T i : v) {
+		cout << i << " ";
 	}
-};
+	cout << endl;
+}
 
-bool IsPossible(const vector<int>& logs, int target, int len) {
+template<typename T>
+void PrintVec(const vector<vector<T>>& vec) {
+	for (auto& v : vec) {
+		PrintVec(v);
+	}
+}
 
-	int sum = 0;
-	for (int i = 0; i < logs.size(); i++) {
-		if (logs[i] > len) {
-			sum += logs[i] - len;
+bool IsPossible(vector<int>& trees, int curHeight, int target) {
+
+	long long sum = 0;
+	for (int i = 0; i < trees.size(); i++) {
+		if (trees[i] > curHeight) {
+			sum += trees[i] - curHeight;
 		}
-		if (sum >= target) return true;
+
+		if (sum >= target) {
+			return true;
+		}
 	}
 
 	return false;
 }
 
-int main()
-{
-	int target;
-	vector<int> logs;
+int main() {
 
-	Input(logs, target);
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
 
-	int left = 0, right = 1000000000;
+	int N, M;
+	cin >> N >> M;
+	vector<int> trees(N);
+	for (int i = 0; i < N; i++) {
+		cin >> trees[i];
+	}
 
+	long long left = 1;
+	long long right = 2e9;
 	while (left <= right) {
-		int mid = (left + right) / 2;
+		long long mid = (left + right) / 2;
 
-		if (IsPossible(logs, target, mid)) {
+		if (IsPossible(trees, mid, M)) {
 			left = mid + 1;
 		}
 		else {
@@ -49,6 +70,7 @@ int main()
 		}
 	}
 
-	cout << right << endl;
+	cout << right;
 
+	return 0;
 }
