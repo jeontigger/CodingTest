@@ -5,6 +5,9 @@
 #include <queue>
 #include <cmath>
 #include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
 
@@ -24,27 +27,41 @@ void PrintVec(const vector<vector<T>>& vec) {
 		PrintVec(v);
 	}
 }
+vector<vector<char>> maps;
+struct Pos {
+	int row;
+	int col;
+};
 
 int g_nrow[] = { 0, 1, 0, -1 };
 int g_ncol[] = { 1, 0, -1, 0 };
 
-int DFS(vector<vector<char>>& maps, int row, int col) {
+int BFS(Pos start) {
 	int res = 0;
 
-	for (int i = 0; i < 4; i++) {
-		int nrow = row + g_nrow[i];
-		int ncol = col + g_ncol[i];
+	queue<Pos> q;
+	q.push(start);
+	maps[start.row][start.col] = 'X';
+	while (!q.empty()) {
+		Pos curPos = q.front();
+		q.pop();
 
-		if (0 <= nrow && nrow < maps.size() && 0 <= ncol && ncol < maps[0].size()) {
-			if (maps[nrow][ncol] == 'O' || maps[nrow][ncol] == 'P') {
-				if (maps[nrow][ncol] == 'P') {
-					res++;
-				}
+		for (int i = 0; i < 4; i++) {
+			int nrow = curPos.row + g_nrow[i];
+			int ncol = curPos.col + g_ncol[i];
+
+			if (0 <= nrow && nrow < maps.size() && 0 <= ncol && ncol < maps[0].size()) {
+				if (maps[nrow][ncol] == 'X')continue;
+
+				if (maps[nrow][ncol] == 'P') res++;
+
+				q.push({ nrow, ncol });
 				maps[nrow][ncol] = 'X';
-				res += DFS(maps, nrow, ncol);
 			}
 		}
+
 	}
+
 	return res;
 }
 
@@ -52,25 +69,34 @@ int main() {
 
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
+	cout.tie(NULL);
 
-	int n, m;
-	cin >> n >> m;
+	int N, M;
+	cin >> N >> M;
+	maps.resize(N, vector<char>(M));
 
-	vector<vector<char>> maps(n, vector<char>(m));
+	Pos start;
 
-	int row = 0, col = 0;
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < m; j++) {
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < M; j++) {
 			cin >> maps[i][j];
 			if (maps[i][j] == 'I') {
-				row = i;
-				col = j;
+				start.row = i;
+				start.col = j;
 			}
 		}
 	}
 
-	int res = DFS(maps, row, col);
-	res == 0 ? cout << "TT" : cout << res;
+	//PrintVec(maps);
+
+	int res = BFS(start);
+	if (res == 0) {
+		cout << "TT";
+	}
+	else {
+		cout << res;
+	}
+
 
 	return 0;
 }
