@@ -7,6 +7,7 @@
 #include <stack>
 #include <unordered_map>
 #include <set>
+#include <sstream>
 
 using namespace std;
 
@@ -35,29 +36,29 @@ int main() {
 
 	int N;
 	cin >> N;
-
-	vector<int> tang(N);
+	vector<int> fruits(N);
 	for (int i = 0; i < N; i++) {
-		cin >> tang[i];
+		cin >> fruits[i];
 	}
 
-	set<int> s;
-	int left = 0;
-	int maxValue = 0;
+	int cnt = 0, left = 0;
+	vector<int> cnts(200001);
+	int maxLen = 0;
 	for (int right = 0; right < N; right++) {
-		s.insert(tang[right]);
-
-		if (s.size() > 2) {
-			left = right - 1;
-			while (tang[left] == tang[left - 1]) {
-				left--;
-			}
-			s.erase(tang[left - 1]);
+		int curFruit = fruits[right];
+		if (cnts[curFruit]++ == 0) {
+			cnt++;
 		}
-		//cout << left << " " << right << endl;
-		maxValue = max(maxValue, right - left + 1);
-	}
-	cout << maxValue;
 
+		while (cnt > 2) {
+			if (--cnts[fruits[left++]] == 0) {
+				cnt--;
+			}
+		}
+
+		maxLen = max(maxLen, right - left + 1);
+	}
+
+	cout << maxLen;
 	return 0;
 }
