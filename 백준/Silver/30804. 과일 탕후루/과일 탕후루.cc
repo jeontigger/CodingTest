@@ -42,7 +42,7 @@ int main() {
 	}
 
 	int cnt = 0, left = 0;
-	vector<int> cnts(200001);
+	vector<int> cnts(11);
 	int maxLen = 0;
 	for (int right = 0; right < N; right++) {
 		int curFruit = fruits[right];
