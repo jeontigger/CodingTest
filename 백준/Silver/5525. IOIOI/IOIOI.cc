@@ -1,65 +1,44 @@
-#include <vector>
 #include <iostream>
 #include <string>
-#include <algorithm>
-#include <queue>
-#include <cmath>
-#include <stack>
-#include <unordered_map>
-#include <set>
-#include <sstream>
 
 using namespace std;
 
-#define INF 1e9
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
-template<typename T>
-void PrintVec(const vector<T>& v) {
-	for (T i : v) {
-		cout << i << " ";
-	}
-	cout << endl;
-}
+    int n, m;
+    cin >> n >> m;
 
-template<typename T>
-void PrintVec(const vector<vector<T>>& vec) {
-	for (auto& v : vec) {
-		PrintVec(v);
-	}
-}
+    string s;
+    cin >> s;
 
-int main() {
+    int ans = 0;
+    for (int i = 0; i < m; i++)
+    {
+        int k = 0; // k는 IOI의 길이. IOI면 1 , IOIOI면 2
+        // O가 나오면 pass
+        if (s[i] == 'O')
+            continue;
+        // s[i] == 'I'일 때
+        else
+        {
+            while (s[i + 1] == 'O' && s[i + 2] == 'I')
+            {
+                k++;
+                if (k == n)
+                {
+                    k--; // 중복 카운트를 막기 위해 -1 해준다.
+                    ans++;
+                }
+                i += 2; // O를 건너 뛴다.
+            }
+            k = 0;
+        }
+    }
+    cout << ans;
 
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-
-	int N, M;
-	cin >> N >> M;
-
-	string str;
-	cin >> str;
-	int res = 0;
-	for (int i = 0; i < str.size(); i++) {
-		if (str[i] == 'I') {
-			int cnt = 0;
-			for (int j = 0; j < (2 * N + 1) && i + j < str.size(); j++) {
-				if (j % 2 == 0) {
-					if (str[i + j] == 'I') {
-						cnt++;
-					}
-				}
-				else {
-					if (str[i + j] == 'O') {
-						cnt++;
-					}
-				}
-			}
-			if (cnt == 2 * N + 1) {
-				res++;
-			}
-		}
-	}
-	cout << res;
-	return 0;
+    return 0;
 }
