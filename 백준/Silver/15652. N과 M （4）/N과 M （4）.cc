@@ -18,7 +18,7 @@ void PrintVec(const vector<T>& v) {
 	for (T i : v) {
 		cout << i << " ";
 	}
-	cout << endl;
+	cout << '\n';
 }
 
 template<typename T>
@@ -28,16 +28,19 @@ void PrintVec(const vector<vector<T>>& vec) {
 	}
 }
 
-void PrintMultipleComb(int N, int M, vector<int>& path, int start) {
+void PrintMultipleComb(vector<int>& nums, int M, vector<int>& path) {
 
 	if (M == 0) {
 		PrintVec(path);
 		return;
 	}
 
-	for (int i = start; i <= N; i++) {
-		path[path.size() - M] = i;
-		PrintMultipleComb(N, M - 1, path, i);
+	int start = path.size() == 0 ? 0 : path.back() - 1;
+
+	for (int i = start; i < nums.size(); i++) {
+		path.push_back(nums[i]);
+		PrintMultipleComb(nums, M - 1, path);
+		path.pop_back();
 	}
 }
 
@@ -49,9 +52,13 @@ int main() {
 
 	int N, M;
 	cin >> N >> M;
+	vector<int> nums(N);
+	for (int i = 0; i < N; i++) {
+		nums[i] = i + 1;
+	}
 
-	vector<int> path(M, 1);
-	PrintMultipleComb(N, M, path, 1);
+	vector<int> path;
+	PrintMultipleComb(nums, M, path);
 
 	return 0;
 }
