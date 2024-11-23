@@ -36,7 +36,7 @@ int SnakeLadder() {
 	queue<int> q;
 	q.push(1);
 
-	vector<int> table(101, INF);
+	vector<bool> visited(101);
 
 	int cnt = 0;
 	while (!q.empty()) {
@@ -46,8 +46,8 @@ int SnakeLadder() {
 		while (size--) {
 			int curNum = q.front();
 			q.pop();
-			if (table[curNum] < cnt) continue;
-			table[curNum] = cnt;
+			if (visited[curNum]) continue;
+			visited[curNum] = true;
 
 			for (int i = 1; i <= 6; i++) {
 				int nextNum = curNum + i;
