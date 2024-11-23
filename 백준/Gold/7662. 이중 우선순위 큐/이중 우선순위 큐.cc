@@ -36,13 +36,10 @@ void Insert(int n, priority_queue<int>& maxpq, priority_queue<int, vector<int>, 
 
 void Delete(int type, priority_queue<int>& maxpq, priority_queue<int, vector<int>, greater<int>>& minpq, unordered_map<int, int>& m) {
 	// 1은 최대값 제거, -1은 최소값 제거
-	while (!minpq.empty() && m[minpq.top()] == 0) {
-		minpq.pop();
-	}
-	while (!maxpq.empty() && m[maxpq.top()] == 0) {
-		maxpq.pop();
-	}
 	if (type == 1) {
+		while (!maxpq.empty() && m[maxpq.top()] == 0) {
+			maxpq.pop();
+		}
 
 		if (maxpq.empty()) return;
 		int curNum = maxpq.top();
@@ -50,17 +47,16 @@ void Delete(int type, priority_queue<int>& maxpq, priority_queue<int, vector<int
 		maxpq.pop();
 	}
 	else {
+		while (!minpq.empty() && m[minpq.top()] == 0) {
+			minpq.pop();
+		}
+
 		if (minpq.empty()) return;
 		int curNum = minpq.top();
 		m[curNum]--;
 		minpq.pop();
 	}
-	while (!maxpq.empty() && m[maxpq.top()] == 0) {
-		maxpq.pop();
-	}
-	while (!minpq.empty() && m[minpq.top()] == 0) {
-		minpq.pop();
-	}
+
 }
 
 int main() {
@@ -90,14 +86,13 @@ int main() {
 			else if (c == 'D') {
 				Delete(n, maxpq, minpq, m);
 			}
-			//if (maxpq.empty() || minpq.empty()) {
-			//	cout << "EMPTY\n";
-			//}
-			//else {
-			//	cout << maxpq.top() << ' ' << minpq.top() << '\n';
-			//}
 		}
-
+		while (!maxpq.empty() && m[maxpq.top()] == 0) {
+			maxpq.pop();
+		}
+		while (!minpq.empty() && m[minpq.top()] == 0) {
+			minpq.pop();
+		}
 		if (maxpq.empty() || minpq.empty()) {
 			cout << "EMPTY\n";
 		}
