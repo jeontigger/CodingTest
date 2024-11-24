@@ -1,56 +1,87 @@
-#pragma once
-#include <iostream>
 #include <vector>
-#include <list>
+#include <iostream>
+#include <string>
 #include <algorithm>
 #include <queue>
-#include <string>
+#include <cmath>
+#include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
 
-void input(int& subin, int& sister) {
-    cin >> subin >> sister;
+#define INF 1e9
+
+template<typename T>
+void PrintVec(const vector<T>& v) {
+	for (T i : v) {
+		cout << i << " ";
+	}
+	cout << endl;
 }
 
-bool checked[200000];
-
-void solution(int subin, int sister) {
-
-    list<pair<int, int>> q;
-
-    q.push_back({ subin, 0 });
-
-    while (!q.empty()) {
-        pair<int, int> p = q.front();
-        q.pop_front();
-
-        int iSubin = p.first;
-        int cnt = p.second;
-
-        if (checked[iSubin])
-            continue;
-        
-        checked[iSubin] = true;
-        if (iSubin == sister) {
-            cout << cnt << endl;
-            break;
-        }
-
-        if (iSubin - 1 >= 0)
-            q.push_back({ iSubin - 1 , cnt + 1 });
-        if (iSubin + 1 <= 200000) 
-            q.push_back({ iSubin + 1 ,  cnt + 1 });
-        if (iSubin * 2 <= 200000) 
-            q.push_back({ iSubin * 2, cnt + 1 });
-    }
-    
+template<typename T>
+void PrintVec(const vector<vector<T>>& vec) {
+	for (auto& v : vec) {
+		PrintVec(v);
+	}
 }
 
-int main()
-{
-    int subin, sister;
+int main() {
 
-    input(subin, sister);
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
 
-    solution(subin, sister);  
+	int N, K;
+	cin >> N >> K;
+
+	queue<int> q;
+
+	vector<bool> visited(100001);
+	visited[N] = true;
+	q.push(N);
+
+	int cnt = -1;
+	while (!q.empty()) {
+		int size = q.size();
+		cnt++;
+		while (size--) {
+
+			int curNum = q.front();
+			q.pop();
+
+			if (curNum > 100000) continue;
+
+			if (curNum == K) {
+				cout << cnt;
+				return 0;
+			}
+
+			int next;
+			next = curNum + 1;
+			if (0 <= next && next < 100001 && !visited[next])
+			{
+				visited[next] = true;
+				q.push(next);
+			}
+
+			next = curNum - 1;
+			if (0 <= next && next < 100001 && !visited[next])
+			{
+				visited[next] = true;
+				q.push(next);
+			}
+
+			next = curNum * 2;
+			if (0 <= next && next < 100001 && !visited[next])
+			{
+				visited[next] = true;
+				q.push(next);
+			}
+		}
+	}
+
+	return 0;
 }
