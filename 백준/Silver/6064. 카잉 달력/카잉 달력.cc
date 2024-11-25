@@ -28,8 +28,8 @@ void PrintVec(const vector<vector<T>>& vec) {
 	}
 }
 
-long long gcd(long long a, long long b) {
-	long long c = b;
+int gcd(int a, int b) {
+	int c = b;
 	while (c != 0) {
 		c = a % b;
 		a = b;
@@ -52,27 +52,23 @@ int main() {
 	int T;
 	cin >> T;
 	while (T--) {
-		long long N, M, x, y;
-		cin >> N >> M >> x >> y;
-		if (y == M)
-			y = 0;
+		int M, N, x, y;
+		cin >> M >> N >> x >> y;
 
-		long long least = lcm(N, M);
-		bool noway = true;
-		for (int i = x; i <= least; i += N) {
-			if (i % M == y) {
-				cout << i << ' ';
-				noway = false;
+		int res = -1;
+
+		int limit = lcm(M, N);
+		for (int i = x; i <= limit; i += M) {
+			int mod = i % N;
+			if (mod == 0) mod = N;
+			if (mod == y) {
+				res = i;
 				break;
 			}
 		}
-
-		if (noway) {
-			cout << -1 << ' ';
-		}
+		cout << res << ' ';
 
 	}
-
 
 	return 0;
 }
