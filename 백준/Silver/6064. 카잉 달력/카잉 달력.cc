@@ -39,7 +39,7 @@ int gcd(int a, int b) {
 	return a;
 }
 
-long long lcm(long long a, long long b) {
+int lcm(int a, int b) {
 	return a * b / gcd(a, b);
 }
 
