@@ -18,7 +18,7 @@ void PrintVec(const vector<T>& v) {
 	for (T i : v) {
 		cout << i << " ";
 	}
-	cout << endl;
+	cout << '\n';
 }
 
 template<typename T>
@@ -26,43 +26,6 @@ void PrintVec(const vector<vector<T>>& vec) {
 	for (auto& v : vec) {
 		PrintVec(v);
 	}
-}
-
-void Execute(deque<int>& nums, const string& command) {
-	bool rev = false;
-
-	for (int i = 0; i < command.size(); i++) {
-		if (command[i] == 'R') {
-			rev = !rev;
-		}
-
-		if (command[i] == 'D') {
-			if (nums.empty()) {
-				cout << "error\n";
-				return;
-			}
-
-			if (rev) {
-				nums.pop_back();
-			}
-			else {
-				nums.pop_front();
-			}
-		}
-	}
-
-	if (rev) {
-		reverse(nums.begin(), nums.end());
-	}
-
-	cout << '[';
-	if (nums.size() > 0) {
-		cout << nums[0];
-	}
-	for (int i = 1; i < nums.size(); i++) {
-		cout << ',' << nums[i];
-	}
-	cout << "]\n";
 }
 
 int main() {
@@ -73,24 +36,64 @@ int main() {
 
 	int T;
 	cin >> T;
-	while (T--) {
-		string command;
-		cin >> command;
 
+	while (T--) {
+		string str;
+		cin >> str;
 		int n;
 		cin >> n;
-
-		string s;
-		cin >> s;
-
-		deque<int> nums;
-		istringstream iss(s.substr(1, s.size() - 2));
-
-		while (getline(iss, s, ',')) {
-			nums.push_back(stoi(s));
+		string strNums;
+		cin >> strNums;
+		deque<int>nums;
+		istringstream iss(strNums.substr(1, strNums.size() - 2));
+		string token;
+		while (getline(iss, token, ',')) {
+			nums.push_back(stoi(token));
 		}
 
-		Execute(nums, command);
+
+		bool rev = false;
+		bool err = false;
+		for (int i = 0; i < str.size(); i++) {
+			if (str[i] == 'D') {
+				if (nums.empty()) {
+					err = true;
+					break;
+				}
+				if (rev) {
+					nums.pop_back();
+				}
+				else {
+					nums.pop_front();
+				}
+			}
+			else {
+				rev = !rev;
+			}
+		}
+
+		if (err) {
+			cout << "error" << '\n';
+		}
+		else {
+			if (rev) {
+				reverse(nums.begin(), nums.end());
+			}
+
+			string res = "";
+			res += '[';
+			for (int i = 0; i < nums.size(); i++) {
+				res += to_string(nums[i]);
+				res += ',';
+			}
+			if (!nums.empty()) {
+				res.pop_back();
+			}
+			res += "]\n";
+			cout << res;
+		}
+
 	}
+
 	return 0;
 }
