@@ -1,108 +1,103 @@
-#pragma once
-#include <iostream>
 #include <vector>
-#include <list>
+#include <iostream>
+#include <string>
 #include <algorithm>
 #include <queue>
-#include <string>
+#include <cmath>
+#include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
 
-int g_row;
-int g_col;
+#define INF 1e9
 
-int g_nrow[4] = { 0, 1, 0, -1 };
-int g_ncol[4] = { 1, 0, -1, 0 };
-
-
-void input(vector<vector<int>>& grid) {
-    cin >> g_col >> g_row;
-
-    grid.resize(g_row);
-
-    for (size_t i = 0; i < g_row; i++)
-    {
-        grid[i].resize(g_col);
-        for (size_t j = 0; j < g_col; j++)
-        {
-            cin >> grid[i][j];
-        }
-    }
+template<typename T>
+void PrintVec(const vector<T>& v) {
+	for (T i : v) {
+		cout << i << " ";
+	}
+	cout << '\n';
 }
 
-void solution(vector<vector<int>> grid) {
-    struct fData {
-        int row;
-        int col;
-        int cnt;
-    };
-
-    list<fData> q;
-    fData data = {};
-    for (size_t i = 0; i < g_row; i++)
-    {
-        for (size_t j = 0; j < g_col; j++)
-        {
-            if (grid[i][j] == 1) {
-                data.row = i;
-                data.col = j;
-                data.cnt = 0;
-                q.push_back(data);
-            }
-        }
-    }
-
-    int maxCnt = 0;
-
-    while (!q.empty()) {
-        auto data = q.front();
-        q.pop_front();
-
-        for (size_t i = 0; i < 4; i++)
-        {
-            int nrow = data.row + g_nrow[i];
-            int ncol = data.col + g_ncol[i];
-
-            if (0 <= nrow && nrow < g_row && 0 <= ncol && ncol < g_col) {
-                if (grid[nrow][ncol] == 0) {
-                    fData _data = {};
-                    _data.row = nrow;
-                    _data.col = ncol;
-                    _data.cnt = data.cnt + 1;
-                    q.push_back(_data);
-                    grid[nrow][ncol] = 1;
-
-                    maxCnt = max(maxCnt, _data.cnt);
-                }
-            }
-        }
-
-    }
-
-
-
-    for (size_t i = 0; i < g_row; i++)
-    {
-        for (size_t j = 0; j < g_col; j++)
-        {
-            if (grid[i][j] == 0) {
-                cout << -1 << endl;
-                return;
-            }
-        }
-    }
-
-    cout << maxCnt << endl;
+template<typename T>
+void PrintVec(const vector<vector<T>>& vec) {
+	for (auto& v : vec) {
+		PrintVec(v);
+	}
 }
 
+struct Pos {
+	int row;
+	int col;
+};
 
-int main()
-{
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
+int main() {
 
-    vector<vector<int>> grid;
-    input(grid);
-    solution(grid);
-    
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int M, N;
+	cin >> M >> N;
+
+	vector<vector<int>> maps(N, vector<int>(M));
+	queue<Pos> q;
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < M; j++) {
+			cin >> maps[i][j];
+			if (maps[i][j] == 1) {
+				q.push({ i, j });
+			}
+		}
+	}
+
+	int g_nrow[] = { 0, 1, 0, -1 };
+	int g_ncol[] = { 1, 0, -1, 0 };
+
+	int cnt = -1;
+	while (!q.empty()) {
+		cnt++;
+		int size = q.size();
+		while (size--) {
+			Pos curPos = q.front();
+			q.pop();
+
+			for (int i = 0; i < 4; i++) {
+				int nrow = curPos.row + g_nrow[i];
+				int ncol = curPos.col + g_ncol[i];
+
+				if (0 <= nrow && nrow < N && 0 <= ncol && ncol < M) {
+					if (maps[nrow][ncol] == 0) {
+						maps[nrow][ncol] = 1;
+						q.push({ nrow, ncol });
+					}
+				}
+			}
+		}
+
+	}
+
+
+	bool bFail = false;
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < M; j++) {
+			if (maps[i][j] == 0) {
+				bFail = true;
+				break;
+			}
+		}
+		if (bFail) break;
+	}
+
+	if (bFail) {
+		cout << -1 << ' ';
+	}
+	else {
+		cout << cnt << ' ';
+	}
+
+
+	return 0;
 }
