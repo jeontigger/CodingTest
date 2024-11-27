@@ -18,7 +18,7 @@ void PrintVec(const vector<T>& v) {
 	for (T i : v) {
 		cout << i << " ";
 	}
-	cout << endl;
+	cout << '\n';
 }
 
 template<typename T>
@@ -28,77 +28,11 @@ void PrintVec(const vector<vector<T>>& vec) {
 	}
 }
 
-int g_nhieght[] = { 0, 0, 0, 0, 1, -1 };
-int g_nrow[] = { 1, 0, -1, 0, 0, 0 };
-int g_ncol[] = { 0, 1, 0, -1, 0, 0 };
-
-int M, N, H;
 struct Pos {
-	int height;
 	int row;
 	int col;
+	int height;
 };
-
-bool IsValid(int h, int r, int c, vector<vector<vector<int>>>& box) {
-	if (h < 0 || h >= H) return false;
-	if (r < 0 || r >= N) return false;
-	if (c < 0 || c >= M) return false;
-
-	if (box[h][r][c] == -1) return false;
-
-	return true;
-}
-
-int CountingDay(vector<vector<vector<int>>>& box) {
-
-	// 첫 익은 토마토 기입
-	queue<Pos> q;
-	for (int i = 0; i < H; i++) {
-		for (int j = 0; j < N; j++) {
-			for (int k = 0; k < M; k++) {
-				if (box[i][j][k] == 1) {
-					box[i][j][k] = -1;
-					q.push({ i, j, k });
-				}
-			}
-		}
-	}
-
-	int cnt = -1;
-
-	while (!q.empty()) {
-
-		int size = q.size();
-		cnt++;
-		for (int j = 0; j < size; j++) {
-			Pos pos = q.front();
-			q.pop();
-
-			for (int i = 0; i < 6; i++) {
-				int nheight = pos.height + g_nhieght[i];
-				int nrow = pos.row + g_nrow[i];
-				int ncol = pos.col + g_ncol[i];
-
-				if (IsValid(nheight, nrow, ncol, box)) {
-					box[nheight][nrow][ncol] = -1;
-					q.push({ nheight, nrow, ncol });
-				}
-			}
-		}
-	}
-
-	for (int i = 0; i < H; i++) {
-		for (int j = 0; j < N; j++) {
-			for (int k = 0; k < M; k++) {
-				if (box[i][j][k] != -1) {
-					return -1;
-				}
-			}
-		}
-	}
-
-	return cnt;
-}
 
 int main() {
 
@@ -106,19 +40,68 @@ int main() {
 	cin.tie(NULL);
 	cout.tie(NULL);
 
+	int M, N, H;
 	cin >> M >> N >> H;
 
-	vector<vector<vector<int>>> box(H, vector<vector<int>>(N, vector<int>(M)));
-	for (int i = 0; i < H; i++) {
-		for (int j = 0; j < N; j++) {
-			for (int k = 0; k < M; k++) {
-				cin >> box[i][j][k];
+	vector<vector<vector<int>>> maps(H, vector<vector<int>>(N, vector<int>(M)));
+	queue<Pos> q;
+	for (int k = 0; k < H; k++) {
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < M; j++) {
+				cin >> maps[k][i][j];
+				if (maps[k][i][j] == 1) {
+					q.push({ i, j, k });
+				}
 			}
 		}
 	}
 
-	cout << CountingDay(box);
+	int g_nheight[] = { 0, 0, 0, 0, 1, -1 };
+	int g_nrow[] = { 0, 1, 0, -1, 0, 0 };
+	int g_ncol[] = { 1, 0, -1, 0 , 0, 0 };
 
+	int cnt = -1;
+	while (!q.empty()) {
+		cnt++;
+		int size = q.size();
+		while (size--) {
+			Pos curPos = q.front();
+			q.pop();
+
+			for (int i = 0; i < 6; i++) {
+				int nheight = curPos.height + g_nheight[i];
+				int nrow = curPos.row + g_nrow[i];
+				int ncol = curPos.col + g_ncol[i];
+
+				if (0 <= nrow && nrow < N && 0 <= ncol && ncol < M && 0 <= nheight && nheight < H) {
+					if (maps[nheight][nrow][ncol] == 0) {
+						maps[nheight][nrow][ncol] = 1;
+						q.push({ nrow, ncol, nheight });
+					}
+				}
+			}
+		}
+	}
+
+	bool bFail = false;
+	for (int k = 0; k < H; k++) {
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < M; j++) {
+				if (maps[k][i][j] == 0) {
+					bFail = true;
+					break;
+				}
+			}
+			if (bFail) break;
+		}
+	}
+
+	if (bFail) {
+		cout << -1 << ' ';
+	}
+	else {
+		cout << cnt << ' ';
+	}
 
 
 	return 0;
