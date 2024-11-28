@@ -1,105 +1,196 @@
-#pragma once
-#include <iostream>
 #include <vector>
-#include <list>
+#include <iostream>
+#include <string>
 #include <algorithm>
 #include <queue>
-#include <string>
+#include <cmath>
+#include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
-vector<vector<int>> g_fields;
-int g_row;
-int g_col;
 
-typedef  vector<vector<vector<int>>> Tetronomis;
-Tetronomis t1 = { { {1, 1, 1, 1} }, {{1}, {1}, {1}, {1} } };
-Tetronomis t2 = { { {1, 1}, {1, 1}} };
-Tetronomis t3 = { { {1, 0},{1, 0}, {1, 1}}, {{0, 1},{0, 1}, {1, 1}},{{1, 1},{1, 0}, {1, 0} }, { {1, 1},{0, 1}, {0, 1} }, {{1, 0, 0}, {1, 1, 1}}, {{0, 0, 1}, {1, 1, 1}}, {{1, 1, 1}, {1, 0, 0}}, {{1, 1, 1}, {0, 0, 1}} };
-Tetronomis t4 = { { {1, 0}, {1, 1}, {0, 1}}, { {0, 1}, {1, 1}, {1, 0}}, {{0, 1, 1}, {1, 1, 0} }, {{1, 1, 0}, {0, 1, 1} } };
-Tetronomis t5 = { { {0, 1, 0}, {1, 1, 1} }, { {1, 1, 1}, {0, 1, 0}}, {{1, 0}, {1, 1}, {1, 0}}, {{0, 1}, {1, 1}, {0, 1}} };
+#define INF 1e9
 
-
-
-void input() {
-    cin >> g_row >> g_col;
-
-    g_fields.resize(g_row);
-    for (size_t i = 0; i < g_row; i++)
-    {
-        g_fields[i].resize(g_col);
-        for (size_t j = 0; j < g_col; j++)
-        {
-            cin >> g_fields[i][j];
-        }
-    }
+template<typename T>
+void PrintVec(const vector<T>& v) {
+	for (T i : v) {
+		cout << i << " ";
+	}
+	cout << '\n';
 }
 
-void printTetris(Tetronomis t) {
-    for (auto vs : t) {
-        cout << "=============" << endl;
-        for (auto v : vs) {
-            for (auto i : v) {
-                cout << i << " ";
-            }
-            cout << endl;
-        }
-    }
-    cout << endl;
+template<typename T>
+void PrintVec(const vector<vector<T>>& vec) {
+	for (auto& v : vec) {
+		PrintVec(v);
+	}
 }
 
-int calTetris(int row, int col, const vector<vector<int>>& t) {
+// [type][rot][rc]
+struct Pos {
+	int row;
+	int col;
+};
 
-    int sum = 0;
+vector<vector<vector<Pos>>> blocks = {
+	// type
+	{
+		{
+			{0, 0}, {0, 1}, {0, 2}, {0, 3},
+		},
+		{
+			{ 0, 0 },
+			{1, 0},
+			{2, 0},
+			{3, 0}
+		}
+	},
+	{
+		{
+			{ 0, 0 }, { 0,  1},
+			{ 1, 0}, {1, 1}
+		}
+	},
+	{
+		{
+			{0, 0},
+			{1, 0},
+			{2, 0},{2, 1}
+		},
+		{
+			{0, 0}, {0, 1}, {0, 2},
+			{1, 0}
+		},
+		{
+			{ 0, 0 }, {0, 1},
+							{1, 1},
+							{2, 1}
+		},
+		{
+									{0, 0},
+			{1, -2}, {1, -1}, {1, 0}
+		},
+		{
+							{0, 0},
+							{1, 0},
+			{2, -1}, { 2, 0 },
+		},
+		{
+			{0, 0},
+			{1, 0}, {1, 1}, {1, 2}
+		},
+		{
+			{0, 0}, {0, 1},
+			{1, 0},
+			{2, 0}
+		},
+		{
+			{0, 0}, {0, 1}, {0, 2},
+									{1, 2}
+		}
+	},
+	{
+		{
+			{0, 0},
+			{1, 0}, {1, 1},
+						{2, 1}
+		},
+		{
+						{0, 0}, {0, 1},
+			{1, -1}, {1, 0}
+		},
+		{
+						{0, 0},
+			{1, -1}, {1, 0},
+			{2, -1}
+		},
+		{
+			{0, 0}, {0, 1},
+						{1, 1}, {1, 2}
+		}
+	},
+	{
+		{
+			{0, 0}, {0, 1}, {0, 2},
+						{1, 1}
+		} ,
+		{
+						{0, 0},
+			{1, -1}, {1, 0},
+						 {2, 0}
+		},
+		{
+						{0, 0},
+			{1, -1}, {1, 0}, {1, 1}
+		},
+		{
+			{0, 0},
+			{1, 0},{1, 1},
+			{2, 0},
+		}
+	}
+};
 
-    for (int i = 0; i < t.size(); i++)
-    {
-        for (int j = 0; j < t[i].size(); j++) {
-            int mrow = i + row;
-            int mcol = j + col;
+int N, M;
+vector<vector<int>> maps;
 
-            if (t[i][j]) {
-                if (mrow < g_row && mcol < g_col) {
-                    sum += g_fields[mrow][mcol];
-                }
-            }
-        }
-    }
+int GetSum(int row, int col, int type, int rot) {
 
-    return sum;
+	int sum = 0;
+	for (int i = 0; i < blocks[type][rot].size(); i++) {
+		Pos delta = blocks[type][rot][i];
+		int nrow = row + delta.row;
+		int ncol = col + delta.col;
+
+		if (0 <= nrow && nrow < N && 0 <= ncol && ncol < M) {
+			sum += maps[nrow][ncol];
+		}
+		else {
+			// Invalid Bound
+			//return 0;
+		}
+	}
+
+	return sum;
 }
 
-int maxTetris(const Tetronomis& t) {
-    int maxValue = 0;
+int GetSum(int row, int col, int type) {
 
-    for(int k = 0; k < t.size(); k++) {
-        for (int i = 0; i < g_row; i++) {
-            for (int j = 0; j < g_col; j++) {
-                maxValue = max(maxValue, calTetris(i, j, t[k]));
-            }
-        }
-    }
+	int sum = 0;
+	// 회전별
+	for (int i = 0; i < blocks[type].size(); i++) {
+		sum = max(sum, GetSum(row, col, type, i));
+	}
 
-    return maxValue;
+	return sum;
 }
 
-void solution() {
+int main() {
 
-    int maxValue = 0;
-    maxValue = max(maxValue, maxTetris(t1));
-    maxValue = max(maxValue, maxTetris(t2));
-    maxValue = max(maxValue, maxTetris(t3));
-    maxValue = max(maxValue, maxTetris(t4));
-    maxValue = max(maxValue, maxTetris(t5));
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
 
-    cout << maxValue << endl;
-}
+	cin >> N >> M;
+	maps.resize(N, vector<int>(M));
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < M; j++) {
+			cin >> maps[i][j];
+		}
+	}
 
+	int maxValue = 0;
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < M; j++) {
+			for (int k = 0; k < 5; k++) {
+				maxValue = max(maxValue, GetSum(i, j, k));
+			}
+		}
+	}
 
-int main()
-{
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    input();
-    solution();
+	cout << maxValue;
 
+	return 0;
 }
