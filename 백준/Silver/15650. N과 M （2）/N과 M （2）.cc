@@ -18,7 +18,7 @@ void PrintVec(const vector<T>& v) {
 	for (T i : v) {
 		cout << i << " ";
 	}
-	cout << endl;
+	cout << '\n';
 }
 
 template<typename T>
@@ -28,22 +28,27 @@ void PrintVec(const vector<vector<T>>& vec) {
 	}
 }
 
-void PrintComb(vector<int>& nums, int M) {
-	vector<bool> check(nums.size());
-	for (int i = 0; i < M; i++) {
-		check[i] = true;
-	}
+vector<int> visited;
 
-	do {
+void NM(int N, int idx, int M) {
 
-		for (int i = 0; i < nums.size(); i++) {
-			if (check[i]) {
-				cout << nums[i] << ' ';
+	if (M == 0) {
+		for (int i = 1; i <= N; i++) {
+			if (visited[i]) {
+				cout << i << ' ';
 			}
 		}
 		cout << '\n';
+	}
 
-	} while (prev_permutation(check.begin(), check.end()));
+	for (int i = idx + 1; i <= N; i++) {
+		if (visited[i]) continue;
+		visited[i] = true;
+		NM(N, i, M - 1);
+		visited[i] = false;
+	}
+
+
 
 }
 
@@ -55,12 +60,10 @@ int main() {
 
 	int N, M;
 	cin >> N >> M;
-	vector<int> nums(N);
-	for (int i = 0; i < N; i++) {
-		nums[i] = i + 1;
-	}
 
-	PrintComb(nums, M);
+	visited.resize(N + 1);
+
+	NM(N, 0, M);
 
 
 	return 0;
