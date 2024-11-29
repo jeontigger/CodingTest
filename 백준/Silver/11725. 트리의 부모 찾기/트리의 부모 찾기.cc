@@ -5,37 +5,41 @@
 #include <queue>
 #include <cmath>
 #include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
 
 #define INF 1e9
 
-
-void PrintVec(const vector<int>& v) {
-	for (int i : v) {
-		printf("%d ", i);
+template<typename T>
+void PrintVec(const vector<T>& v) {
+	for (T i : v) {
+		cout << i << " ";
 	}
-	printf("\n");
+	cout << '\n';
 }
 
-void PrintVec(const vector<vector<int>>& vec) {
+template<typename T>
+void PrintVec(const vector<vector<T>>& vec) {
 	for (auto& v : vec) {
 		PrintVec(v);
 	}
 }
 
-int g_nrow[] = { 0, 1, 0, -1 };
-int g_ncol[] = { 1, 0, -1, 0 };
+vector<int> visited;
+vector<vector<int>> edges;
+vector<int> parents;
 
-void DFS(vector<vector<int>>& nodes, vector<int>& parents, int curNode) {
+void FindParents(int curNode = 1) {
 
-	for (int i = 0; i < nodes[curNode].size(); i++) {
-		int nextNode = nodes[curNode][i];
-		if (parents[nextNode])continue;
-
-		parents[nextNode] = curNode;
-
-		DFS(nodes, parents, nextNode);
+	for (int i = 0; i < edges[curNode].size(); i++) {
+		int next = edges[curNode][i];
+		if (visited[next])continue;
+		visited[next] = true;
+		parents[next] = curNode;
+		FindParents(next);
 	}
 }
 
@@ -43,25 +47,28 @@ int main() {
 
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
+	cout.tie(NULL);
 
-	int n;
-	cin >> n;
+	int N;
+	cin >> N;
 
-	vector<vector<int>> nodes(n + 1);
-	for (int i = 0; i < n - 1; i++) {
-		int r1, r2;
-		cin >> r1 >> r2;
-		nodes[r1].push_back(r2);
-		nodes[r2].push_back(r1);
+	edges.resize(N + 1);
+	visited.resize(N + 1);
+	parents.resize(N + 1);
+
+	for (int i = 0; i < N - 1; i++) {
+		int v1, v2;
+		cin >> v1 >> v2;
+		edges[v1].push_back(v2);
+		edges[v2].push_back(v1);
 	}
 
-	vector<int> parents(n + 1);
-	parents[1] = 1;
-	DFS(nodes, parents, 1);
+	FindParents();
 
-	for (int i = 2; i < parents.size(); i++) {
-		printf("%d ", parents[i]);
+	for (int i = 2; i <= N; i++) {
+		cout << parents[i] << ' ';
 	}
+
 
 	return 0;
 }
