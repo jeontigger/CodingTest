@@ -28,17 +28,16 @@ void PrintVec(const vector<vector<T>>& vec) {
 	}
 }
 
-int A, B;
-
 int main() {
 
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
 
+	int A, B;
 	cin >> A >> B;
 
-	queue<long long> q;
+	queue<int> q;
 	q.push(A);
 
 	int cnt = 0;
@@ -49,10 +48,6 @@ int main() {
 			long long curNum = q.front();
 			q.pop();
 
-			if (curNum > B)continue;
-
-			//cout << curNum << ' ';
-
 			if (curNum == B) {
 				cout << cnt;
 				return 0;
@@ -60,10 +55,15 @@ int main() {
 
 			long long next;
 			next = curNum * 2;
-			q.push(next);
+			if (next <= B) {
+				q.push(next);
+			}
 
 			next = curNum * 10 + 1;
-			q.push(next);
+			if (next <= B) {
+				q.push(next);
+			}
+
 		}
 	}
 
