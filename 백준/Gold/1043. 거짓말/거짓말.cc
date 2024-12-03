@@ -6,6 +6,8 @@
 #include <cmath>
 #include <stack>
 #include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
 
@@ -16,7 +18,7 @@ void PrintVec(const vector<T>& v) {
 	for (T i : v) {
 		cout << i << " ";
 	}
-	cout << endl;
+	cout << '\n';
 }
 
 template<typename T>
@@ -26,15 +28,14 @@ void PrintVec(const vector<vector<T>>& vec) {
 	}
 }
 
-vector<int> roots;
-vector<bool> truth;
+vector<int> parents;
 
 int Find(int n) {
-	if (n == roots[n]) {
+	if (parents[n] == n) {
 		return n;
 	}
 	else {
-		return roots[n] = Find(roots[n]);
+		return parents[n] = Find(parents[n]);
 	}
 }
 
@@ -42,20 +43,9 @@ void Union(int a, int b) {
 	a = Find(a);
 	b = Find(b);
 
-	//if (a == b) return;
+	if (a == b) return;
 
-	if (truth[a]) {
-		roots[b] = a;
-		truth[b] = true;
-
-	}
-	else if (truth[b]) {
-		roots[a] = b;
-		truth[a] = true;
-	}
-	else {
-		roots[a] = b;
-	}
+	parents[a] = b;
 }
 
 int main() {
@@ -64,52 +54,55 @@ int main() {
 	cin.tie(NULL);
 	cout.tie(NULL);
 
-	// Init
 	int N, M;
 	cin >> N >> M;
-
-	roots.resize(N + 1);
-	for (int i = 1; i < N + 1; i++) {
-		roots[i] = i;
+	parents.resize(N + 1);
+	for (int i = 0; i < N + 1; i++) {
+		parents[i] = i;
 	}
 
-	int T, t;
-	cin >> T;
-	truth.resize(N + 1);
-	for (int i = 0; i < T; i++) {
-		cin >> t;
-		truth[t] = true;
+	int truthNum;
+	cin >> truthNum;
+	vector<int> truths(truthNum);
+	for (int i = 0; i < truthNum; i++) {
+		cin >> truths[i];
 	}
-
-	vector<vector<int>> parties(M);
+	vector<vector<int>> party(M);
 	for (int i = 0; i < M; i++) {
-		cin >> T;
-		parties[i].resize(T);
-		for (int j = 0; j < T; j++) {
-			cin >> parties[i][j];
-		}
-	}
+		int peopleNum;
+		cin >> peopleNum;
 
-	for (int i = 0; i < M; i++) {
-		for (int j = 1; j < parties[i].size(); j++) {
-			Union(parties[i][j], parties[i][j - 1]);
+		party[i].resize(peopleNum);
+		cin >> party[i][0];
+		for (int j = 1; j < peopleNum; j++) {
+			cin >> party[i][j];
+			Union(party[i][j - 1], party[i][j]);
 		}
 	}
 
 	int cnt = 0;
 	for (int i = 0; i < M; i++) {
-		cnt++;
-		for (int j = 0; j < parties[i].size(); j++) {
-			int people = parties[i][j];
-			if (truth[Find(people)]) {
-				cnt--;
+		bool canLie = true;
+
+		for (int j = 0; j < party[i].size(); j++) {
+			int curPeople = party[i][j];
+
+			for (int k = 0; k < truthNum; k++) {
+				if (Find(curPeople) == Find(truths[k])) {
+					canLie = false;
+					break;
+				}
+			}
+
+			if (!canLie) {
 				break;
 			}
 		}
-	}
 
-	//PrintVec(parties);
-	//PrintVec(truth);
+		if (canLie) {
+			cnt++;
+		}
+	}
 
 	cout << cnt;
 
