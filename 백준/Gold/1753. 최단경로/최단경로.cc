@@ -3,80 +3,91 @@
 #include <string>
 #include <algorithm>
 #include <queue>
+#include <cmath>
+#include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
 
-#define INF 100000000
+#define INF 1e9
+
+template<typename T>
+void PrintVec(const vector<T>& v) {
+	for (T i : v) {
+		cout << i << " ";
+	}
+	cout << '\n';
+}
+
+template<typename T>
+void PrintVec(const vector<vector<T>>& vec) {
+	for (auto& v : vec) {
+		PrintVec(v);
+	}
+}
 
 struct Edge {
-	int weight;
 	int to;
+	int w;
 };
 
 struct cmp {
 	bool operator()(const Edge& e1, const Edge& e2) {
-		return e1.weight > e2.weight;
+		return e1.w > e2.w;
 	}
 };
 
-void Input(vector<vector<Edge>>& edges, int& start) {
-	int V, E;
-	cin >> V >> E >> start;
-	start--;
+int V, E, K;
+vector<vector<Edge>> edges;
 
-	edges.resize(V);
-	for (int i = 0; i < E; i++) {
-		int f, t, w;
-		cin >> f >> t >> w;
-		edges[f - 1].push_back({ w, t - 1 });
-	}
-
-}
-
-void Dijkstra(vector<vector<Edge>>& edges, int start) {
-
-	priority_queue<Edge, vector<Edge>, cmp> pq;
-	vector<int> dist(edges.size(), INF);
-
+void Dijkstra(int start) {
+	priority_queue<Edge, vector<Edge>, cmp>pq;
+	pq.push({ start, 0 });
+	vector<int> dist(V + 1, INF);
 	dist[start] = 0;
-	pq.push({ 0, start });
 
 	while (!pq.empty()) {
-		int curNode = pq.top().to;
-		int curWeight = pq.top().weight;
+		Edge edge = pq.top();
 		pq.pop();
 
-		if (dist[curNode] < curWeight) continue;
+		if (dist[edge.to] < edge.w) continue;
 
-		for (Edge& edge : edges[curNode]) {
-			int toNode = edge.to;
-			int toWeight = edge.weight;
-			int cost = toWeight + curWeight;
-
-			if (dist[toNode] > cost) {
-				dist[toNode] = cost;
-				pq.push({ cost, toNode });
+		for (int i = 0; i < edges[edge.to].size(); i++) {
+			int next = edges[edge.to][i].to;
+			int cost = edges[edge.to][i].w + edge.w;
+			if (dist[next] > cost) {
+				dist[next] = cost;
+				pq.push({ next, cost });
 			}
 		}
 	}
 
-	for (int i : dist) {
-		if (i == INF) {
-			cout << "INF" << endl;
+	for (int i = 1; i <= V; i++) {
+		if (dist[i] == INF) {
+			cout << "INF\n";
 		}
 		else {
-			cout << i << endl;
+			cout << dist[i] << '\n';
 		}
 	}
 }
 
 int main() {
 
-	vector<vector<Edge>> edges;
-	int start;
-	Input(edges, start);
-	Dijkstra(edges, start);
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+	cin >> V >> E >> K;
+	edges.resize(V + 1);
+	for (int i = 0; i < E; i++) {
+		int u, v, w;
+		cin >> u >> v >> w;
+		edges[u].push_back({ v, w });
+	}
 
+	Dijkstra(K);
 
 	return 0;
 }
