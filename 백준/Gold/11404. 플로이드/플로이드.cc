@@ -6,6 +6,8 @@
 #include <cmath>
 #include <stack>
 #include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
 
@@ -16,7 +18,7 @@ void PrintVec(const vector<T>& v) {
 	for (T i : v) {
 		cout << i << " ";
 	}
-	cout << endl;
+	cout << '\n';
 }
 
 template<typename T>
@@ -26,44 +28,44 @@ void PrintVec(const vector<vector<T>>& vec) {
 	}
 }
 
+
 int main() {
 
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
 
-	int n, m;
-	cin >> n >> m;
+	int N, M;
+	cin >> N >> M;
+	vector<vector<int>> edges(N, vector<int>(N, INF));
+	for (int i = 0; i < M; i++) {
+		int v1, v2, c;
+		cin >> v1 >> v2 >> c;
+		v1--;
+		v2--;
+		edges[v1][v2] = min(edges[v1][v2], c);
 
-	vector<vector<int>> maps(n + 1, vector<int>(n + 1, INF));
-
-	int f, t, w;
-	for (int i = 0; i < m; i++) {
-		cin >> f >> t >> w;
-		maps[f][t] = min(maps[f][t], w);
 	}
 
-	for (int i = 1; i <= n; i++) {
-		for (int j = 1; j <= n; j++) {
-			for (int k = 1; k <= n; k++) {
-				if (j == k) continue;
-				maps[j][k] = min(maps[j][k], maps[j][i] + maps[i][k]);
+	for (int k = 0; k < N; k++) {
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				if (i == j) continue;
+				edges[i][j] = min(edges[i][j], edges[i][k] + edges[k][j]);
 			}
 		}
 	}
 
-	for (int i = 1; i <= n; i++) {
-		for (int j = 1; j <= n; j++) {
-			if (maps[i][j] == INF) {
-				cout << 0 << " ";
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			if (edges[i][j] == INF) {
+				cout << "0 ";
 			}
 			else {
-				cout << maps[i][j] << " ";
+				cout << edges[i][j] << ' ';
 			}
 		}
-		cout << endl;
+		cout << '\n';
 	}
-	//PrintVec(maps);
-
 	return 0;
 }
