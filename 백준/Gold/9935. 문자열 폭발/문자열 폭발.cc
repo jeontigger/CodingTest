@@ -5,50 +5,58 @@
 #include <queue>
 #include <cmath>
 #include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
 
 #define INF 1e9
 
-
-void PrintVec(const vector<int>& v) {
-	for (int i : v) {
+template<typename T>
+void PrintVec(const vector<T>& v) {
+	for (T i : v) {
 		cout << i << " ";
 	}
-	cout << endl;
+	cout << '\n';
 }
 
-void PrintVec(const vector<vector<int>>& vec) {
+template<typename T>
+void PrintVec(const vector<vector<T>>& vec) {
 	for (auto& v : vec) {
 		PrintVec(v);
 	}
+}
+
+string Bomb(string& origin, const string& bomb) {
+
+	string s;
+	for (int i = 0; i < origin.size(); i++) {
+		s.push_back(origin[i]);
+
+
+		while (s.size() >= bomb.size() && s.substr(s.size() - bomb.size(), s.size()) == bomb) {
+			s.resize(s.size() - bomb.size());
+		}
+	}
+
+	if (s == "") {
+		s = "FRULA";
+	}
+
+	return s;
 }
 
 int main() {
 
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
+	cout.tie(NULL);
 
 	string origin, bomb;
-	cin >> origin;
-	cin >> bomb;
+	cin >> origin >> bomb;
 
-	string s;
+	cout << Bomb(origin, bomb);
 
-	for (int i = 0; i < origin.size(); i++) {
-		s += origin[i];
-
-		if (s.size() >= bomb.size()) {
-			if (s.substr(s.size() - bomb.size(), bomb.size()) == bomb) {
-				s.resize(s.size() - bomb.size());
-			}
-		}
-	}
-
-	if (s.size() == 0) {
-		cout << "FRULA" << endl;
-	}
-	else {
-		cout << s << endl;
-	}
+	return 0;
 }
