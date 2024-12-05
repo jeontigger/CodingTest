@@ -1,121 +1,154 @@
-#pragma once
-#include <iostream>
 #include <vector>
-#include <list>
+#include <iostream>
+#include <string>
 #include <algorithm>
 #include <queue>
-#include <string>
+#include <cmath>
+#include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
 
+#define INF 1e9
 
-void input(vector<vector<int>>& vec) {
-    int row, col;
-    cin >> row >> col;
-
-    vec.resize(row);
-    for (size_t i = 0; i < row; i++)
-    {
-        vec[i].resize(col);
-        for (size_t j = 0; j < col; j++)
-        {
-            cin >> vec[i][j];
-        }
-    }
+template<typename T>
+void PrintVec(const vector<T>& v) {
+	for (T i : v) {
+		cout << i << " ";
+	}
+	cout << '\n';
 }
 
-int CountZero(vector<vector<int>>& lab) {
-    int cnt = 0;
-    for (auto v : lab) {
-        for (int i : v) {
-            if (i == 0) {
-                cnt++;
-            }
-        }
-    }
-    return cnt;
+template<typename T>
+void PrintVec(const vector<vector<T>>& vec) {
+	for (auto& v : vec) {
+		PrintVec(v);
+	}
 }
 
-int nrow[4] = { 0, 1, 0, -1 };
-int ncol[4] = { 1, 0, -1, 0 };
-int BFS(vector<vector<int>> lab) {
-    list<pair<int, int>> q;
+int N, M;
+vector<vector<int>> maps;
 
-    for (int i = 0; i < lab.size(); i++) {
-        for (size_t j = 0; j < lab[i].size(); j++)
-        {
-            if (lab[i][j] != 2) {
-                continue;
-            }
+bool BuildWall(int num) {
+	int row = num / M;
+	int col = num % M;
+	if (maps[row][col] != 0) return false;
+	maps[row][col] = 1;
 
-            q.push_back({ i,j });
-            while (!q.empty()) {
-                auto curpos = q.front();
-                q.pop_front();
-                for (size_t k = 0; k < 4; k++)
-                {
-                    int newrow = curpos.first + nrow[k];
-                    int newcol = curpos.second + ncol[k];
-                    if (0 <= newrow && newrow < lab.size() && 0 <= newcol && newcol < lab[0].size()) {
-                        if (lab[newrow][newcol] == 0) {
-                            lab[newrow][newcol] = 2;
-                            q.push_back({ newrow, newcol });
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    return CountZero(lab);
+	return true;
 }
 
-void solution(vector<vector<int>>& lab) {
-    int row = lab.size();
-    int col = lab[0].size();
-    int totalCnt = row * col;
-    int maxi = 0;
-    for (size_t i = 0; i < totalCnt; i++)
-    {
-        pair<int, int> ipos = { i / col, i % col };
-        if (lab[ipos.first][ipos.second] != 0)
-            continue;
-        lab[ipos.first][ipos.second] = 1;
+void CancelWall(int num) {
+	int row = num / M;
+	int col = num % M;
 
-        for (size_t j = i + 1; j < totalCnt; j++)
-        {
-            pair<int, int> jpos = { j / col, j % col };
-            if (lab[jpos.first][jpos.second] != 0)
-                continue;
-            lab[jpos.first][jpos.second] = 1;
-
-            for (size_t k = j + 1; k < totalCnt; k++)
-            {
-                pair<int, int> kpos = { k / col, k % col };
-                if (lab[kpos.first][kpos.second] != 0)
-                    continue;
-
-                lab[kpos.first][kpos.second] = 1;
-                maxi = max(maxi, BFS(lab));
-                lab[kpos.first][kpos.second] = 0;
-                
-            }
-            lab[jpos.first][jpos.second] = 0;
-        }
-        lab[ipos.first][ipos.second] = 0;
-    }
-
-
-    cout << maxi << endl;
+	maps[row][col] = 0;
 }
 
+struct Pos {
+	int row;
+	int col;
+};
 
-int main()
-{
-    vector<vector<int>> lab;
+int g_nrow[] = { 0, 1, 0, -1 };
+int g_ncol[] = { 1, 0, -1, 0 };
 
-    input(lab);
+bool VirusValid(int row, int col, const vector<vector<int>>& maps) {
+	if (row < 0 || row >= N) return false;
+	if (col < 0 || col >= M) return false;
 
-    solution(lab);
+	if (maps[row][col] != 0) return false;
 
+	return true;
+}
+
+void Virus(vector<vector<int>>& testMaps) {
+	queue<Pos> q;
+
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < M; j++) {
+			if (testMaps[i][j] == 2) {
+				q.push({ i, j });
+			}
+		}
+	}
+
+	while (!q.empty()) {
+		Pos pos = q.front();
+		q.pop();
+
+		for (int i = 0; i < 4; i++) {
+			int nrow = pos.row + g_nrow[i];
+			int ncol = pos.col + g_ncol[i];
+
+			if (VirusValid(nrow, ncol, testMaps)) {
+				testMaps[nrow][ncol] = 2;
+				q.push({ nrow, ncol });
+			}
+		}
+	}
+}
+
+int Check(vector<vector<int>>& testMaps) {
+	int res = 0;
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < M; j++) {
+			if (testMaps[i][j] == 0) {
+				res++;
+			}
+		}
+	}
+	return res;
+}
+
+int main() {
+
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	cin >> N >> M;
+
+	maps.resize(N, vector<int>(M));
+
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < M; j++) {
+			cin >> maps[i][j];
+		}
+	}
+
+	// 벽세우기
+	// 검사하기
+
+	int row, col;
+	int maxValue = 0;
+	for (int i = 0; i < N * M; i++) {
+		if (!BuildWall(i)) continue;
+
+		for (int j = i + 1; j < N * M; j++) {
+			if (!BuildWall(j)) continue;
+
+			for (int k = j + 1; k < N * M; k++) {
+				if (!BuildWall(k)) continue;
+
+				// 바이러스 퍼지기
+				auto testMap = maps;
+				Virus(testMap);
+				// 검사하기
+				maxValue = max(maxValue, Check(testMap));
+
+				CancelWall(k);
+			}
+			CancelWall(j);
+		}
+		CancelWall(i);
+	}
+
+	cout << maxValue;
+
+
+
+	return 0;
 }
