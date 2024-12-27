@@ -1,21 +1,20 @@
 #include <string>
 #include <vector>
-#include <algorithm>
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
 vector<int> solution(vector<int> array, vector<vector<int>> commands) {
     vector<int> answer;
-    for(int i = 0; i < commands.size(); i++){
-        vector<int> command = commands[i];
-        vector<int> sorted(array.begin() + command[0] - 1, array.begin() + command[1]);
-        sort(sorted.begin(), sorted.end());
-        // for(auto i : sorted){
-        //     cout << i << " " ;
-        // }
-        answer.push_back(sorted[command[2]-1]);
-        
+    
+    for(int i = 0 ; i < commands.size(); i++){
+        int left = commands[i][0]-1;
+        int right = commands[i][1];
+        int k = commands[i][2]-1;
+        vector<int>v (array.begin() + left, array.begin() + right);
+        sort(v.begin(), v.end());
+        answer.push_back(v[k]);
     }
     return answer;
 }
