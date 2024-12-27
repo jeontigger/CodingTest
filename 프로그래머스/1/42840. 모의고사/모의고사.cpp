@@ -1,35 +1,32 @@
 #include <string>
 #include <vector>
-#include <iostream>
 
 using namespace std;
 
+int first[] = {1, 2, 3, 4, 5};
+int second[] = {2, 1, 2, 3, 2, 4, 2, 5};
+int third[] = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
+
 vector<int> solution(vector<int> answers) {
     vector<int> answer;
-    vector<int> first = {1, 2, 3, 4, 5};
-    vector<int> second = {2, 1, 2, 3, 2, 4, 2, 5};
-    vector<int> third = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
-    
-    int cnt1 = 0, cnt2 =0, cnt3 = 0;
-    for(int i =0; i < answers.size();i++){
-        if(answers[i] == first[i%first.size()])
-            cnt1++;
+    int cnts[] = {0, 0, 0};
+    int maxCnt = 0;
+    for(int i = 0 ; i < answers.size(); i++){
         
-        if(answers[i] == second[i%second.size()])
-            cnt2++;
+        if(first[i%5] == answers[i])
+            cnts[0]++;
+        if(second[i%8] == answers[i])
+            cnts[1]++;
+        if(third[i%10] == answers[i])
+            cnts[2]++;
         
-        if(answers[i] == third[i%third.size()])
-            cnt3++;
+        maxCnt = max(cnts[0], max(cnts[1], cnts[2]));
     }
     
-    int m = max(cnt1, max(cnt2, cnt3));
-    
-    if(cnt1 == m)
-        answer.push_back(1);
-    if(cnt2 == m)
-        answer.push_back(2);
-    if(cnt3 == m)
-        answer.push_back(3);
+    for(int i = 0; i < 3; i++){
+        if(cnts[i] == maxCnt)
+            answer.push_back(i+1);
+    }
     
     return answer;
 }
