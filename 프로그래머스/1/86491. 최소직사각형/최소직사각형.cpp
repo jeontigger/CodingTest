@@ -1,22 +1,24 @@
 #include <string>
 #include <vector>
+#include <iostream>
+#include <cmath>
 
 using namespace std;
 
 int solution(vector<vector<int>> sizes) {
     int answer = 0;
+    int big = 0;
+    int small = 0;
     
-    int small_max = 0;
-    int big_max = 0;
-    for(int i = 0; i<sizes.size();i++){
-        int small = min(sizes[i][0], sizes[i][1]);
-        int big = max(sizes[i][0], sizes[i][1]);
-        
-        small_max = max(small_max, small);
-        big_max = max(big_max, big);
+    for(int i = 0 ; i < sizes.size(); i++){
+        int a = sizes[i][0];
+        int b = sizes[i][1];
+        if(a > b) swap(a, b);
+        small = max(small, a);
+        big = max(big, b);
     }
     
-    answer = small_max * big_max;
+    answer = small * big;
     
     return answer;
 }
