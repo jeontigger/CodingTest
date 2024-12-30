@@ -1,43 +1,30 @@
 #include <string>
 #include <vector>
-#include <iostream>
 #include <algorithm>
+#include <iostream>
+#include <cmath>
 
 using namespace std;
 
-void Initialize(vector<string>& words, string word, int cnt){
+char aeiou[] = {'A', 'E', 'I', 'O', 'U'};
+vector<string> dictionary;
+
+void MakeDictionary(int depth, string str){
+    dictionary.push_back(str);
+    if(depth == 5) return;
     
-    if(cnt == 5){
-        return;
+    for(int i = 0 ; i < 5;i++){
+        str += aeiou[i];
+        MakeDictionary(depth+1, str);
+        str.pop_back();
     }
-    string str = word + "A";
-    words.push_back(str);
-    Initialize(words, str, cnt + 1);
-    str = word + "E";
-    words.push_back(str);
-    Initialize(words, str, cnt + 1);
-    str = word + "I";
-    words.push_back(str);
-    Initialize(words, str, cnt + 1);
-    str = word + "O";
-    words.push_back(str);
-    Initialize(words, str, cnt + 1);
-    str = word + "U";
-    words.push_back(str);
-    Initialize(words, str, cnt + 1);
-    
 }
 
 int solution(string word) {
     int answer = 0;
-    vector<string> words;
     
-    Initialize(words, "", 0);
-    
-    answer = find(words.begin(), words.end(), word) - words.begin() + 1;
-    // for(string str:words){
-    //     cout << str << " ";
-    // }
-    
+    MakeDictionary(0, "");
+    auto iter = find(dictionary.begin(), dictionary.end(), word);
+    answer = iter - dictionary.begin();
     return answer;
 }
