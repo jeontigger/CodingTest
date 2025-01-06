@@ -1,50 +1,54 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-
+#include <iostream>
+#include <queue>
 using namespace std;
 
-#define MAX 2100000000
-int g_Short = MAX;
-
-void ChangeDFS(const string& strCur, const string& strTarget, int cnt, const vector<string>& words, vector<bool>& visited){
-    // 종료조건
-    if(cnt > g_Short)
-        return;
-    if(strCur == strTarget){
-        g_Short = min(g_Short, cnt);
-        return;
+bool OneDiff(const string& str1, const string& str2){
+    int cnt = 0;
+    for(int i = 0 ; i < str1.size(); i++){
+        if(str1[i] != str2[i]){
+            cnt++;
+            if(cnt > 1)
+                return false;
+        }
     }
     
-    for(int i =0; i<words.size();i++){
-        if(visited[i])
-            continue;
-        
-        // 하나만 다를 때 재귀
-        int diff = 0;
-        for(int j = 0; j<words[i].size();j++){
-            if(words[i][j] != strCur[j])
-                diff++;
-            if(diff>2)
-                break;
-        }
-        if(diff == 1){
-            visited[i] = true;
-            ChangeDFS(words[i], strTarget, cnt+1, words, visited);
-            visited[i] = false;
-        }
-    }
+    return true;
 }
 
 int solution(string begin, string target, vector<string> words) {
     int answer = 0;
     
-    // 도착지 없는 예외처리
-    if(find(words.begin(), words.end(), target) == words.end())
-        return answer;
+    vector<bool> visited(words.size());
     
-    vector<bool>visited (words.size());
-    ChangeDFS(begin, target, 0, words, visited);
+    queue<string> q;
+    q.push(begin);
     
-    return g_Short;
+    int cnt = -1;
+    while(!q.empty()){
+        int size = q.size();
+        cnt++;
+        while(size--){
+            string cur = q.front();
+            q.pop();
+            
+            if(cur == target){
+                return cnt;
+            }
+            
+            for(int i = 0 ; i < words.size(); i++){
+                string next = words[i];
+                if(!visited[i] && OneDiff(cur, next)){
+                    visited[i] = true;
+                    q.push(next);
+                }
+            }
+        }
+        
+    }
+    
+    
+    return 0;
 }
