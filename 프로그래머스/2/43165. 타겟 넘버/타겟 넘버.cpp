@@ -3,25 +3,21 @@
 
 using namespace std;
 
-int Recursive(int idx, int sum, const vector<int>& numbers, int target){
-    int res = 0;
-    
+int g_targetCnt;
+void TargetCnt(vector<int>& numbers, int idx, int target, int sum){
     if(idx == numbers.size()){
         if(sum == target)
-            return 1;
-        else
-            return 0;
+            g_targetCnt++;
+        
+        return;
     }
     
-    res += Recursive(idx + 1, sum + numbers[idx], numbers, target);
-    res += Recursive(idx + 1, sum - numbers[idx], numbers, target);
-    
-    return res;
+    TargetCnt(numbers, idx+1, target, sum + numbers[idx]);
+    TargetCnt(numbers, idx+1, target, sum - numbers[idx]);
 }
 
 int solution(vector<int> numbers, int target) {
     int answer = 0;
-    
-    answer = Recursive(0, 0, numbers, target);
-    return answer;
+    TargetCnt(numbers, 0, target, 0);
+    return g_targetCnt;
 }
