@@ -1,39 +1,43 @@
-#include <vector>
+#include<vector>
+#include <algorithm>
+#include <iostream>
 #include <queue>
-using namespace std;
 
-struct Data{
-    int row;
-    int col;
-    int cnt;
-};
+using namespace std;
 
 int g_nrow[] = {0, 1, 0, -1};
 int g_ncol[] = {1, 0, -1, 0};
+vector<vector<int>> g_maps;
 
-int solution(vector<vector<int>> maps)
-{
-    int answer = 0;
-    queue<Data> q;
-    q.push({0, 0, 1});
-    maps[0][0] = 0;
-    
+struct Pos{
+    int row;
+    int col;
+};
+
+int BFS(){
+    queue<Pos>q;
+    q.push({0, 0});
+    g_maps[0][0] = 1;
+    int cnt = 0;
     while(!q.empty()){
-        Data data = q.front();
-        q.pop();
-        
-        if(data.row == maps.size()-1 && data.col == maps[0].size()-1){
-            return data.cnt;
-        }
-        
-        for(int i = 0; i< 4; i++){
-            int nrow = data.row + g_nrow[i];
-            int ncol = data.col + g_ncol[i];
+        cnt++;
+        int size = q.size();
+        while(size--){
+            Pos cur = q.front();
+            q.pop();
             
-            if(0 <= nrow && nrow < maps.size() && 0 <= ncol && ncol < maps[0].size()){
-                if(maps[nrow][ncol] == 1){
-                    q.push({nrow, ncol, data.cnt+1});
-                    maps[nrow][ncol] = 0;
+            // cout << cur.row << ' ' << cur.col << '\n';
+            if(cur.row == g_maps.size()-1 && cur.col == g_maps[0].size()-1){
+                return cnt;
+            }
+            
+            for(int i = 0 ; i < 4; i++){
+                int nrow = cur.row + g_nrow[i];
+                int ncol = cur.col + g_ncol[i];
+                
+                if(0 <= nrow && nrow < g_maps.size() && 0 <= ncol && ncol < g_maps[0].size() && g_maps[nrow][ncol]){
+                    g_maps[nrow][ncol] = 0;
+                    q.push({nrow, ncol});
                 }
             }
         }
@@ -42,12 +46,11 @@ int solution(vector<vector<int>> maps)
     return -1;
 }
 
-
-
-
-
-
-
-
-
-
+int solution(vector<vector<int> > maps)
+{
+    int answer = 0;
+    g_maps = maps;
+    
+    answer = BFS();
+    return answer;
+}
