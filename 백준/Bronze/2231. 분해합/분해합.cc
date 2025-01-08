@@ -18,7 +18,7 @@ void PrintVec(const vector<T>& v) {
 	for (T i : v) {
 		cout << i << " ";
 	}
-	cout << endl;
+	cout << '\n';
 }
 
 template<typename T>
@@ -36,23 +36,19 @@ int main() {
 
 	int N;
 	cin >> N;
-
-	for (int i = 1; i < N; i++) {
-		string str = to_string(i);
-
-		int sum = 0;
+	for (int i = 1; i <= N; i++) {
+		int sum = i;
+		string str = to_string(sum);
 		for (int j = 0; j < str.size(); j++) {
 			sum += str[j] - '0';
 		}
 
-		if (i + sum == N) {
+		if (sum == N) {
 			cout << i;
 			return 0;
 		}
 	}
 
 	cout << 0;
-
 	return 0;
 }
-
