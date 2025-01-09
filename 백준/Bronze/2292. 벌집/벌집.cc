@@ -18,7 +18,7 @@ void PrintVec(const vector<T>& v) {
 	for (T i : v) {
 		cout << i << " ";
 	}
-	cout << endl;
+	cout << '\n';
 }
 
 template<typename T>
@@ -37,10 +37,10 @@ int main() {
 	int N;
 	cin >> N;
 
-	int num = 1;
+	int n = 1;
 	int cnt = 1;
-	while (num < N) {
-		num += 6 * cnt;
+	while (n < N) {
+		n += cnt * 6;
 		cnt++;
 	}
 
@@ -48,4 +48,3 @@ int main() {
 
 	return 0;
 }
-
