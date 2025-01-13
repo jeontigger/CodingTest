@@ -18,7 +18,7 @@ void PrintVec(const vector<T>& v) {
 	for (T i : v) {
 		cout << i << " ";
 	}
-	cout << endl;
+	cout << '\n';
 }
 
 template<typename T>
@@ -28,8 +28,23 @@ void PrintVec(const vector<vector<T>>& vec) {
 	}
 }
 
-bool cmp(const string& s1, const string& s2) {
-	return s1.size() == s2.size() ? s1 < s2 : s1.size() < s2.size();
+bool IsDevilNum(int num) {
+
+	int cnt = 3;
+	while (num) {
+		if (num % 10 == 6) {
+			cnt--;
+		}
+		else {
+			cnt = 3;
+		}
+
+		if (cnt == 0)return true;
+
+		num /= 10;
+	}
+
+	return false;
 }
 
 int main() {
@@ -42,25 +57,17 @@ int main() {
 	cin >> N;
 
 	int num = 666;
+
+	//cout << IsDevilNum(666);
+
 	while (N) {
-		string str = to_string(num);
-
-		int sixCnt = 0;
-		for (int i = 0; i < str.size(); i++) {
-			if (str[i] == '6') {
-				sixCnt++;
-			}
-			else
-				sixCnt = 0;
-			if (sixCnt == 3) {
-				N--;
-				break;
-			}
+		if (IsDevilNum(num)) {
+			N--;
 		}
-
 		num++;
 	}
 
 	cout << num - 1;
+
 	return 0;
 }
