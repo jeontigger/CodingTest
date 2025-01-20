@@ -18,7 +18,7 @@ void PrintVec(const vector<T>& v) {
 	for (T i : v) {
 		cout << i << " ";
 	}
-	cout << endl;
+	cout << '\n';
 }
 
 template<typename T>
@@ -28,42 +28,38 @@ void PrintVec(const vector<vector<T>>& vec) {
 	}
 }
 
-int GetWrongCnt(const vector<string>& board, int row, int col) {
-	char LT = board[row][col];
+vector<string>  maps;
+int DiffCnt(int row, int col, bool type) {
+	// true == W, false == B
 
 	int res = 0;
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
-			if ((i + j) % 2 != 0) {
-				if (board[row + i][col + j] == LT) {
-					res++;
+			char ch = maps[row + i][col + j];
+			if (type) {
+				if ((i + j) % 2 == 0) {
+					if (ch == 'W')
+						res++;
+				}
+				else {
+					if (ch == 'B')
+						res++;
 				}
 			}
 			else {
-				if (board[row + i][col + j] != LT) {
-					res++;
+				if ((i + j) % 2 == 0) {
+					if (ch == 'B')
+						res++;
+				}
+				else {
+					if (ch == 'W')
+						res++;
 				}
 			}
+
 		}
 	}
-
-	int other = 0;
-	for (int i = 0; i < 8; i++) {
-		for (int j = 0; j < 8; j++) {
-			if ((i + j) % 2 != 0) {
-				if (board[row + i][col + j] != LT) {
-					other++;
-				}
-			}
-			else {
-				if (board[row + i][col + j] == LT) {
-					other++;
-				}
-			}
-		}
-	}
-
-	return min(res, other);
+	return 64 - res;
 }
 
 int main() {
@@ -74,24 +70,20 @@ int main() {
 
 	int N, M;
 	cin >> N >> M;
-	vector<string> board(N);
+	maps.resize(N);
 	for (int i = 0; i < N; i++) {
-		cin >> board[i];
+		cin >> maps[i];
 	}
 
-
-	int minValue = 64;
-	for (int i = 0; i < N - 7; i++) {
-		for (int j = 0; j < M - 7; j++) {
-			// 좌상단 선택
-			//cout << GetWrongCnt(board, i, j);
-			//cout << i << " " << j << endl;
-			minValue = min(GetWrongCnt(board, i, j), minValue);
-
+	int res = INF;
+	for (int i = 0; i <= N - 8; i++) {
+		for (int j = 0; j <= M - 8; j++) {
+			res = min(res, DiffCnt(i, j, false));
+			res = min(res, DiffCnt(i, j, true));
 		}
 	}
 
-	cout << minValue;
+	cout << res;
 
 	return 0;
 }
