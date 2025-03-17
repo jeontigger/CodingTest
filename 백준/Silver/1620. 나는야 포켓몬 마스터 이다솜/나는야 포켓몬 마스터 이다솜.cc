@@ -18,7 +18,7 @@ void PrintVec(const vector<T>& v) {
 	for (T i : v) {
 		cout << i << " ";
 	}
-	cout << endl;
+	cout << '\n';
 }
 
 template<typename T>
@@ -36,25 +36,27 @@ int main() {
 
 	int N, M;
 	cin >> N >> M;
-	vector<string> numToName(N + 1);
-	unordered_map<string, int> nameToNum;
+
+	vector<string> vec(N);
+	unordered_map<string, int> maps;
 
 	string str;
 	for (int i = 0; i < N; i++) {
 		cin >> str;
-		nameToNum[str] = i + 1;
-		numToName[i + 1] = str;
+		vec[i] = str;
+		maps[str] = i;
 	}
 
 	for (int i = 0; i < M; i++) {
 		cin >> str;
-		if ('0' <= str[0] && str[0] <= '9') {
-			cout << numToName[stoi(str)] << ' ';
+		if (isalpha(str[0])) {
+			cout << maps[str] + 1 << '\n';
 		}
 		else {
-			cout << nameToNum[str] << ' ';
+			cout << vec[stoi(str) - 1] << '\n';
 		}
 	}
+
 
 	return 0;
 }
