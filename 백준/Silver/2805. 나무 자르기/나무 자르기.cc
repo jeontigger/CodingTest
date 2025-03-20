@@ -18,7 +18,7 @@ void PrintVec(const vector<T>& v) {
 	for (T i : v) {
 		cout << i << " ";
 	}
-	cout << endl;
+	cout << '\n';
 }
 
 template<typename T>
@@ -27,18 +27,13 @@ void PrintVec(const vector<vector<T>>& vec) {
 		PrintVec(v);
 	}
 }
+int N, M;
 
-bool IsPossible(vector<int>& trees, int curHeight, int target) {
-
-	long long sum = 0;
-	for (int i = 0; i < trees.size(); i++) {
-		if (trees[i] > curHeight) {
-			sum += trees[i] - curHeight;
-		}
-
-		if (sum >= target) {
-			return true;
-		}
+bool IsValid(int testNum, vector<int>& trees) {
+	int sum = 0;
+	for (int i = 0; i < N; i++) {
+		sum += (trees[i] > testNum) ? trees[i] - testNum : 0;
+		if (sum >= M) return true;
 	}
 
 	return false;
@@ -50,27 +45,26 @@ int main() {
 	cin.tie(NULL);
 	cout.tie(NULL);
 
-	int N, M;
 	cin >> N >> M;
 	vector<int> trees(N);
 	for (int i = 0; i < N; i++) {
 		cin >> trees[i];
 	}
 
-	long long left = 1;
-	long long right = 2e9;
-	while (left <= right) {
-		long long mid = (left + right) / 2;
+	int low = 0;
+	int high = 2e9;
 
-		if (IsPossible(trees, mid, M)) {
-			left = mid + 1;
+	while (low <= high) {
+		int mid = low + (high - low) / 2;
+		//cout << mid << ' ';
+		if (IsValid(mid, trees)) {
+			low = mid + 1;
 		}
 		else {
-			right = mid - 1;
+			high = mid - 1;
 		}
 	}
 
-	cout << right;
-
+	cout << high;
 	return 0;
 }
