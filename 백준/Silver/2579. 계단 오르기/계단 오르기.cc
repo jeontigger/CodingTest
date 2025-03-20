@@ -18,7 +18,7 @@ void PrintVec(const vector<T>& v) {
 	for (T i : v) {
 		cout << i << " ";
 	}
-	cout << endl;
+	cout << '\n';
 }
 
 template<typename T>
@@ -28,6 +28,7 @@ void PrintVec(const vector<vector<T>>& vec) {
 	}
 }
 
+
 int main() {
 
 	ios::sync_with_stdio(false);
@@ -36,29 +37,30 @@ int main() {
 
 	int N;
 	cin >> N;
-
-	vector<vector<int>> dp(N, vector<int>(2));
-	vector<int> steps(N);
-	for (int i = 0; i < N; i++) {
-		cin >> steps[i];
+	vector<int> vec(N + 1);
+	for (int i = 1; i < N + 1; i++) {
+		cin >> vec[i];
 	}
-
+	vector<vector<int>> dp(N + 1, vector<int>(2));
 	if (N == 1) {
-		cout << steps[0];
+		cout << vec[1];
 		return 0;
 	}
 
-	dp[0][0] = steps[0];
-	dp[0][1] = steps[0];
-	dp[1][0] = steps[1] + steps[0];
-	dp[1][1] = steps[1];
+	dp[1][0] = vec[1];
+	dp[1][1] = vec[1];
 
-	for (int i = 2; i < dp.size(); i++) {
-		dp[i][0] = dp[i - 1][1] + steps[i];
-		dp[i][1] = max(dp[i - 2][0], dp[i - 2][1]) + steps[i];
+	dp[2][0] = dp[1][1] + vec[2];
+	dp[2][1] = vec[2];
+
+	for (int i = 3; i < N + 1; i++) {
+		dp[i][1] = max(dp[i - 2][0], dp[i - 2][1]) + vec[i];
+		dp[i][0] = dp[i - 1][1] + vec[i];
 	}
 
-	cout << *max_element(dp.back().begin(), dp.back().end());
+	cout << max(dp[N][0], dp[N][1]);
+	//PrintVec(dp);
+
 
 	return 0;
 }
