@@ -28,18 +28,29 @@ void PrintVec(const vector<vector<T>>& vec) {
 	}
 }
 
-vector<int> visited;
+int N;
 vector<vector<int>> edges;
 vector<int> parents;
+void SetParents() {
+	queue<int> q;
+	vector<int> visited(N + 1);
 
-void FindParents(int curNode = 1) {
+	int parent = 1;
+	q.push(parent);
+	visited[parent] = true;
 
-	for (int i = 0; i < edges[curNode].size(); i++) {
-		int next = edges[curNode][i];
-		if (visited[next])continue;
-		visited[next] = true;
-		parents[next] = curNode;
-		FindParents(next);
+	while (!q.empty()) {
+		int cur = q.front();
+		q.pop();
+
+		for (int i = 0; i < edges[cur].size(); i++) {
+			int next = edges[cur][i];
+			if (!visited[next]) {
+				visited[next] = true;
+				parents[next] = cur;
+				q.push(next);
+			}
+		}
 	}
 }
 
@@ -49,13 +60,9 @@ int main() {
 	cin.tie(NULL);
 	cout.tie(NULL);
 
-	int N;
 	cin >> N;
-
 	edges.resize(N + 1);
-	visited.resize(N + 1);
 	parents.resize(N + 1);
-
 	for (int i = 0; i < N - 1; i++) {
 		int v1, v2;
 		cin >> v1 >> v2;
@@ -63,12 +70,11 @@ int main() {
 		edges[v2].push_back(v1);
 	}
 
-	FindParents();
+	SetParents();
 
-	for (int i = 2; i <= N; i++) {
-		cout << parents[i] << ' ';
+	for (int i = 2; i < N + 1; i++) {
+		cout << parents[i] << '\n';
 	}
-
 
 	return 0;
 }
