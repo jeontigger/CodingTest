@@ -28,26 +28,29 @@ void PrintVec(const vector<vector<T>>& vec) {
 	}
 }
 
-vector<int> visited;
-vector<int> nums;
-set<vector<int>> s;
 int N, M;
-
-void PrintCombination(int k, vector<int>& path) {
-
-	if (k == 0) {
-		s.insert(path);
+vector<int> nums;
+vector<int> visited;
+vector<int> last;
+set<vector<int>> s;
+void NM(vector<int>& res) {
+	// 기저사례
+	if (res.size() == M) {
+		s.insert(res);
+		return;
 	}
 
 	for (int i = 0; i < N; i++) {
-		if (visited[i]) continue;
-		visited[i] = true;
-		path.push_back(nums[i]);
-		PrintCombination(k - 1, path);
-		path.pop_back();
-		visited[i] = false;
+		if (!visited[i]) {
+			visited[i] = true;
+			res.push_back(nums[i]);
+			NM(res);
+			res.pop_back();
+			visited[i] = false;
+		}
 	}
 }
+
 
 int main() {
 
@@ -61,14 +64,14 @@ int main() {
 	for (int i = 0; i < N; i++) {
 		cin >> nums[i];
 	}
-
 	sort(nums.begin(), nums.end());
+	//PrintVec(nums);
 
-	vector<int> path;
-	PrintCombination(M, path);
+	vector<int> res;
+	NM(res);
 
-	for (auto iter = s.begin(); iter != s.end(); ++iter) {
-		PrintVec(*iter);
+	for (const vector<int>& v : s) {
+		PrintVec(v);
 	}
 
 	return 0;
