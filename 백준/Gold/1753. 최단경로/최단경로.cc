@@ -30,46 +30,45 @@ void PrintVec(const vector<vector<T>>& vec) {
 
 struct Edge {
 	int to;
-	int w;
+	int cost;
 };
 
 struct cmp {
 	bool operator()(const Edge& e1, const Edge& e2) {
-		return e1.w > e2.w;
+		return e1.cost != e2.cost ? e1.cost > e2.cost : e1.to < e2.to;
 	}
 };
 
-int V, E, K;
-vector<vector<Edge>> edges;
-
-void Dijkstra(int start) {
-	priority_queue<Edge, vector<Edge>, cmp>pq;
-	pq.push({ start, 0 });
+void Dijkstra(const vector<vector<Edge>>& edges, int K, int V) {
 	vector<int> dist(V + 1, INF);
-	dist[start] = 0;
+	dist[K] = 0;
+
+	priority_queue<Edge, vector<Edge>, cmp> pq;
+	pq.push({ K, 0 });
 
 	while (!pq.empty()) {
-		Edge edge = pq.top();
+		Edge cur = pq.top();
 		pq.pop();
 
-		if (dist[edge.to] < edge.w) continue;
+		if (dist[cur.to] < cur.cost)continue;
 
-		for (int i = 0; i < edges[edge.to].size(); i++) {
-			int next = edges[edge.to][i].to;
-			int cost = edges[edge.to][i].w + edge.w;
-			if (dist[next] > cost) {
-				dist[next] = cost;
-				pq.push({ next, cost });
+		for (int i = 0; i < edges[cur.to].size(); i++) {
+			int next = edges[cur.to][i].to;
+			int nextCost = cur.cost + edges[cur.to][i].cost;
+
+			if (dist[next] > nextCost) {
+				dist[next] = nextCost;
+				pq.push({ next, nextCost });
 			}
 		}
 	}
 
 	for (int i = 1; i <= V; i++) {
 		if (dist[i] == INF) {
-			cout << "INF\n";
+			cout << "INF ";
 		}
 		else {
-			cout << dist[i] << '\n';
+			cout << dist[i] << ' ';
 		}
 	}
 }
@@ -79,15 +78,19 @@ int main() {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
+
+	int V, E, K;
 	cin >> V >> E >> K;
-	edges.resize(V + 1);
+
+	vector<vector<Edge>> edges(V + 1);
 	for (int i = 0; i < E; i++) {
-		int u, v, w;
-		cin >> u >> v >> w;
-		edges[u].push_back({ v, w });
+		int f, t, c;
+		cin >> f >> t >> c;
+		edges[f].push_back({ t, c });
 	}
 
-	Dijkstra(K);
+	Dijkstra(edges, K, V);
+
 
 	return 0;
 }
