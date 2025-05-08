@@ -6,17 +6,19 @@
 #include <cmath>
 #include <stack>
 #include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
 
-#define INF (int)1e9
+#define INF 1e9
 
 template<typename T>
 void PrintVec(const vector<T>& v) {
 	for (T i : v) {
 		cout << i << " ";
 	}
-	cout << endl;
+	cout << '\n';
 }
 
 template<typename T>
@@ -28,7 +30,7 @@ void PrintVec(const vector<vector<T>>& vec) {
 
 struct Data {
 	int in;
-	vector<int> outs;
+	vector<int> next;
 };
 
 int main() {
@@ -40,39 +42,39 @@ int main() {
 	int N, M;
 	cin >> N >> M;
 
-	vector<Data> students(N + 1);
-
-	int left, right;
+	vector<Data> vec(N + 1);
 	for (int i = 0; i < M; i++) {
-		cin >> left >> right;
-		students[left].outs.push_back(right);
-		students[right].in++;
+		int a, b;
+		cin >> a >> b;
+		vec[b].in++;
+		vec[a].next.push_back(b);
 	}
 
 	queue<int> q;
-	//vector<int> visited(N + 1);
-	//visited[0] = true;
-	for (int i = 1; i < students.size(); i++) {
-		if (students[i].in == 0) {
+	for (int i = 1; i <= N; i++) {
+		if (vec[i].in == 0) {
 			q.push(i);
-			//visited[i] = true;
 		}
 	}
 
+	vector<int> visited(N + 1);
 	while (!q.empty()) {
-		int student = q.front();
+		int cur = q.front();
 		q.pop();
+		if (visited[cur]) continue;
+		cout << cur << ' ';
+		visited[cur] = true;
 
-		cout << student << " ";
-
-		for (int i = 0; i < students[student].outs.size(); i++) {
-			int other = students[student].outs[i];
-			students[other].in--;
-			if (students[other].in == 0) {
-				q.push(other);
+		for (int i = 0; i < vec[cur].next.size(); i++) {
+			int next = vec[cur].next[i];
+			if (visited[next]) continue;
+			vec[next].in--;
+			if (vec[next].in == 0) {
+				q.push(next);
 			}
 		}
 	}
+
 
 	return 0;
 }
