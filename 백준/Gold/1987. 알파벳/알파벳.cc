@@ -1,77 +1,75 @@
-#pragma once
-#include <iostream>
 #include <vector>
-#include <list>
+#include <iostream>
+#include <string>
 #include <algorithm>
 #include <queue>
-#include <string>
+#include <cmath>
+#include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
 
-int MAXROW;
-int MAXCOL;
-void input(vector<vector<char>>& data) {
-    int row, col;
-    cin >> row >> col;
+#define INF 1e9
 
-    MAXROW = row;
-    MAXCOL = col;
-
-    data.resize(row);
-    for (size_t j = 0; j < row; j++)
-    {
-        data[j].resize(col);
-        for (size_t i = 0; i < col; i++)
-        {
-            cin >> data[j][i];
-        }
-    }
-
+template<typename T>
+void PrintVec(const vector<T>& v) {
+	for (T i : v) {
+		cout << i << " ";
+	}
+	cout << '\n';
 }
 
-bool check[26];
-int maxValue = 0;
-void solution(vector<vector<char>>& data, int _row, int _col, int cnt) {
-
-    // 범위 예외처리
-    if (_row < 0 || data.size() <= _row || _col < 0 || data[0].size() <= _col)
-        return;
-
-    // 탈출 조건
-    char c = data[_row][_col];
-    if (check[c - 'A'])
-    {
-        maxValue = max(cnt, maxValue);
-        return;
-    }
-
-
-    check[c - 'A'] = true;
-
-    solution(data, _row + 1, _col, cnt+1);
-    solution(data, _row, _col - 1, cnt + 1);
-    solution(data, _row - 1, _col, cnt + 1);
-    solution(data, _row, _col + 1, cnt + 1);
-
-    check[c - 'A'] = false;
-
-
+template<typename T>
+void PrintVec(const vector<vector<T>>& vec) {
+	for (auto& v : vec) {
+		PrintVec(v);
+	}
 }
 
-int main()
-{
-    vector<vector<char>> data;
+vector<int> visited(26);
 
-    input(data);
+int g_nrow[] = { 0, 1, 0, -1 };
+int g_ncol[] = { 1, 0, -1, 0 };
 
-    if (MAXROW == 1 && MAXCOL == 1) {
-        cout << 1 << endl;
-        return 0;
-    }
+int DFS(const vector<vector<char>>& maps, int row, int col) {
+	int res = 0;
 
-    solution(data, 0, 0, 0);
+	for (int i = 0; i < 4; i++) {
+		int nrow = row + g_nrow[i];
+		int ncol = col + g_ncol[i];
 
-    cout << maxValue << endl;
+		if (0 <= nrow && nrow < maps.size() && 0 <= ncol && ncol < maps[0].size()) {
+			char alpha = maps[nrow][ncol] - 'A';
+			if (!visited[alpha]) {
+				visited[alpha] = true;
+				res = max(res, 1 + DFS(maps, nrow, ncol));
+				visited[alpha] = false;
+			}
+		}
+	}
+	return res;
+}
 
-    return 0 ;
+int main() {
+
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int N, M;
+	cin >> N >> M;
+	vector < vector<char>> maps(N, vector<char>(M));
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < M; j++) {
+			cin >> maps[i][j];
+		}
+	}
+
+	visited[maps[0][0] - 'A'] = true;
+	cout << DFS(maps, 0, 0) + 1;
+
+
+	return 0;
 }
