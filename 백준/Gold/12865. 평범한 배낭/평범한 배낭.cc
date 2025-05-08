@@ -1,64 +1,64 @@
-#pragma once
-#include <iostream>
 #include <vector>
-#include <list>
+#include <iostream>
+#include <string>
 #include <algorithm>
 #include <queue>
-#include <string>
+#include <cmath>
+#include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
 
-int g_maxWeight;
+#define INF 1e9
 
-struct fData {
-    float weight;
-    float value;
+template<typename T>
+void PrintVec(const vector<T>& v) {
+	for (T i : v) {
+		cout << i << " ";
+	}
+	cout << '\n';
+}
+
+template<typename T>
+void PrintVec(const vector<vector<T>>& vec) {
+	for (auto& v : vec) {
+		PrintVec(v);
+	}
+}
+
+struct Data {
+	int weight;
+	int value;
 };
 
+int main() {
 
-void input(vector<fData>& vec) {
-    int n;
-    cin >> n >> g_maxWeight;
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
 
-    vec.resize(n);
+	int N, K;
+	cin >> N >> K;
 
-    for (size_t i = 0; i < n; i++)
-    {
-        cin >> vec[i].weight >> vec[i].value;
-    }
-}
+	vector<Data> items(N);
+	vector<int> knaps(K + 1);
+	for (int i = 0; i < N; i++) {
+		cin >> items[i].weight >> items[i].value;
+	}
 
-void solution(vector<fData>& vec) {
-    vector<int> dp;
-    vector<int> prevDP;
-    dp.resize(g_maxWeight + 1);
-    prevDP.resize(g_maxWeight + 1);
-    
-    for (size_t i = 0; i < vec.size(); i++)
-    {
-        auto data = vec[i];
-        int value = data.value;
-        int weight = data.weight;
-        if (weight > g_maxWeight)
-            continue;
+	for (int i = 0; i < N; i++) {
+		int w = items[i].weight;
+		int v = items[i].value;
+		auto prev = knaps;
+		for (int i = w; i <= K; i++) {
+			knaps[i] = max(prev[i - w] + v, prev[i]);
+		}
+		//PrintVec(knaps);
+	}
 
-        prevDP = dp;
-        for (size_t j = 0; j < dp.size() - weight; j++)
-        {
-            dp[weight + j] = max(prevDP[weight + j], value + prevDP[j]);
-        }
-    }
-    cout << *max_element(dp.begin(), dp.end());
-}
+	cout << knaps[K];
 
-
-int main()
-{
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-
-    vector<fData> vec;
-    input(vec);
-    solution(vec);
-
+	return 0;
 }
