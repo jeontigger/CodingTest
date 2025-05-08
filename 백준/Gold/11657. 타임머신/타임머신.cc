@@ -3,69 +3,83 @@
 #include <string>
 #include <algorithm>
 #include <queue>
+#include <cmath>
+#include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
 
 using namespace std;
 
-#define INF 1e15
+#define INF 1e9
 
-struct Edge {
-	int from;
-	int to;
-	int weight;
-};
+template<typename T>
+void PrintVec(const vector<T>& v) {
+	for (T i : v) {
+		cout << i << " ";
+	}
+	cout << '\n';
+}
 
-void Input(vector<Edge>& edges, int& n) {
-	int M;
-	cin >> n >> M;
-
-	for (int i = 0; i < M; i++) {
-		int f, t, w;
-		cin >> f >> t >> w;
-		edges.push_back({ f - 1, t - 1, w });
+template<typename T>
+void PrintVec(const vector<vector<T>>& vec) {
+	for (auto& v : vec) {
+		PrintVec(v);
 	}
 }
 
-void BellmanFord(const vector<Edge>& edges, int n) {
-	vector<long long> dist(n, INF);
-	dist[0] = 0;
+struct Edge {
+	long long from;
+	long long to;
+	long long weight;
+};
+int main() {
 
-	for (int i = 0; i <= n; i++) {
-		for (int j = 0; j < edges.size(); j++) {
-			long long from = edges[j].from;
-			long long to = edges[j].to;
-			long long weight = edges[j].weight;
-			long long cost = dist[from] + weight;
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
 
-			if (dist[from] == INF) continue;
-			if (cost < dist[to]) {
-				if (i == n) {
-					cout << -1 << endl;
-					return;
-				}
-				else {
-					dist[to] = cost;
-				}
+	int N, M;
+	cin >> N >> M;
+	vector<Edge> edges(M);
+	for (int i = 0; i < M; i++) {
+		cin >> edges[i].from >> edges[i].to >> edges[i].weight;
+		edges[i].from;
+		edges[i].to;
+	}
+
+
+	vector<long long> dist(N + 1, INF);
+	dist[1] = 0;
+
+	for (int i = 0; i < N - 1; i++) {
+		for (const auto& edge : edges) {
+			if (dist[edge.from] != INF && dist[edge.to] > dist[edge.from] + edge.weight) {
+				dist[edge.to] = dist[edge.from] + edge.weight;
 			}
 		}
 	}
 
-	for (int i = 1; i < n; i++) {
-		if (dist[i] == INF) {
-			cout << -1 << endl;
-		}
-		else {
-			cout << dist[i] << endl;
+	bool minus = false;
+	for (const auto& edge : edges) {
+		if (dist[edge.from] != INF && dist[edge.to] > dist[edge.from] + edge.weight) {
+			minus = true;
 		}
 	}
-}
-
-int main() {
-
-	vector<Edge> edges;
-	int n;
-	Input(edges, n);
-
-	BellmanFord(edges, n);
+	if (minus) {
+		cout << -1;
+		return 0;
+	}
+	else {
+		for (int i = 2; i < N + 1; i++) {
+			if (dist[i] == INF) {
+				cout << -1 << ' ';
+			}
+			else {
+				cout << dist[i] << ' ';
+			}
+		}
+	}
 
 	return 0;
 }
