@@ -1,68 +1,51 @@
 #include <string>
 #include <vector>
-#include <unordered_map>
+#include <map>
 #include <iostream>
 #include <algorithm>
+
 using namespace std;
+map<string, int> playCnt;
 
-struct Data{
-    int val;
-    int idx;
-};
-
-struct Data2{
-    string genre;
-    int val;
-};
-
-void PrintMap(unordered_map<string, vector<Data>>& um){
-    for(auto& p : um){
-        cout << p.first << ' ' ;
-        for(auto& d : p.second){
-            cout << d.val << ' ' ;
-        }
-        cout << '\n';
+bool cmp(const pair<int, int>& p1, const pair<int, int>& p2){
+    if(p1.first != p2.first){
+        return p1.first > p2.first;
+    }else{
+        return p1.second < p2.second;
     }
 }
-
-bool cmp(const Data&d1, const Data&d2){
-    return d1.val != d2.val ? d1.val > d2.val : d1.idx < d2.idx;
-}
-
-bool cmp2(const Data2&d1, const Data2&d2){
-    return d1.val > d2.val;
-}
-
 vector<int> solution(vector<string> genres, vector<int> plays) {
     vector<int> answer;
-    
-    unordered_map<string, vector<Data>> um;
-    unordered_map<string, int> cntMap;
-    vector<Data2> v;
-    for(int i = 0 ; i < genres.size(); i++){
-        um[genres[i]].push_back({plays[i], i});
-        cntMap[genres[i]] += plays[i];
+    int N = genres.size();
+    // [genre] => [play, idx]
+    map<string, vector<pair<int, int>>> genreSongs;
+    for(int i = 0 ; i < N; i++){
+        playCnt[genres[i]] += plays[i];
+        genreSongs[genres[i]].push_back(make_pair(plays[i], i));
     }
     
-    for(auto& p: cntMap){
-        v.push_back({p.first, p.second});
+    vector<pair<int, string>> byPlays;
+    for(auto iter = playCnt.begin(); iter != playCnt.end(); ++iter){
+        byPlays.push_back(make_pair(-iter->second, iter->first));
     }
     
-    sort(v.begin(), v.end(), cmp2);
+    sort(byPlays.begin(), byPlays.end());
+    // for(auto p:byPlays){
+    //     cout << p.first << ' ' << p.second << '\n';
+    // }
     
-    for(auto& p: um){
+    for(auto& p:genreSongs){
         sort(p.second.begin(), p.second.end(), cmp);
     }
     
-    PrintMap(um);
-    
-    for(auto& d: v){
-        string genre = d.genre;
-        vector<Data>& cnts = um[genre];
-        for(int i = 0 ; i < 2 && i < cnts.size(); i++){
-            answer.push_back(cnts[i].idx);
+    for(int i = 0 ; i < byPlays.size(); i++){
+        string genre = byPlays[i].second;
+        auto vec = genreSongs[genre];
+        for(int i = 0 ; i < vec.size() && i < 2; i++){
+            answer.push_back(vec[i].second);
         }
     }
+    
     
     return answer;
 }
