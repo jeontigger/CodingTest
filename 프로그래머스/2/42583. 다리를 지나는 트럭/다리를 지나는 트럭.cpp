@@ -7,32 +7,35 @@ using namespace std;
 
 int solution(int bridge_length, int weight, vector<int> truck_weights) {
     int answer = 0;
-    
-    int curWeight = 0;
     int time = 0;
-    queue<int> q;
+    int waitIdx = 0;
+    int curWeight = 0;
+    queue<int> bridge;
     for(int i = 0 ; i < bridge_length; i++){
-        q.push(0);
+        bridge.push(0);
     }
-    
-    int idx = 0;
-    while(true){
+    while(waitIdx != truck_weights.size()){
+        // 빼고
+        // 들어가기
+        curWeight -= bridge.front();
+        bridge.pop();
         time++;
-        int truck = q.front();
-        q.pop();
-        curWeight -= truck;
-        if(curWeight + truck_weights[idx] <= weight){
-            q.push(truck_weights[idx]);
-            curWeight += truck_weights[idx];
-            idx++;
+        int predWeight = curWeight + truck_weights[waitIdx];
+        if(predWeight <= weight){
+            bridge.push(truck_weights[waitIdx]);
+            curWeight += truck_weights[waitIdx++];
         }else{
-            q.push(0);
+            bridge.push(0);
         }
         
-        if(idx == truck_weights.size())
-            break;
+        // auto copyQ = bridge;
+        // while(!copyQ.empty()){
+        //     cout << copyQ.front() << ' ';
+        //     copyQ.pop();
+        // }
+        // cout << '\n';
     }
-    time += bridge_length;
     
-    return time;
+    
+    return time + bridge_length;
 }
