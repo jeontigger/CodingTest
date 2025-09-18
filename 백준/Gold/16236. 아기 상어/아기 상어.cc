@@ -32,148 +32,119 @@ void PrintVec(const vector<vector<T>>& vec) {
 	}
 }
 
-// 크기별 물고기 위치 list를 갖는 vec
-// 현재 상어 위치, 현재 상어 크기
-// 현재 버틴? 시간
-
-// 조건: 자신보다 작은 물고기가 없으면
-// 가장 가까운 물고기를 먹으러 가고, 가까운 물고기가 여럿이라면 상단, 그래도 여럿이면 좌측 임
-// 먹은 수가 자신의 크기와 같으면 성장
+// 현재 위치에서 잡을 수 있는 물고기 있는지 검색
+//
+// 
 
 int N;
 int map[21][21];
-vector<list<pair<int, int>>> fishes;
 pair<int, int> sharkPos;
 
 void Inputs() {
-	fishes.resize(7);
 	cin >> N;
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < N; j++) {
 			cin >> map[i][j];
-			if (map[i][j] != 0) {
-				if (map[i][j] == 9) {
-					// 상어라면
-					sharkPos = { i, j };
-					map[i][j] = 0;
-				}
-				else {
-					// 물고기라면
-					fishes[map[i][j]].push_back({ i, j });
-				}
+			if (map[i][j] == 9) {
+				sharkPos = { i, j };
+				map[i][j] = 0;
 			}
 		}
 	}
 }
 
-int GetDistance(pair<int, int> src, pair<int, int> dst, int _size) {
-	queue<pair<int, int>> q;
-	q.push(src);
+struct PosData {
+	int row;
+	int col;
+	int cnt;
+};
+
+struct cmp {
+	bool operator()(const PosData& p1, const PosData& p2) {
+		if (p1.cnt != p2.cnt) {
+			return p1.cnt > p2.cnt;
+		}
+		else if (p1.row != p2.row) {
+			return p1.row > p2.row;
+		}
+		else {
+			return p1.col > p2.col;
+		}
+	}
+};
+
+int BFS(pair<int, int>& shark, int sharkSize) {
+
+	int nrow[4] = { -1, 0, 0, 1 };
+	int ncol[4] = { 0, -1, 1, 0 };
+
+	int res = INF;
+	priority_queue<PosData, vector<PosData>, cmp> pq;
+	vector<vector<int>> visited(N, vector<int>(N));
+	pq.push({ shark.first, shark.second, 0 });
+	visited[shark.first][shark.second] = true;
 
 	int cnt = -1;
+	//pq.push({ 1, 1 });
+	//pq.push({ 0, 1 });
+	//pq.push({ 2, 3 });
+	//auto pos = pq.top();
 
-	int nrow[4] = { 0, 1, 0, -1 };
-	int ncol[4] = { 1, 0, -1, 0 };
-	vector<vector<bool>> visited(N + 1, vector<bool>(N + 1));
-	visited[src.first][src.second] = true;
+	while (!pq.empty()) {
+		int size = pq.size();
 
-	while (!q.empty()) {
-		int size = q.size();
-		cnt++;
+		auto pos = pq.top();
+		pq.pop();
 
-		while (size--) {
-			pair<int, int> pos = q.front();
-			q.pop();
+		if (map[pos.row][pos.col] != 0 && map[pos.row][pos.col] < sharkSize) {
+			shark = { pos.row, pos.col };
+			map[pos.row][pos.col] = 0;
+			//cout << pos.row << ' ' << pos.col << '\n';
+			return pos.cnt;
+		}
 
-			if (pos == dst) {
-				return cnt;
-			}
+		for (int i = 0; i < 4; i++) {
+			int _nrow = pos.row + nrow[i];
+			int _ncol = pos.col + ncol[i];
 
-			for (int i = 0; i < 4; i++) {
-				int _nrow = pos.first + nrow[i];
-				int _ncol = pos.second + ncol[i];
-
-				if (0 <= _nrow && _nrow < N && 0 <= _ncol && _ncol < N) {
-					if (_size >= map[_nrow][_ncol] && !visited[_nrow][_ncol]) {
-						q.push({ _nrow, _ncol });
+			// 범위 조건
+			if (0 <= _nrow && _nrow < N && 0 <= _ncol && _ncol < N) {
+				// 방문 조건
+				if (!visited[_nrow][_ncol]) {
+					// 크기 조건
+					if (sharkSize >= map[_nrow][_ncol]) {
+						pq.push({ _nrow,_ncol, pos.cnt + 1 });
 						visited[_nrow][_ncol] = true;
 					}
 				}
 			}
 		}
+
 	}
 
-	return INF;
-}
-
-bool CanEatFish(pair<int, int> shark, int size) {
-	for (int i = 1; i < size && i < fishes.size(); i++) {
-		for (auto iter = fishes[i].begin(); iter != fishes[i].end(); ++iter) {
-			if (GetDistance(shark, *iter, size) != INF)
-				return true;
-		}
-	}
-	return false;
-}
-
-
-
-pair<int, int> GetNearestFish(pair<int, int> pos, int size) {
-	int minDist = INF;
-	vector<pair<int, int>> cand;
-
-	for (int i = 1; i < size && i < fishes.size(); i++) {
-		for (auto iter = fishes[i].begin(); iter != fishes[i].end(); ++iter) {
-			int dist = GetDistance(pos, *iter, size);
-			if (dist == minDist) {
-				cand.push_back(*iter);
-			}
-			else if (dist < minDist) {
-				cand.clear();
-				cand.push_back(*iter);
-				minDist = dist;
-			}
-		}
-	}
-
-	sort(cand.begin(), cand.end());
-	return cand[0];
-}
-
-void EatFish(int size, pair<int, int> pos) {
-	for (auto iter = fishes[size].begin(); iter != fishes[size].end();) {
-		if (pos == *iter) {
-			// 조건 삭제
-			iter = fishes[size].erase(iter);
-		}
-		else {
-			++iter;
-		}
-	}
+	return res;
 }
 
 void Solution() {
+
 	int curSize = 2;
-	pair<int, int> curPos = sharkPos;
+	int curCnt = 0;
 	int time = 0;
-	int eatCnt = 0;
 	while (true) {
-		if (!CanEatFish(curPos, curSize))
+		int res = BFS(sharkPos, curSize);
+		if (res == INF) {
 			break;
-
-		pair<int, int> pos = GetNearestFish(curPos, curSize);
-		time += GetDistance(curPos, pos, curSize);
-		EatFish(map[pos.first][pos.second], pos);
-		eatCnt++;
-		if (eatCnt == curSize) {
-			curSize++;
-			eatCnt = 0;
 		}
-		curPos = pos;
-		//cout << curPos.first << ' ' << curPos.second << ' ' << curSize << ' ' << eatCnt << ' ' << time << '\n';
+		else {
+			curCnt++;
+			time += res;
+			if (curCnt == curSize) {
+				curSize++;
+				curCnt = 0;
+			}
+		}
 	}
-
-	cout << time;
+	cout << time << '\n';
 }
 
 int main() {
