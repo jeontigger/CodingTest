@@ -1,53 +1,76 @@
-#pragma once
-#include <iostream>
 #include <vector>
-#include <list>
+#include <iostream>
+#include <string>
 #include <algorithm>
 #include <queue>
-#include <string>
-#include <limits.h>
+#include <cmath>
+#include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
+#include <iomanip>
+#include <cassert>
+#include <cstring>
+#include <list>
 
 using namespace std;
 
-int g_cnt;
-vector<int> g_dp;
+#define INF 1e9
 
-void input(vector<int>& coins) {
-    int n;
-    cin >> n >> g_cnt;
-    coins.resize(n);
-    g_dp.resize(g_cnt+1, 1000000);
-    for (size_t i = 0; i < n; i++)
-    {
-        cin >> coins[i];
-    }
-}
-void solution(vector<int>& coins) {
-    
-    // idx = value, value = coins nums
-    for (int i = 0; i < coins.size(); i++) {
-        g_dp[coins[i]] = 1;
-        for (int j = coins[i]; j < g_dp.size(); j++) {
-            g_dp[j] = min(g_dp[j], g_dp[j - coins[i]] + 1);
-        }
-    }
-
-    if (g_dp.back() == 1000000) {
-        cout << -1 << endl;
-    }
-    else {
-        cout << g_dp.back() << endl;
-    }
+template<typename T>
+void PrintVec(const vector<T>& v) {
+	for (T i : v) {
+		cout << i << " ";
+	}
+	cout << '\n';
 }
 
+template<typename T>
+void PrintVec(const vector<vector<T>>& vec) {
+	for (auto& v : vec) {
+		PrintVec(v);
+	}
+}
+#define FOR(idx, limit) for(int idx = 0; idx < limit; idx++)
 
-int main()
-{
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
+int n, k;
+int val[101];
 
-    vector<int> coins;
-    input(coins);
-    solution(coins);
+void Inputs() {
+	cin >> n >> k;
+	FOR(i, n)
+		cin >> val[i];
+}
 
+void Solution() {
+	vector<int> dp(10001, INF);
+	dp[0] = 0;
+	for (int i = 0; i < n; i++) {
+		dp[val[i]] = 1;
+		for (int j = val[i]; j <= k; j++) {
+			dp[j] = min(dp[j], dp[j - val[i]] + 1);
+		}
+	}
+	if (dp[k] == INF)
+		cout << -1 << '\n';
+	else
+		cout << dp[k] << '\n';
+}
+
+int main() {
+
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+
+	int T = 1;
+	//cin >> T;
+	while (T--) {
+		Inputs();
+		Solution();
+	}
+
+
+	return 0;
 }
