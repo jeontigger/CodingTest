@@ -5,61 +5,71 @@
 #include <queue>
 #include <cmath>
 #include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
+#include <iomanip>
+#include <cassert>
+#include <cstring>
+#include <list>
 
 using namespace std;
 
 #define INF 1e9
 
-
-void PrintVec(const vector<int>& v) {
-	for (int i : v) {
+template<typename T>
+void PrintVec(const vector<T>& v) {
+	for (T i : v) {
 		cout << i << " ";
 	}
-	cout << endl;
+	cout << '\n';
 }
 
-void PrintVec(const vector<vector<int>>& vec) {
+template<typename T>
+void PrintVec(const vector<vector<T>>& vec) {
 	for (auto& v : vec) {
 		PrintVec(v);
 	}
 }
+#define FOR(idx, limit) for(int idx = 0; idx < limit; idx++)
 
-void Solution(int N, int M, vector<int>& coins, vector<int>& dp) {
+int N, M, coins[20];
+
+void Inputs() {
+	cin >> N;
+	FOR(i, N) {
+		cin >> coins[i];
+	}
+	cin >> M;
+}
+
+void Solution() {
+	vector<int> dp(M + 1, 0);
+	dp[0] = 1;
+
 	for (int i = 0; i < N; i++) {
-		dp[coins[i]]++;
-		for (int j = coins[i]; j <= M; j++) {
-			dp[j] += dp[j - coins[i]];
+		int coin = coins[i];
+		for (int j = coin; j < dp.size(); j++) {
+			dp[j] += dp[j - coin];
 		}
+
 	}
 
-	cout << dp[M] << endl;
+	cout << dp[M] << '\n';
 }
 
 int main() {
 
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
+	cout.tie(NULL);
 
-	int T, N, M;
+
+	int T = 1;
 	cin >> T;
-
-	vector<int> dp(10001);
-
-	for (int i = 0; i < T; i++) {
-		// input
-		cin >> N;
-		vector<int> coins(N);
-		for (int j = 0; j < N; j++) {
-			cin >> coins[j];
-		}
-
-		cin >> M;
-
-		// solution
-		for (int i = 0; i < dp.size(); i++) {
-			dp[i] = 0;
-		}
-		Solution(N, M, coins, dp);
+	while (T--) {
+		Inputs();
+		Solution();
 	}
 
 
