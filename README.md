@@ -25,6 +25,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0169-majority-element](https://github.com/jeontigger/CodingTest/tree/master/0169-majority-element) |
 | [0209-minimum-size-subarray-sum](https://github.com/jeontigger/CodingTest/tree/master/0209-minimum-size-subarray-sum) |
 | [0239-sliding-window-maximum](https://github.com/jeontigger/CodingTest/tree/master/0239-sliding-window-maximum) |
+| [0480-sliding-window-median](https://github.com/jeontigger/CodingTest/tree/master/0480-sliding-window-median) |
 | [1352-maximum-profit-in-job-scheduling](https://github.com/jeontigger/CodingTest/tree/master/1352-maximum-profit-in-job-scheduling) |
 ## Sliding Window
 |  |
@@ -32,6 +33,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0076-minimum-window-substring](https://github.com/jeontigger/CodingTest/tree/master/0076-minimum-window-substring) |
 | [0209-minimum-size-subarray-sum](https://github.com/jeontigger/CodingTest/tree/master/0209-minimum-size-subarray-sum) |
 | [0239-sliding-window-maximum](https://github.com/jeontigger/CodingTest/tree/master/0239-sliding-window-maximum) |
+| [0480-sliding-window-median](https://github.com/jeontigger/CodingTest/tree/master/0480-sliding-window-median) |
 ## Prefix Sum
 |  |
 | ------- |
@@ -72,6 +74,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0239-sliding-window-maximum](https://github.com/jeontigger/CodingTest/tree/master/0239-sliding-window-maximum) |
+| [0480-sliding-window-median](https://github.com/jeontigger/CodingTest/tree/master/0480-sliding-window-median) |
 ## Monotonic Queue
 |  |
 | ------- |
@@ -81,6 +84,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0076-minimum-window-substring](https://github.com/jeontigger/CodingTest/tree/master/0076-minimum-window-substring) |
 | [0169-majority-element](https://github.com/jeontigger/CodingTest/tree/master/0169-majority-element) |
+| [0480-sliding-window-median](https://github.com/jeontigger/CodingTest/tree/master/0480-sliding-window-median) |
 ## Divide and Conquer
 |  |
 | ------- |
