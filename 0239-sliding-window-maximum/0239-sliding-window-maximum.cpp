@@ -1,39 +1,42 @@
 class Solution {
 public:
-    struct Data{
-        int idx;
-        int val;
-    };
-
-    struct cmp{
-        bool operator()(const Data& d1, const Data& d2){
-            return d1.val == d2.val ? d1.idx > d2.idx : d1.val < d2.val;
-        }
-    };
-
+    
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        priority_queue<Data, vector<Data>, cmp> pq;
+        struct Cmp {
+            bool operator()(const pair<int, int> &a, const pair<int, int> &b)
+            {
+                if(a.first == b.first){
+                    return a.second > b.second;
+                }
+                return a.first < b.first;
+            };
+        };
 
-        vector<int> res;
-        for (int i = 0; i < k; i++) {
-            pq.push({i, nums[i]});
+        priority_queue<pair<int, int>, vector<pair<int, int>>, Cmp> pq;
+        
+
+        for(int i = 0; i<k;i++){
+            pq.push({nums[i], i});
         }
-        res.push_back(pq.top().val);
+        vector<int>res;
 
-        for(int i = k ; i<nums.size(); i++){
-            pq.push({i, nums[i]});
-            int popNum = nums[i-k];
 
-            if(popNum == pq.top().val){
-                while(!pq.empty()){
+        for(int i = 0; i<nums.size() - k ; i++){
+            int curMax = pq.top().first;
+            res.push_back(curMax);
+            int prevNum = nums[i];
+            if(prevNum == curMax){
+                while(true){
                     pq.pop();
-                    if(pq.top().idx > i-k){
+                    if(pq.top().second >=i){
                         break;
                     }
                 }
             }
-            res.push_back(pq.top().val);
+            pq.push({nums[i+k], i+k});
         }
-        return res;
+        res.push_back(pq.top().first);
+
+        return res;    
     }
 };
