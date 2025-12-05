@@ -44,6 +44,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [1052-grumpy-bookstore-owner](https://github.com/jeontigger/CodingTest/tree/master/1052-grumpy-bookstore-owner) |
 | [1235-maximum-profit-in-job-scheduling](https://github.com/jeontigger/CodingTest/tree/master/1235-maximum-profit-in-job-scheduling) |
 | [1352-maximum-profit-in-job-scheduling](https://github.com/jeontigger/CodingTest/tree/master/1352-maximum-profit-in-job-scheduling) |
+| [1458-max-dot-product-of-two-subsequences](https://github.com/jeontigger/CodingTest/tree/master/1458-max-dot-product-of-two-subsequences) |
 | [1493-longest-subarray-of-1s-after-deleting-one-element](https://github.com/jeontigger/CodingTest/tree/master/1493-longest-subarray-of-1s-after-deleting-one-element) |
 | [1695-maximum-erasure-value](https://github.com/jeontigger/CodingTest/tree/master/1695-maximum-erasure-value) |
 | [1981-minimize-the-difference-between-target-and-chosen-elements](https://github.com/jeontigger/CodingTest/tree/master/1981-minimize-the-difference-between-target-and-chosen-elements) |
@@ -109,6 +110,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [1155-number-of-dice-rolls-with-target-sum](https://github.com/jeontigger/CodingTest/tree/master/1155-number-of-dice-rolls-with-target-sum) |
 | [1235-maximum-profit-in-job-scheduling](https://github.com/jeontigger/CodingTest/tree/master/1235-maximum-profit-in-job-scheduling) |
 | [1352-maximum-profit-in-job-scheduling](https://github.com/jeontigger/CodingTest/tree/master/1352-maximum-profit-in-job-scheduling) |
+| [1458-max-dot-product-of-two-subsequences](https://github.com/jeontigger/CodingTest/tree/master/1458-max-dot-product-of-two-subsequences) |
 | [1493-longest-subarray-of-1s-after-deleting-one-element](https://github.com/jeontigger/CodingTest/tree/master/1493-longest-subarray-of-1s-after-deleting-one-element) |
 | [1981-minimize-the-difference-between-target-and-chosen-elements](https://github.com/jeontigger/CodingTest/tree/master/1981-minimize-the-difference-between-target-and-chosen-elements) |
 ## Backtracking
