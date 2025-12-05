@@ -11,37 +11,37 @@
  */
 class Solution {
 public:
-    void printVec(vector<int> vec){
-        for(int i: vec){
-            cout << i << " ";
+    vector<int> m_pre;
+    vector<int> m_in;
+    TreeNode* BST(int pl, int pr, int il, int ir){
+        if(pl > pr || il > ir) return nullptr;
+
+        // pre의 가장 왼쪽은 root
+        // in의 root를 찾고 그 왼쪽과 오른쪽을 나눔
+        int rootVal = m_pre[pl];
+        int inIdx = -1;
+        for(int idx = il; idx <= ir; idx++){
+            if(rootVal == m_in[idx]){
+                inIdx = idx;
+                break;
+            }
         }
-        cout << endl;
+
+        int leftSize = inIdx - il;
+        int rightSize = ir - inIdx;
+
+        auto lNode = BST(pl+1, pl+leftSize, il, inIdx-1);
+        auto rNode = BST(pl+1+leftSize, pr, inIdx+1, ir);
+        TreeNode* root = new TreeNode(rootVal);
+        root->left = lNode;
+        root->right = rNode;
+
+        return root;
     }
-    
+
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        
-        if(preorder.size() == 0||inorder.size() == 0){
-            return nullptr;
-        }
-
-        int value = preorder[0];
-        int cnt = find(inorder.begin(), inorder.end(), value) - inorder.begin();
-        vector<int> preLeft(preorder.begin()+1, preorder.begin() + cnt + 1);
-        vector<int> preRight(preorder.begin() + cnt + 1, preorder.end());
-
-        // printVec(preLeft);
-        // printVec(preRight);
-
-        vector<int> inLeft(inorder.begin(), inorder.begin() + cnt);
-        vector<int> inRight(inorder.begin() + cnt+ 1, inorder.end());
-        // printVec(inLeft);
-        // printVec(inRight);
-
-        TreeNode* pNode = new TreeNode(value);
-        pNode->left = buildTree(preLeft, inLeft);
-        pNode->right = buildTree(preRight, inRight);
-
-
-        return pNode;
+        m_pre = preorder;
+        m_in = inorder;
+        return BST(0, preorder.size()-1, 0, inorder.size()-1);
     }
 };
