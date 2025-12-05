@@ -105,6 +105,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0879-profitable-schemes](https://github.com/jeontigger/CodingTest/tree/master/0879-profitable-schemes) |
 | [0956-tallest-billboard](https://github.com/jeontigger/CodingTest/tree/master/0956-tallest-billboard) |
 | [1049-last-stone-weight-ii](https://github.com/jeontigger/CodingTest/tree/master/1049-last-stone-weight-ii) |
+| [1155-number-of-dice-rolls-with-target-sum](https://github.com/jeontigger/CodingTest/tree/master/1155-number-of-dice-rolls-with-target-sum) |
 | [1235-maximum-profit-in-job-scheduling](https://github.com/jeontigger/CodingTest/tree/master/1235-maximum-profit-in-job-scheduling) |
 | [1352-maximum-profit-in-job-scheduling](https://github.com/jeontigger/CodingTest/tree/master/1352-maximum-profit-in-job-scheduling) |
 | [1493-longest-subarray-of-1s-after-deleting-one-element](https://github.com/jeontigger/CodingTest/tree/master/1493-longest-subarray-of-1s-after-deleting-one-element) |
