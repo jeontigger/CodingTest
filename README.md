@@ -19,6 +19,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0222-count-complete-tree-nodes](https://github.com/jeontigger/CodingTest/tree/master/0222-count-complete-tree-nodes) |
 | [0315-count-of-smaller-numbers-after-self](https://github.com/jeontigger/CodingTest/tree/master/0315-count-of-smaller-numbers-after-self) |
 | [0327-count-of-range-sum](https://github.com/jeontigger/CodingTest/tree/master/0327-count-of-range-sum) |
+| [0493-reverse-pairs](https://github.com/jeontigger/CodingTest/tree/master/0493-reverse-pairs) |
 | [1004-max-consecutive-ones-iii](https://github.com/jeontigger/CodingTest/tree/master/1004-max-consecutive-ones-iii) |
 | [1235-maximum-profit-in-job-scheduling](https://github.com/jeontigger/CodingTest/tree/master/1235-maximum-profit-in-job-scheduling) |
 | [1352-maximum-profit-in-job-scheduling](https://github.com/jeontigger/CodingTest/tree/master/1352-maximum-profit-in-job-scheduling) |
@@ -41,6 +42,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0416-partition-equal-subset-sum](https://github.com/jeontigger/CodingTest/tree/master/0416-partition-equal-subset-sum) |
 | [0474-ones-and-zeroes](https://github.com/jeontigger/CodingTest/tree/master/0474-ones-and-zeroes) |
 | [0480-sliding-window-median](https://github.com/jeontigger/CodingTest/tree/master/0480-sliding-window-median) |
+| [0493-reverse-pairs](https://github.com/jeontigger/CodingTest/tree/master/0493-reverse-pairs) |
 | [0494-target-sum](https://github.com/jeontigger/CodingTest/tree/master/0494-target-sum) |
 | [0518-coin-change-ii](https://github.com/jeontigger/CodingTest/tree/master/0518-coin-change-ii) |
 | [0643-maximum-average-subarray-i](https://github.com/jeontigger/CodingTest/tree/master/0643-maximum-average-subarray-i) |
@@ -178,6 +180,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0190-reverse-bits](https://github.com/jeontigger/CodingTest/tree/master/0190-reverse-bits) |
 | [0315-count-of-smaller-numbers-after-self](https://github.com/jeontigger/CodingTest/tree/master/0315-count-of-smaller-numbers-after-self) |
 | [0327-count-of-range-sum](https://github.com/jeontigger/CodingTest/tree/master/0327-count-of-range-sum) |
+| [0493-reverse-pairs](https://github.com/jeontigger/CodingTest/tree/master/0493-reverse-pairs) |
 | [1763-longest-nice-substring](https://github.com/jeontigger/CodingTest/tree/master/1763-longest-nice-substring) |
 ## Sorting
 |  |
@@ -229,19 +232,23 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0315-count-of-smaller-numbers-after-self](https://github.com/jeontigger/CodingTest/tree/master/0315-count-of-smaller-numbers-after-self) |
 | [0327-count-of-range-sum](https://github.com/jeontigger/CodingTest/tree/master/0327-count-of-range-sum) |
+| [0493-reverse-pairs](https://github.com/jeontigger/CodingTest/tree/master/0493-reverse-pairs) |
 ## Segment Tree
 |  |
 | ------- |
 | [0315-count-of-smaller-numbers-after-self](https://github.com/jeontigger/CodingTest/tree/master/0315-count-of-smaller-numbers-after-self) |
 | [0327-count-of-range-sum](https://github.com/jeontigger/CodingTest/tree/master/0327-count-of-range-sum) |
+| [0493-reverse-pairs](https://github.com/jeontigger/CodingTest/tree/master/0493-reverse-pairs) |
 ## Merge Sort
 |  |
 | ------- |
 | [0315-count-of-smaller-numbers-after-self](https://github.com/jeontigger/CodingTest/tree/master/0315-count-of-smaller-numbers-after-self) |
 | [0327-count-of-range-sum](https://github.com/jeontigger/CodingTest/tree/master/0327-count-of-range-sum) |
+| [0493-reverse-pairs](https://github.com/jeontigger/CodingTest/tree/master/0493-reverse-pairs) |
 ## Ordered Set
 |  |
 | ------- |
 | [0315-count-of-smaller-numbers-after-self](https://github.com/jeontigger/CodingTest/tree/master/0315-count-of-smaller-numbers-after-self) |
 | [0327-count-of-range-sum](https://github.com/jeontigger/CodingTest/tree/master/0327-count-of-range-sum) |
+| [0493-reverse-pairs](https://github.com/jeontigger/CodingTest/tree/master/0493-reverse-pairs) |
 <!---LeetCode Topics End-->
