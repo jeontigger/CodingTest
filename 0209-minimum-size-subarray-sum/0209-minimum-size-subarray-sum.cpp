@@ -1,26 +1,19 @@
 class Solution {
 public:
     int minSubArrayLen(int target, vector<int>& nums) {
-        
-        int left = 0, right = 0, sum = 0;
-        int output = nums.size()+1;
-        for(;left < nums.size();){
-            if(sum < target && right < nums.size()){
-                sum += nums[right];
-                right++;
-            }else if(sum >= target){
-                sum -= nums[left];
-                left++;
-                output = min(output, right - left + 1);
-                cout << left << " " << right << endl;
-            }else{
-                sum -= nums[left];
-                left++;
+        int sum = 0, ret = nums.size(), left = 0;
+        bool never = true;
+
+        for (int right = 0; right < nums.size(); right++) {
+            sum += nums[right];
+
+            while (sum >= target) {
+                never = false;
+                ret = min(ret, right - left + 1);
+                sum -= nums[left++];
             }
         }
-        if(output == nums.size() + 1)
-            output = 0;
 
-        return output;
+        return never ? 0 : ret;
     }
 };
