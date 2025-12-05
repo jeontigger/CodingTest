@@ -17,6 +17,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0081-search-in-rotated-sorted-array-ii](https://github.com/jeontigger/CodingTest/tree/master/0081-search-in-rotated-sorted-array-ii) |
 | [0209-minimum-size-subarray-sum](https://github.com/jeontigger/CodingTest/tree/master/0209-minimum-size-subarray-sum) |
 | [0222-count-complete-tree-nodes](https://github.com/jeontigger/CodingTest/tree/master/0222-count-complete-tree-nodes) |
+| [0315-count-of-smaller-numbers-after-self](https://github.com/jeontigger/CodingTest/tree/master/0315-count-of-smaller-numbers-after-self) |
 | [1004-max-consecutive-ones-iii](https://github.com/jeontigger/CodingTest/tree/master/1004-max-consecutive-ones-iii) |
 | [1235-maximum-profit-in-job-scheduling](https://github.com/jeontigger/CodingTest/tree/master/1235-maximum-profit-in-job-scheduling) |
 | [1352-maximum-profit-in-job-scheduling](https://github.com/jeontigger/CodingTest/tree/master/1352-maximum-profit-in-job-scheduling) |
@@ -33,6 +34,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0209-minimum-size-subarray-sum](https://github.com/jeontigger/CodingTest/tree/master/0209-minimum-size-subarray-sum) |
 | [0219-contains-duplicate-ii](https://github.com/jeontigger/CodingTest/tree/master/0219-contains-duplicate-ii) |
 | [0239-sliding-window-maximum](https://github.com/jeontigger/CodingTest/tree/master/0239-sliding-window-maximum) |
+| [0315-count-of-smaller-numbers-after-self](https://github.com/jeontigger/CodingTest/tree/master/0315-count-of-smaller-numbers-after-self) |
 | [0322-coin-change](https://github.com/jeontigger/CodingTest/tree/master/0322-coin-change) |
 | [0416-partition-equal-subset-sum](https://github.com/jeontigger/CodingTest/tree/master/0416-partition-equal-subset-sum) |
 | [0474-ones-and-zeroes](https://github.com/jeontigger/CodingTest/tree/master/0474-ones-and-zeroes) |
@@ -172,6 +174,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0109-convert-sorted-list-to-binary-search-tree](https://github.com/jeontigger/CodingTest/tree/master/0109-convert-sorted-list-to-binary-search-tree) |
 | [0169-majority-element](https://github.com/jeontigger/CodingTest/tree/master/0169-majority-element) |
 | [0190-reverse-bits](https://github.com/jeontigger/CodingTest/tree/master/0190-reverse-bits) |
+| [0315-count-of-smaller-numbers-after-self](https://github.com/jeontigger/CodingTest/tree/master/0315-count-of-smaller-numbers-after-self) |
 | [1763-longest-nice-substring](https://github.com/jeontigger/CodingTest/tree/master/1763-longest-nice-substring) |
 ## Sorting
 |  |
@@ -218,4 +221,20 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0109-convert-sorted-list-to-binary-search-tree](https://github.com/jeontigger/CodingTest/tree/master/0109-convert-sorted-list-to-binary-search-tree) |
+## Binary Indexed Tree
+|  |
+| ------- |
+| [0315-count-of-smaller-numbers-after-self](https://github.com/jeontigger/CodingTest/tree/master/0315-count-of-smaller-numbers-after-self) |
+## Segment Tree
+|  |
+| ------- |
+| [0315-count-of-smaller-numbers-after-self](https://github.com/jeontigger/CodingTest/tree/master/0315-count-of-smaller-numbers-after-self) |
+## Merge Sort
+|  |
+| ------- |
+| [0315-count-of-smaller-numbers-after-self](https://github.com/jeontigger/CodingTest/tree/master/0315-count-of-smaller-numbers-after-self) |
+## Ordered Set
+|  |
+| ------- |
+| [0315-count-of-smaller-numbers-after-self](https://github.com/jeontigger/CodingTest/tree/master/0315-count-of-smaller-numbers-after-self) |
 <!---LeetCode Topics End-->
