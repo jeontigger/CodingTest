@@ -1,42 +1,27 @@
 class Solution {
 public:
-    
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        struct Cmp {
-            bool operator()(const pair<int, int> &a, const pair<int, int> &b)
-            {
-                if(a.first == b.first){
-                    return a.second > b.second;
-                }
-                return a.first < b.first;
-            };
-        };
+        vector<int> window;
+        vector<int> ret;
 
-        priority_queue<pair<int, int>, vector<pair<int, int>>, Cmp> pq;
-        
+        int left = 0;
 
-        for(int i = 0; i<k;i++){
-            pq.push({nums[i], i});
-        }
-        vector<int>res;
+        for (int right = 0; right < nums.size(); right++) {
+            window.insert(
+                lower_bound(window.begin(), window.end(), nums[right]),
+                nums[right]);
 
+            if (right - left + 1 == k) {
+                int val = window.back();
+                
+                ret.push_back(val);
 
-        for(int i = 0; i<nums.size() - k ; i++){
-            int curMax = pq.top().first;
-            res.push_back(curMax);
-            int prevNum = nums[i];
-            if(prevNum == curMax){
-                while(true){
-                    pq.pop();
-                    if(pq.top().second >=i){
-                        break;
-                    }
-                }
+                window.erase(
+                    lower_bound(window.begin(), window.end(), nums[left]));
+                left++;
             }
-            pq.push({nums[i+k], i+k});
         }
-        res.push_back(pq.top().first);
 
-        return res;    
+        return ret;
     }
 };
