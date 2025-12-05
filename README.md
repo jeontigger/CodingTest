@@ -34,6 +34,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0643-maximum-average-subarray-i](https://github.com/jeontigger/CodingTest/tree/master/0643-maximum-average-subarray-i) |
 | [0879-profitable-schemes](https://github.com/jeontigger/CodingTest/tree/master/0879-profitable-schemes) |
 | [0904-fruit-into-baskets](https://github.com/jeontigger/CodingTest/tree/master/0904-fruit-into-baskets) |
+| [0956-tallest-billboard](https://github.com/jeontigger/CodingTest/tree/master/0956-tallest-billboard) |
 | [1004-max-consecutive-ones-iii](https://github.com/jeontigger/CodingTest/tree/master/1004-max-consecutive-ones-iii) |
 | [1049-last-stone-weight-ii](https://github.com/jeontigger/CodingTest/tree/master/1049-last-stone-weight-ii) |
 | [1052-grumpy-bookstore-owner](https://github.com/jeontigger/CodingTest/tree/master/1052-grumpy-bookstore-owner) |
@@ -93,6 +94,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0474-ones-and-zeroes](https://github.com/jeontigger/CodingTest/tree/master/0474-ones-and-zeroes) |
 | [0494-target-sum](https://github.com/jeontigger/CodingTest/tree/master/0494-target-sum) |
 | [0879-profitable-schemes](https://github.com/jeontigger/CodingTest/tree/master/0879-profitable-schemes) |
+| [0956-tallest-billboard](https://github.com/jeontigger/CodingTest/tree/master/0956-tallest-billboard) |
 | [1049-last-stone-weight-ii](https://github.com/jeontigger/CodingTest/tree/master/1049-last-stone-weight-ii) |
 | [1352-maximum-profit-in-job-scheduling](https://github.com/jeontigger/CodingTest/tree/master/1352-maximum-profit-in-job-scheduling) |
 | [1493-longest-subarray-of-1s-after-deleting-one-element](https://github.com/jeontigger/CodingTest/tree/master/1493-longest-subarray-of-1s-after-deleting-one-element) |
