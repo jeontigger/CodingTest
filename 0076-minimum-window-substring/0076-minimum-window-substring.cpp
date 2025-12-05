@@ -1,55 +1,45 @@
 class Solution {
 public:
-    bool IsInclude(unordered_map<char, int>& m1, unordered_map<char, int>& m2) {
-        for (auto iter = m2.begin(); iter != m2.end(); ++iter) {
-            if (m2[iter->first] > m1[iter->first]) {
+    int sCnts[128];
+    unordered_map<char, int> tCnts;
+
+    bool IsSubstring() {
+
+        for (auto& [c, cnt] : tCnts) {
+            if (sCnts[c] < cnt)
                 return false;
-            }
         }
+
         return true;
     }
 
-    unordered_map<char, int> m;
-    unordered_map<char, int> mt;
     string minWindow(string s, string t) {
+        if (t.size() > s.size())
+            return "";
 
-        for (int i = 0; i < t.length(); i++) {
-            mt[t[i]]++;
+        for (char c : t) {
+            tCnts[c]++;
         }
 
+        string ret = "";
         int left = 0;
-        int len = 1e9;
-        string answer = "";
-        for (int i = 0; i < s.length(); i++) {
-            m[s[i]]++;
 
-            // if(IsInclude(m, mt)){
-            //     while(mt[s[left]] != 0){
-            //         m[s[left]]--;
-            //         if(i - left< len){
-            //             answer = s.substr(left, i - left+1);
-            //             len = min(len, i - left+1);
-            //         }
-            //         left++;
-            //     }
-            // }
+        for (int right = 0; right < s.size(); right++) {
+            sCnts[s[right]]++;
 
-            bool include = false;
-            while (IsInclude(m, mt)) {
-                m[s[left]]--;
-                include = true;
-                left++;
-                // cout << "in ";
-            }
+            if (IsSubstring()) {
 
-            if (include) {
-                if (i - left < len) {
-                    answer = s.substr(left-1, i - left + 2);
-                    len = min(len, i - left + 1);
+                while (IsSubstring()) {
+                    sCnts[s[left]]--;
+                    left++;
+                }
+
+                if (ret == "" || right - left + 1 < ret.size()) {
+                    ret = s.substr(left - 1, right - left + 2);
                 }
             }
         }
 
-        return answer;
+        return ret;
     }
 };
