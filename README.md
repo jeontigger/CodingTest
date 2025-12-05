@@ -32,6 +32,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0480-sliding-window-median](https://github.com/jeontigger/CodingTest/tree/master/0480-sliding-window-median) |
 | [0494-target-sum](https://github.com/jeontigger/CodingTest/tree/master/0494-target-sum) |
 | [0643-maximum-average-subarray-i](https://github.com/jeontigger/CodingTest/tree/master/0643-maximum-average-subarray-i) |
+| [0879-profitable-schemes](https://github.com/jeontigger/CodingTest/tree/master/0879-profitable-schemes) |
 | [0904-fruit-into-baskets](https://github.com/jeontigger/CodingTest/tree/master/0904-fruit-into-baskets) |
 | [1004-max-consecutive-ones-iii](https://github.com/jeontigger/CodingTest/tree/master/1004-max-consecutive-ones-iii) |
 | [1049-last-stone-weight-ii](https://github.com/jeontigger/CodingTest/tree/master/1049-last-stone-weight-ii) |
@@ -91,6 +92,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0416-partition-equal-subset-sum](https://github.com/jeontigger/CodingTest/tree/master/0416-partition-equal-subset-sum) |
 | [0474-ones-and-zeroes](https://github.com/jeontigger/CodingTest/tree/master/0474-ones-and-zeroes) |
 | [0494-target-sum](https://github.com/jeontigger/CodingTest/tree/master/0494-target-sum) |
+| [0879-profitable-schemes](https://github.com/jeontigger/CodingTest/tree/master/0879-profitable-schemes) |
 | [1049-last-stone-weight-ii](https://github.com/jeontigger/CodingTest/tree/master/1049-last-stone-weight-ii) |
 | [1352-maximum-profit-in-job-scheduling](https://github.com/jeontigger/CodingTest/tree/master/1352-maximum-profit-in-job-scheduling) |
 | [1493-longest-subarray-of-1s-after-deleting-one-element](https://github.com/jeontigger/CodingTest/tree/master/1493-longest-subarray-of-1s-after-deleting-one-element) |
