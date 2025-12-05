@@ -11,36 +11,18 @@
  */
 class Solution {
 public:
-    vector<bool> visited;
-    TreeNode* DC(int left, int right, vector<int>& nums){
-        // right - left
-        // 짝수일 때 0 ~ 5 = 2 = 5 - 0 / 2  -> 0, 5 - 0 / 2 - 1 | 5 - 0 / 2 + 1, 5
-        // 홀수일 때 0 ~ 4 = 2 = 4 - 0 / 2  -> 0, 4 - 0 / 2 - 1 | 4 - 0 / 2 + 1, 4
-        TreeNode* pNode = nullptr;
+    TreeNode* HBBST(vector<int>& nums, int left, int right){
+        if(left > right) return nullptr;
+        if(left == right)return new TreeNode(nums[left]);
 
-        if(right <= left){
-            if(!visited[left]){
-                pNode = new TreeNode;
-                pNode->val = nums[left];
-                visited[left] = true;
-                cout << left<< " " << right << " " << pNode->val << " " << endl;
-            }
-            return pNode;
-        }
-        
-        int idx = (left + right) / 2;
-        if(!visited[idx]){
-            pNode = new TreeNode;
-            pNode->val = nums[idx];
-            visited[idx] = true;
-            cout << left<< " " << right << " " << pNode->val << " " << endl;
-            pNode->left = DC(left, idx-1, nums);
-            pNode->right = DC(idx + 1, right, nums);
-        }
-        return pNode;
+        int mid = (left+right)/2;
+        TreeNode* root = new TreeNode(nums[mid]);
+        root->left = HBBST(nums, left, mid-1);
+        root->right = HBBST(nums, mid+1, right);
+
+        return root;
     }
     TreeNode* sortedArrayToBST(vector<int>& nums) {
-        visited.resize(nums.size());
-        return DC(0, nums.size()-1, nums);
+        return HBBST(nums, 0, nums.size()-1);
     }
 };
