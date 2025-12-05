@@ -24,6 +24,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0034-find-first-and-last-position-of-element-in-sorted-array](https://github.com/jeontigger/CodingTest/tree/master/0034-find-first-and-last-position-of-element-in-sorted-array) |
 | [0081-search-in-rotated-sorted-array-ii](https://github.com/jeontigger/CodingTest/tree/master/0081-search-in-rotated-sorted-array-ii) |
+| [0108-convert-sorted-array-to-binary-search-tree](https://github.com/jeontigger/CodingTest/tree/master/0108-convert-sorted-array-to-binary-search-tree) |
 | [0139-word-break](https://github.com/jeontigger/CodingTest/tree/master/0139-word-break) |
 | [0169-majority-element](https://github.com/jeontigger/CodingTest/tree/master/0169-majority-element) |
 | [0209-minimum-size-subarray-sum](https://github.com/jeontigger/CodingTest/tree/master/0209-minimum-size-subarray-sum) |
@@ -77,10 +78,12 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Tree
 |  |
 | ------- |
+| [0108-convert-sorted-array-to-binary-search-tree](https://github.com/jeontigger/CodingTest/tree/master/0108-convert-sorted-array-to-binary-search-tree) |
 | [0222-count-complete-tree-nodes](https://github.com/jeontigger/CodingTest/tree/master/0222-count-complete-tree-nodes) |
 ## Binary Tree
 |  |
 | ------- |
+| [0108-convert-sorted-array-to-binary-search-tree](https://github.com/jeontigger/CodingTest/tree/master/0108-convert-sorted-array-to-binary-search-tree) |
 | [0222-count-complete-tree-nodes](https://github.com/jeontigger/CodingTest/tree/master/0222-count-complete-tree-nodes) |
 ## String
 |  |
@@ -147,6 +150,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Divide and Conquer
 |  |
 | ------- |
+| [0108-convert-sorted-array-to-binary-search-tree](https://github.com/jeontigger/CodingTest/tree/master/0108-convert-sorted-array-to-binary-search-tree) |
 | [0169-majority-element](https://github.com/jeontigger/CodingTest/tree/master/0169-majority-element) |
 ## Sorting
 |  |
@@ -183,4 +187,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [1981-minimize-the-difference-between-target-and-chosen-elements](https://github.com/jeontigger/CodingTest/tree/master/1981-minimize-the-difference-between-target-and-chosen-elements) |
+## Binary Search Tree
+|  |
+| ------- |
+| [0108-convert-sorted-array-to-binary-search-tree](https://github.com/jeontigger/CodingTest/tree/master/0108-convert-sorted-array-to-binary-search-tree) |
 <!---LeetCode Topics End-->
