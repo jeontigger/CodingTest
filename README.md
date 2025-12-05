@@ -66,6 +66,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [1052-grumpy-bookstore-owner](https://github.com/jeontigger/CodingTest/tree/master/1052-grumpy-bookstore-owner) |
 | [1493-longest-subarray-of-1s-after-deleting-one-element](https://github.com/jeontigger/CodingTest/tree/master/1493-longest-subarray-of-1s-after-deleting-one-element) |
 | [1695-maximum-erasure-value](https://github.com/jeontigger/CodingTest/tree/master/1695-maximum-erasure-value) |
+| [1763-longest-nice-substring](https://github.com/jeontigger/CodingTest/tree/master/1763-longest-nice-substring) |
 ## Prefix Sum
 |  |
 | ------- |
@@ -76,6 +77,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0190-reverse-bits](https://github.com/jeontigger/CodingTest/tree/master/0190-reverse-bits) |
 | [0222-count-complete-tree-nodes](https://github.com/jeontigger/CodingTest/tree/master/0222-count-complete-tree-nodes) |
+| [1763-longest-nice-substring](https://github.com/jeontigger/CodingTest/tree/master/1763-longest-nice-substring) |
 ## Tree
 |  |
 | ------- |
@@ -97,6 +99,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0438-find-all-anagrams-in-a-string](https://github.com/jeontigger/CodingTest/tree/master/0438-find-all-anagrams-in-a-string) |
 | [0474-ones-and-zeroes](https://github.com/jeontigger/CodingTest/tree/master/0474-ones-and-zeroes) |
 | [0567-permutation-in-string](https://github.com/jeontigger/CodingTest/tree/master/0567-permutation-in-string) |
+| [1763-longest-nice-substring](https://github.com/jeontigger/CodingTest/tree/master/1763-longest-nice-substring) |
 ## Dynamic Programming
 |  |
 | ------- |
@@ -148,12 +151,14 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0567-permutation-in-string](https://github.com/jeontigger/CodingTest/tree/master/0567-permutation-in-string) |
 | [0904-fruit-into-baskets](https://github.com/jeontigger/CodingTest/tree/master/0904-fruit-into-baskets) |
 | [1695-maximum-erasure-value](https://github.com/jeontigger/CodingTest/tree/master/1695-maximum-erasure-value) |
+| [1763-longest-nice-substring](https://github.com/jeontigger/CodingTest/tree/master/1763-longest-nice-substring) |
 ## Divide and Conquer
 |  |
 | ------- |
 | [0108-convert-sorted-array-to-binary-search-tree](https://github.com/jeontigger/CodingTest/tree/master/0108-convert-sorted-array-to-binary-search-tree) |
 | [0169-majority-element](https://github.com/jeontigger/CodingTest/tree/master/0169-majority-element) |
 | [0190-reverse-bits](https://github.com/jeontigger/CodingTest/tree/master/0190-reverse-bits) |
+| [1763-longest-nice-substring](https://github.com/jeontigger/CodingTest/tree/master/1763-longest-nice-substring) |
 ## Sorting
 |  |
 | ------- |
