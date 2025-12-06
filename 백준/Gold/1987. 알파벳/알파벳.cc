@@ -8,6 +8,10 @@
 #include <unordered_map>
 #include <set>
 #include <sstream>
+#include <iomanip>
+#include <cassert>
+#include <cstring>
+#include <list>
 
 using namespace std;
 
@@ -27,29 +31,59 @@ void PrintVec(const vector<vector<T>>& vec) {
 		PrintVec(v);
 	}
 }
+#define FOR(idx, limit) for(int idx = 0; idx < limit; idx++)
 
-vector<int> visited(26);
+int N, M;
+char maps[20][20];
+int visited[128];
+int cache[20][20];
 
-int g_nrow[] = { 0, 1, 0, -1 };
-int g_ncol[] = { 1, 0, -1, 0 };
+bool Inputs() {
+	cin >> N >> M;
+	FOR(i, N)
+		FOR(j, M)
+		cin >> maps[i][j];
 
-int DFS(const vector<vector<char>>& maps, int row, int col) {
-	int res = 0;
+	memset(visited, 0, sizeof(visited));
+	memset(cache, -1, sizeof(cache));
+
+	return true;
+}
+
+
+
+bool IsValid(int r, int c) {
+	if (r < 0 || r >= N || c < 0 || c >= M)return false;
+
+	return !visited[maps[r][c]];
+}
+
+int dr[4] = { 0, 1, 0, -1 };
+int dc[4] = { 1, 0, -1, 0 };
+
+int DFS(int r, int c) {
+	int ret = 0;
 
 	for (int i = 0; i < 4; i++) {
-		int nrow = row + g_nrow[i];
-		int ncol = col + g_ncol[i];
+		int nr = r + dr[i];
+		int nc = c + dc[i];
 
-		if (0 <= nrow && nrow < maps.size() && 0 <= ncol && ncol < maps[0].size()) {
-			char alpha = maps[nrow][ncol] - 'A';
-			if (!visited[alpha]) {
-				visited[alpha] = true;
-				res = max(res, 1 + DFS(maps, nrow, ncol));
-				visited[alpha] = false;
-			}
+		if (IsValid(nr, nc)) {
+			visited[maps[nr][nc]] = true;
+			ret = max(ret, DFS(nr, nc));
+			visited[maps[nr][nc]] = false;
 		}
 	}
-	return res;
+	return ret + 1;
+}
+
+void Solution() {
+	int ret = 0;
+
+	visited[maps[0][0]] = true;
+	ret = DFS(0, 0);
+
+	cout << ret << '\n';
 }
 
 int main() {
@@ -58,17 +92,13 @@ int main() {
 	cin.tie(NULL);
 	cout.tie(NULL);
 
-	int N, M;
-	cin >> N >> M;
-	vector < vector<char>> maps(N, vector<char>(M));
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < M; j++) {
-			cin >> maps[i][j];
-		}
-	}
 
-	visited[maps[0][0] - 'A'] = true;
-	cout << DFS(maps, 0, 0) + 1;
+	int T = 1;
+	//cin >> T;
+	while (T--) {
+		if (!Inputs()) break;
+		Solution();
+	}
 
 
 	return 0;
