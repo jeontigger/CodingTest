@@ -33,6 +33,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0108-convert-sorted-array-to-binary-search-tree](https://github.com/jeontigger/CodingTest/tree/master/0108-convert-sorted-array-to-binary-search-tree) |
 | [0139-word-break](https://github.com/jeontigger/CodingTest/tree/master/0139-word-break) |
 | [0169-majority-element](https://github.com/jeontigger/CodingTest/tree/master/0169-majority-element) |
+| [0200-number-of-islands](https://github.com/jeontigger/CodingTest/tree/master/0200-number-of-islands) |
 | [0209-minimum-size-subarray-sum](https://github.com/jeontigger/CodingTest/tree/master/0209-minimum-size-subarray-sum) |
 | [0219-contains-duplicate-ii](https://github.com/jeontigger/CodingTest/tree/master/0219-contains-duplicate-ii) |
 | [0239-sliding-window-maximum](https://github.com/jeontigger/CodingTest/tree/master/0239-sliding-window-maximum) |
@@ -209,6 +210,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Breadth-First Search
 |  |
 | ------- |
+| [0200-number-of-islands](https://github.com/jeontigger/CodingTest/tree/master/0200-number-of-islands) |
 | [0322-coin-change](https://github.com/jeontigger/CodingTest/tree/master/0322-coin-change) |
 ## Trie
 |  |
@@ -217,6 +219,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Matrix
 |  |
 | ------- |
+| [0200-number-of-islands](https://github.com/jeontigger/CodingTest/tree/master/0200-number-of-islands) |
 | [1981-minimize-the-difference-between-target-and-chosen-elements](https://github.com/jeontigger/CodingTest/tree/master/1981-minimize-the-difference-between-target-and-chosen-elements) |
 ## Binary Search Tree
 |  |
@@ -251,4 +254,12 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0315-count-of-smaller-numbers-after-self](https://github.com/jeontigger/CodingTest/tree/master/0315-count-of-smaller-numbers-after-self) |
 | [0327-count-of-range-sum](https://github.com/jeontigger/CodingTest/tree/master/0327-count-of-range-sum) |
 | [0493-reverse-pairs](https://github.com/jeontigger/CodingTest/tree/master/0493-reverse-pairs) |
+## Depth-First Search
+|  |
+| ------- |
+| [0200-number-of-islands](https://github.com/jeontigger/CodingTest/tree/master/0200-number-of-islands) |
+## Union Find
+|  |
+| ------- |
+| [0200-number-of-islands](https://github.com/jeontigger/CodingTest/tree/master/0200-number-of-islands) |
 <!---LeetCode Topics End-->
