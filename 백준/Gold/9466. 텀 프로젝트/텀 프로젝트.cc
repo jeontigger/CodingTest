@@ -1,4 +1,3 @@
-
 #include <vector>
 #include <iostream>
 #include <string>
@@ -7,6 +6,12 @@
 #include <cmath>
 #include <stack>
 #include <unordered_map>
+#include <set>
+#include <sstream>
+#include <iomanip>
+#include <cassert>
+#include <cstring>
+#include <list>
 
 using namespace std;
 
@@ -17,7 +22,7 @@ void PrintVec(const vector<T>& v) {
 	for (T i : v) {
 		cout << i << " ";
 	}
-	cout << endl;
+	cout << '\n';
 }
 
 template<typename T>
@@ -26,33 +31,53 @@ void PrintVec(const vector<vector<T>>& vec) {
 		PrintVec(v);
 	}
 }
+#define FOR(idx, limit) for(int idx = 0; idx < limit; idx++)
 
-int DFS(const vector<int>& students, vector<bool>& visited, vector<int>& path, int curNode) {
+int N;
+vector<int> nums, visited, finished;
 
+bool Inputs() {
+	cin >> N;
+	nums.resize(N + 1);
+	visited.assign(N + 1, 0);
+	finished.assign(N + 1, 0);
+	FOR(i, N)
+		cin >> nums[i + 1];
+	return true;
+}
 
-	int nextNode = students[curNode];
+int DFS(int idx) {
+	int ret = 0;
 
-	int res = 0;
-	if (visited[nextNode]) {
-		auto iter = find(path.begin(), path.end(), nextNode);
-		if (iter == path.end()) {
-			// 이미 팀이 형성된 경우
-
-			return 0;
-		}
-		else {
-			// 사이클 형성 개수
-			return path.size() - (iter - path.begin());
+	int next = nums[idx];
+	if (!visited[next]) {
+		visited[next] = true;
+		ret += DFS(next);
+	}
+	else if (!finished[next]) {
+		int cur = nums[idx];
+		while (true) {
+			ret++;
+			if (cur == idx) break;
+			cur = nums[cur];
 		}
 	}
-	else {
-		// 아직 사이클 미탐색
-		visited[nextNode] = true;
-		path.push_back(nextNode);
-		res = DFS(students, visited, path, nextNode);
+
+	finished[idx] = true;
+
+	return ret;
+}
+
+void Solution() {
+	int ret = 0;
+	for (int i = 1; i <= N; i++) {
+		if (!visited[i]) {
+			visited[i] = true;
+			ret += DFS(i);
+		}
 	}
 
-	return res;
+	cout << N - ret << '\n';
 }
 
 int main() {
@@ -61,32 +86,14 @@ int main() {
 	cin.tie(NULL);
 	cout.tie(NULL);
 
-	int T, N;
+
+	int T = 1;
 	cin >> T;
-
-	while (T) {
-		T--;
-
-		cin >> N;
-		vector<int> students(N + 1);
-
-		for (int i = 1; i < N + 1; i++) {
-			cin >> students[i];
-		}
-		vector<bool> visited(N + 1);
-		visited[0] = true;
-
-		int sum = 0;
-		for (int i = 1; i < N + 1; i++) {
-			if (visited[i]) continue;
-
-			vector<int> path;
-			visited[i] = true;
-			path.push_back(i);
-			sum += DFS(students, visited, path, i);
-		}
-		cout << N - sum << endl;
+	while (T--) {
+		if (!Inputs()) break;
+		Solution();
 	}
+
 
 	return 0;
 }
