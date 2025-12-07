@@ -12,23 +12,19 @@
 class Solution {
 public:
     TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
-        if(root1 == nullptr && root2 == nullptr){
-            return nullptr;
-        }
+        if(root1 == nullptr && root2 == nullptr) return nullptr;
+        int n1 = root1 == nullptr ? 0 : root1->val;
+        int n2 = root2 == nullptr ? 0 : root2->val;
 
-        if(root1 == nullptr){
-            return root2;
-        }
-        if(root2 == nullptr){
-            return root1;
-        }
-        root1->val += root2->val;
+        TreeNode* Cur = new TreeNode(n1+n2);
+        
+        TreeNode* l1 = root1 == nullptr ? nullptr : root1->left;
+        TreeNode* l2 = root2 == nullptr ? nullptr : root2->left;
+        TreeNode* r1 = root1 == nullptr ? nullptr : root1->right;
+        TreeNode* r2 = root2 == nullptr ? nullptr : root2->right;
+        Cur->left = mergeTrees(l1, l2);
+        Cur->right = mergeTrees(r1, r2);
 
-        root1->left = mergeTrees(root1->left, root2->left);
-        root1->right = mergeTrees(root1->right, root2->right);
-
-
-        return root1;
-
+        return Cur;
     }
 };
