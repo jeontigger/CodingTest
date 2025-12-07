@@ -99,6 +99,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0108-convert-sorted-array-to-binary-search-tree](https://github.com/jeontigger/CodingTest/tree/master/0108-convert-sorted-array-to-binary-search-tree) |
 | [0109-convert-sorted-list-to-binary-search-tree](https://github.com/jeontigger/CodingTest/tree/master/0109-convert-sorted-list-to-binary-search-tree) |
 | [0222-count-complete-tree-nodes](https://github.com/jeontigger/CodingTest/tree/master/0222-count-complete-tree-nodes) |
+| [0617-merge-two-binary-trees](https://github.com/jeontigger/CodingTest/tree/master/0617-merge-two-binary-trees) |
 ## Binary Tree
 |  |
 | ------- |
@@ -107,6 +108,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0108-convert-sorted-array-to-binary-search-tree](https://github.com/jeontigger/CodingTest/tree/master/0108-convert-sorted-array-to-binary-search-tree) |
 | [0109-convert-sorted-list-to-binary-search-tree](https://github.com/jeontigger/CodingTest/tree/master/0109-convert-sorted-list-to-binary-search-tree) |
 | [0222-count-complete-tree-nodes](https://github.com/jeontigger/CodingTest/tree/master/0222-count-complete-tree-nodes) |
+| [0617-merge-two-binary-trees](https://github.com/jeontigger/CodingTest/tree/master/0617-merge-two-binary-trees) |
 ## String
 |  |
 | ------- |
@@ -216,6 +218,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0200-number-of-islands](https://github.com/jeontigger/CodingTest/tree/master/0200-number-of-islands) |
 | [0322-coin-change](https://github.com/jeontigger/CodingTest/tree/master/0322-coin-change) |
 | [0463-island-perimeter](https://github.com/jeontigger/CodingTest/tree/master/0463-island-perimeter) |
+| [0617-merge-two-binary-trees](https://github.com/jeontigger/CodingTest/tree/master/0617-merge-two-binary-trees) |
 | [0695-max-area-of-island](https://github.com/jeontigger/CodingTest/tree/master/0695-max-area-of-island) |
 | [0733-flood-fill](https://github.com/jeontigger/CodingTest/tree/master/0733-flood-fill) |
 ## Trie
@@ -268,6 +271,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0200-number-of-islands](https://github.com/jeontigger/CodingTest/tree/master/0200-number-of-islands) |
 | [0463-island-perimeter](https://github.com/jeontigger/CodingTest/tree/master/0463-island-perimeter) |
+| [0617-merge-two-binary-trees](https://github.com/jeontigger/CodingTest/tree/master/0617-merge-two-binary-trees) |
 | [0695-max-area-of-island](https://github.com/jeontigger/CodingTest/tree/master/0695-max-area-of-island) |
 | [0733-flood-fill](https://github.com/jeontigger/CodingTest/tree/master/0733-flood-fill) |
 ## Union Find
