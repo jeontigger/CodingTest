@@ -11,6 +11,7 @@
 #include <iomanip>
 #include <cassert>
 #include <cstring>
+#include <list>
 
 using namespace std;
 
@@ -30,47 +31,46 @@ void PrintVec(const vector<vector<T>>& vec) {
 		PrintVec(v);
 	}
 }
-
-// N은 세로, M은 가로
-// 칸의 수는 높이를 뜻함
-// 계속 내려가고만 싶고, 내려가는 경우의 수에 대해 세고 싶음
-// 시작점은 좌상단, 끝점은 우하단
+#define FOR(idx, limit) for(int idx = 0; idx < limit; idx++)
 
 int N, M;
-int maps[501][501];
-int cache[501][501];
-int Case = 0;
-void Inputs() {
-	cin >> N >> M;
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < M; j++) {
-			cin >> maps[i][j];
-		}
-	}
+vector<vector<int>> maps;
+vector<vector<int>> cache;
 
-	memset(cache, -1, sizeof(cache));
+bool Inputs() {
+
+	cin >> N >> M;
+	maps.resize(N, vector<int>(M));
+	cache.resize(N, vector<int>(M, -1));
+	FOR(i, N)
+		FOR(j, M)
+		cin >> maps[i][j];
+
+	return true;
 }
 
-int DFS(int row, int col) {
-	if (row == N - 1 && col == M - 1) {
+int dr[4] = { 0, 1, 0, -1 };
+int dc[4] = { 1, 0, -1, 0 };
+
+bool IsValid(int r, int c, int cur) {
+	if (r < 0 || r >= N || c < 0 || c >= M) return false;
+	return cur > maps[r][c];
+}
+
+int DFS(int r, int c) {
+	if (r == N - 1 && c == M - 1)
 		return 1;
-	}
-	int& ret = cache[row][col];
+
+	int& ret = cache[r][c];
 	if (ret != -1) return ret;
-
-	int drow[4] = { 0, 1, 0, -1 };
-	int dcol[4] = { 1, 0, -1 , 0 };
-
 	ret = 0;
+
 	for (int i = 0; i < 4; i++) {
-		int nrow = row + drow[i];
-		int ncol = col + dcol[i];
-		// 범위 예외
-		if (0 <= nrow && nrow < N && 0 <= ncol && ncol < M) {
-			//내리막
-			if (maps[nrow][ncol] < maps[row][col]) {
-				ret += DFS(nrow, ncol);
-			}
+		int nr = r + dr[i];
+		int nc = c + dc[i];
+
+		if (IsValid(nr, nc, maps[r][c])) {
+			ret += DFS(nr, nc);
 		}
 	}
 
@@ -78,16 +78,7 @@ int DFS(int row, int col) {
 }
 
 void Solution() {
-
-	DFS(0, 0);
-	cout << cache[0][0] << '\n';
-
-	//for (int i = 0; i < N; i++) {
-	//	for (int j = 0; j < M; j++) {
-	//		cout << cache[i][j] << ' ';
-	//	}
-	//	cout << '\n';
-	//}
+	cout << DFS(0, 0) << '\n';
 }
 
 int main() {
@@ -96,13 +87,13 @@ int main() {
 	cin.tie(NULL);
 	cout.tie(NULL);
 
+
 	int T = 1;
 	//cin >> T;
 	while (T--) {
-		Inputs();
+		if (!Inputs()) break;
 		Solution();
 	}
-
 
 	return 0;
 }
