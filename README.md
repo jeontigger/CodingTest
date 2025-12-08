@@ -296,6 +296,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0200-number-of-islands](https://github.com/jeontigger/CodingTest/tree/master/0200-number-of-islands) |
 | [0207-course-schedule](https://github.com/jeontigger/CodingTest/tree/master/0207-course-schedule) |
 | [0257-binary-tree-paths](https://github.com/jeontigger/CodingTest/tree/master/0257-binary-tree-paths) |
+| [0332-reconstruct-itinerary](https://github.com/jeontigger/CodingTest/tree/master/0332-reconstruct-itinerary) |
 | [0463-island-perimeter](https://github.com/jeontigger/CodingTest/tree/master/0463-island-perimeter) |
 | [0547-number-of-provinces](https://github.com/jeontigger/CodingTest/tree/master/0547-number-of-provinces) |
 | [0617-merge-two-binary-trees](https://github.com/jeontigger/CodingTest/tree/master/0617-merge-two-binary-trees) |
@@ -314,6 +315,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0207-course-schedule](https://github.com/jeontigger/CodingTest/tree/master/0207-course-schedule) |
+| [0332-reconstruct-itinerary](https://github.com/jeontigger/CodingTest/tree/master/0332-reconstruct-itinerary) |
 | [0547-number-of-provinces](https://github.com/jeontigger/CodingTest/tree/master/0547-number-of-provinces) |
 | [0841-keys-and-rooms](https://github.com/jeontigger/CodingTest/tree/master/0841-keys-and-rooms) |
 | [1466-reorder-routes-to-make-all-paths-lead-to-the-city-zero](https://github.com/jeontigger/CodingTest/tree/master/1466-reorder-routes-to-make-all-paths-lead-to-the-city-zero) |
@@ -321,4 +323,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0207-course-schedule](https://github.com/jeontigger/CodingTest/tree/master/0207-course-schedule) |
+## Eulerian Circuit
+|  |
+| ------- |
+| [0332-reconstruct-itinerary](https://github.com/jeontigger/CodingTest/tree/master/0332-reconstruct-itinerary) |
 <!---LeetCode Topics End-->
