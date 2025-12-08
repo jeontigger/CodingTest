@@ -1,69 +1,80 @@
 class Solution {
 public:
-    struct TrieNode {
-        TrieNode* child[26];
-        string word; // 이 노드에서 끝나는 단어 (없으면 "")
+    struct Trie {
+        Trie* child[26];
+        string word;
 
-        TrieNode() : word("") {
+        Trie() {
+            word = "";
             memset(child, 0, sizeof(child));
         }
     };
 
-    TrieNode* buildTrie(const vector<string>& words) {
-        TrieNode* root = new TrieNode();
-        for (const string& w : words) {
-            TrieNode* node = root;
-            for (char ch : w) {
-                int idx = ch - 'a';
-                if (!node->child[idx]) node->child[idx] = new TrieNode();
+    void BuildTrie(Trie* root, const vector<string>& words) {
+        for (int i = 0; i < words.size(); i++) {
+            string word = words[i];
+
+            Trie* node = root;
+            for (int j = 0; j < word.size(); j++) {
+                int idx = word[j] - 'a';
+                if (node->child[idx] == nullptr) {
+                    node->child[idx] = new Trie;
+                }
                 node = node->child[idx];
             }
-            node->word = w; // 단어 끝에 저장
+            node->word = word;
         }
-        return root;
     }
 
-    vector<string> res;
-    int m, n;
-    int dr[4] = {1, -1, 0, 0};
-    int dc[4] = {0, 0, 1, -1};
+    vector<vector<char>> m_board;
+    vector<string> ret;
+    int N, M;
+    int dr[4] = {1, 0, -1, 0};
+    int dc[4] = {0, 1, 0, -1};
 
-    void dfs(vector<vector<char>>& board, int r, int c, TrieNode* node) {
-        char ch = board[r][c];
+    bool IsValid(int r, int c, const vector<vector<int>>& visited) {
+        if (r < 0 || r >= N || c < 0 || c >= M)
+            return false;
+        return !visited[r][c];
+    }
+    void DFS(int r, int c, vector<vector<int>>& visited, Trie* node) {
+        char ch = m_board[r][c];
         int idx = ch - 'a';
-        TrieNode* next = node->child[idx];
-        if (!next) return; // 이 prefix로 시작하는 단어 없음 -> 가지치기
+        Trie* next = node->child[idx];
+        if (next == nullptr)
+            return;
 
-        if (!next->word.empty()) {
-            res.push_back(next->word);
-            next->word.clear(); // 같은 단어 중복 방지
+        if (next->word != "") {
+            ret.push_back(next->word);
+            next->word.clear();
         }
 
-        board[r][c] = '#'; // 방문 표시
-
-        for (int k = 0; k < 4; k++) {
-            int nr = r + dr[k];
-            int nc = c + dc[k];
-            if (nr < 0 || nr >= m || nc < 0 || nc >= n) continue;
-            if (board[nr][nc] == '#') continue;
-            dfs(board, nr, nc, next);
-        }
-
-        board[r][c] = ch; // 복구
-    }
-
-    vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {
-        m = board.size();
-        if (m == 0) return {};
-        n = board[0].size();
-
-        TrieNode* root = buildTrie(words);
-
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                dfs(board, i, j, root);
+        for(int i = 0; i <4 ;i++){
+            int nr = r + dr[i];
+            int nc = c + dc[i];
+            if(IsValid(nr, nc, visited)){
+                visited[nr][nc] = true;
+                DFS(nr, nc, visited, next);
+                visited[nr][nc] = false;
             }
         }
-        return res;
+    }
+
+    vector<string> findWords(vector<vector<char>>& board,
+                             vector<string>& words) {
+        Trie* root = new Trie;
+        BuildTrie(root, words);
+        m_board = board;
+        N = m_board.size(), M = m_board[0].size();
+        vector<vector<int>> visited(N, vector<int>(M));
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                visited[i][j] = true;
+                DFS(i, j, visited, root);
+                visited[i][j] = false;
+            }
+        }
+
+        return ret;
     }
 };
