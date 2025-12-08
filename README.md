@@ -46,6 +46,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0315-count-of-smaller-numbers-after-self](https://github.com/jeontigger/CodingTest/tree/master/0315-count-of-smaller-numbers-after-self) |
 | [0322-coin-change](https://github.com/jeontigger/CodingTest/tree/master/0322-coin-change) |
 | [0327-count-of-range-sum](https://github.com/jeontigger/CodingTest/tree/master/0327-count-of-range-sum) |
+| [0329-longest-increasing-path-in-a-matrix](https://github.com/jeontigger/CodingTest/tree/master/0329-longest-increasing-path-in-a-matrix) |
 | [0416-partition-equal-subset-sum](https://github.com/jeontigger/CodingTest/tree/master/0416-partition-equal-subset-sum) |
 | [0463-island-perimeter](https://github.com/jeontigger/CodingTest/tree/master/0463-island-perimeter) |
 | [0474-ones-and-zeroes](https://github.com/jeontigger/CodingTest/tree/master/0474-ones-and-zeroes) |
@@ -144,6 +145,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0139-word-break](https://github.com/jeontigger/CodingTest/tree/master/0139-word-break) |
 | [0241-different-ways-to-add-parentheses](https://github.com/jeontigger/CodingTest/tree/master/0241-different-ways-to-add-parentheses) |
 | [0322-coin-change](https://github.com/jeontigger/CodingTest/tree/master/0322-coin-change) |
+| [0329-longest-increasing-path-in-a-matrix](https://github.com/jeontigger/CodingTest/tree/master/0329-longest-increasing-path-in-a-matrix) |
 | [0416-partition-equal-subset-sum](https://github.com/jeontigger/CodingTest/tree/master/0416-partition-equal-subset-sum) |
 | [0474-ones-and-zeroes](https://github.com/jeontigger/CodingTest/tree/master/0474-ones-and-zeroes) |
 | [0494-target-sum](https://github.com/jeontigger/CodingTest/tree/master/0494-target-sum) |
@@ -233,6 +235,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0139-word-break](https://github.com/jeontigger/CodingTest/tree/master/0139-word-break) |
 | [0241-different-ways-to-add-parentheses](https://github.com/jeontigger/CodingTest/tree/master/0241-different-ways-to-add-parentheses) |
+| [0329-longest-increasing-path-in-a-matrix](https://github.com/jeontigger/CodingTest/tree/master/0329-longest-increasing-path-in-a-matrix) |
 | [0698-partition-to-k-equal-sum-subsets](https://github.com/jeontigger/CodingTest/tree/master/0698-partition-to-k-equal-sum-subsets) |
 ## Two Pointers
 |  |
@@ -246,6 +249,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0200-number-of-islands](https://github.com/jeontigger/CodingTest/tree/master/0200-number-of-islands) |
 | [0207-course-schedule](https://github.com/jeontigger/CodingTest/tree/master/0207-course-schedule) |
 | [0322-coin-change](https://github.com/jeontigger/CodingTest/tree/master/0322-coin-change) |
+| [0329-longest-increasing-path-in-a-matrix](https://github.com/jeontigger/CodingTest/tree/master/0329-longest-increasing-path-in-a-matrix) |
 | [0463-island-perimeter](https://github.com/jeontigger/CodingTest/tree/master/0463-island-perimeter) |
 | [0547-number-of-provinces](https://github.com/jeontigger/CodingTest/tree/master/0547-number-of-provinces) |
 | [0617-merge-two-binary-trees](https://github.com/jeontigger/CodingTest/tree/master/0617-merge-two-binary-trees) |
@@ -263,6 +267,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0079-word-search](https://github.com/jeontigger/CodingTest/tree/master/0079-word-search) |
 | [0130-surrounded-regions](https://github.com/jeontigger/CodingTest/tree/master/0130-surrounded-regions) |
 | [0200-number-of-islands](https://github.com/jeontigger/CodingTest/tree/master/0200-number-of-islands) |
+| [0329-longest-increasing-path-in-a-matrix](https://github.com/jeontigger/CodingTest/tree/master/0329-longest-increasing-path-in-a-matrix) |
 | [0463-island-perimeter](https://github.com/jeontigger/CodingTest/tree/master/0463-island-perimeter) |
 | [0695-max-area-of-island](https://github.com/jeontigger/CodingTest/tree/master/0695-max-area-of-island) |
 | [0733-flood-fill](https://github.com/jeontigger/CodingTest/tree/master/0733-flood-fill) |
@@ -310,6 +315,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0200-number-of-islands](https://github.com/jeontigger/CodingTest/tree/master/0200-number-of-islands) |
 | [0207-course-schedule](https://github.com/jeontigger/CodingTest/tree/master/0207-course-schedule) |
 | [0257-binary-tree-paths](https://github.com/jeontigger/CodingTest/tree/master/0257-binary-tree-paths) |
+| [0329-longest-increasing-path-in-a-matrix](https://github.com/jeontigger/CodingTest/tree/master/0329-longest-increasing-path-in-a-matrix) |
 | [0332-reconstruct-itinerary](https://github.com/jeontigger/CodingTest/tree/master/0332-reconstruct-itinerary) |
 | [0463-island-perimeter](https://github.com/jeontigger/CodingTest/tree/master/0463-island-perimeter) |
 | [0547-number-of-provinces](https://github.com/jeontigger/CodingTest/tree/master/0547-number-of-provinces) |
@@ -329,6 +335,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0207-course-schedule](https://github.com/jeontigger/CodingTest/tree/master/0207-course-schedule) |
+| [0329-longest-increasing-path-in-a-matrix](https://github.com/jeontigger/CodingTest/tree/master/0329-longest-increasing-path-in-a-matrix) |
 | [0332-reconstruct-itinerary](https://github.com/jeontigger/CodingTest/tree/master/0332-reconstruct-itinerary) |
 | [0547-number-of-provinces](https://github.com/jeontigger/CodingTest/tree/master/0547-number-of-provinces) |
 | [0841-keys-and-rooms](https://github.com/jeontigger/CodingTest/tree/master/0841-keys-and-rooms) |
@@ -337,6 +344,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0207-course-schedule](https://github.com/jeontigger/CodingTest/tree/master/0207-course-schedule) |
+| [0329-longest-increasing-path-in-a-matrix](https://github.com/jeontigger/CodingTest/tree/master/0329-longest-increasing-path-in-a-matrix) |
 ## Eulerian Circuit
 |  |
 | ------- |
