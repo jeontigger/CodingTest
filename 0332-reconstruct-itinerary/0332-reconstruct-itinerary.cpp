@@ -1,40 +1,27 @@
 class Solution {
 public:
+    unordered_map<string, multiset<string>> edges;
+    vector<string> ret;
 
-    unordered_map<string, vector<int>> g_map;
-    vector<vector<string>> g_tickets;
-    vector<string> res;
-
-    void Recursive(const string& arrival){
+    void DFS(const string& from){
         
-        for(int i =0; i< g_map[arrival].size();i++){
-            int idx = g_map[arrival][i];
-            if(g_map[arrival][i] != -1){
-                g_map[arrival][i] = -1;
-                Recursive(g_tickets[idx][1]);
-            }
+        while(!edges[from].empty()){
+            auto iter = edges[from].begin();
+            string to = *iter;
+            edges[from].erase(iter);
+            DFS(to);
         }
-        res.push_back(arrival);
-
+        ret.push_back(from);
     }
-
     vector<string> findItinerary(vector<vector<string>>& tickets) {
-
-        sort(tickets.begin(), tickets.end());
-        g_tickets = tickets;
-
-        for(int i =0; i<tickets.size();i++){
-            g_map[tickets[i][0]].push_back(i);
+        for(int i = 0 ; i < tickets.size(); i++){
+            string s1 = tickets[i][0], s2 = tickets[i][1];
+            edges[s1].insert(s2);
         }
 
-        Recursive("JFK");
-        for(vector<string> v:tickets){
-            for(string str:v){
-                cout << str<< " " ;
-            }
-            cout << endl;
-        }
-        reverse(res.begin(), res.end());
-        return res;
+        DFS("JFK");
+
+        reverse(ret.begin(), ret.end());
+        return ret;
     }
 };
