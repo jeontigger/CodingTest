@@ -51,6 +51,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0518-coin-change-ii](https://github.com/jeontigger/CodingTest/tree/master/0518-coin-change-ii) |
 | [0643-maximum-average-subarray-i](https://github.com/jeontigger/CodingTest/tree/master/0643-maximum-average-subarray-i) |
 | [0695-max-area-of-island](https://github.com/jeontigger/CodingTest/tree/master/0695-max-area-of-island) |
+| [0698-partition-to-k-equal-sum-subsets](https://github.com/jeontigger/CodingTest/tree/master/0698-partition-to-k-equal-sum-subsets) |
 | [0733-flood-fill](https://github.com/jeontigger/CodingTest/tree/master/0733-flood-fill) |
 | [0879-profitable-schemes](https://github.com/jeontigger/CodingTest/tree/master/0879-profitable-schemes) |
 | [0904-fruit-into-baskets](https://github.com/jeontigger/CodingTest/tree/master/0904-fruit-into-baskets) |
@@ -92,6 +93,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0190-reverse-bits](https://github.com/jeontigger/CodingTest/tree/master/0190-reverse-bits) |
 | [0222-count-complete-tree-nodes](https://github.com/jeontigger/CodingTest/tree/master/0222-count-complete-tree-nodes) |
+| [0698-partition-to-k-equal-sum-subsets](https://github.com/jeontigger/CodingTest/tree/master/0698-partition-to-k-equal-sum-subsets) |
 | [1763-longest-nice-substring](https://github.com/jeontigger/CodingTest/tree/master/1763-longest-nice-substring) |
 ## Tree
 |  |
@@ -142,6 +144,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0474-ones-and-zeroes](https://github.com/jeontigger/CodingTest/tree/master/0474-ones-and-zeroes) |
 | [0494-target-sum](https://github.com/jeontigger/CodingTest/tree/master/0494-target-sum) |
 | [0518-coin-change-ii](https://github.com/jeontigger/CodingTest/tree/master/0518-coin-change-ii) |
+| [0698-partition-to-k-equal-sum-subsets](https://github.com/jeontigger/CodingTest/tree/master/0698-partition-to-k-equal-sum-subsets) |
 | [0879-profitable-schemes](https://github.com/jeontigger/CodingTest/tree/master/0879-profitable-schemes) |
 | [0956-tallest-billboard](https://github.com/jeontigger/CodingTest/tree/master/0956-tallest-billboard) |
 | [1049-last-stone-weight-ii](https://github.com/jeontigger/CodingTest/tree/master/1049-last-stone-weight-ii) |
@@ -158,6 +161,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0079-word-search](https://github.com/jeontigger/CodingTest/tree/master/0079-word-search) |
 | [0257-binary-tree-paths](https://github.com/jeontigger/CodingTest/tree/master/0257-binary-tree-paths) |
 | [0494-target-sum](https://github.com/jeontigger/CodingTest/tree/master/0494-target-sum) |
+| [0698-partition-to-k-equal-sum-subsets](https://github.com/jeontigger/CodingTest/tree/master/0698-partition-to-k-equal-sum-subsets) |
 ## Queue
 |  |
 | ------- |
@@ -220,6 +224,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0139-word-break](https://github.com/jeontigger/CodingTest/tree/master/0139-word-break) |
 | [0241-different-ways-to-add-parentheses](https://github.com/jeontigger/CodingTest/tree/master/0241-different-ways-to-add-parentheses) |
+| [0698-partition-to-k-equal-sum-subsets](https://github.com/jeontigger/CodingTest/tree/master/0698-partition-to-k-equal-sum-subsets) |
 ## Two Pointers
 |  |
 | ------- |
@@ -327,4 +332,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0332-reconstruct-itinerary](https://github.com/jeontigger/CodingTest/tree/master/0332-reconstruct-itinerary) |
+## Bitmask
+|  |
+| ------- |
+| [0698-partition-to-k-equal-sum-subsets](https://github.com/jeontigger/CodingTest/tree/master/0698-partition-to-k-equal-sum-subsets) |
 <!---LeetCode Topics End-->
