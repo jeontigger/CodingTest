@@ -8,6 +8,10 @@
 #include <unordered_map>
 #include <set>
 #include <sstream>
+#include <iomanip>
+#include <cassert>
+#include <cstring>
+#include <list>
 
 using namespace std;
 
@@ -27,11 +31,74 @@ void PrintVec(const vector<vector<T>>& vec) {
 		PrintVec(v);
 	}
 }
+#define FOR(idx, limit) for(int idx = 0; idx < limit; idx++)
+int dr[4] = { 0, 1, 0, -1 };
+int dc[4] = { 1, 0, -1, 0 };
 
-struct Pos {
-	int row;
-	int col;
-};
+int N, M;
+vector<vector<int>> maps;
+bool Inputs() {
+	cin >> M >> N;
+	maps.resize(N, vector<int>(M));
+	FOR(r, N)
+		FOR(c, M)
+		cin >> maps[r][c];
+
+	return true;
+}
+
+bool IsValid(int r, int c) {
+	if (r < 0 || r >= N || c < 0 || c >= M)return false;
+	return maps[r][c] == 0;
+}
+
+bool IsAllRipe() {
+	FOR(r, N)
+		FOR(c, M) {
+		if (maps[r][c] == 0) return false;
+	}
+
+	return true;
+}
+
+void Solution() {
+	int ret = 0;
+
+	queue<pair<int, int>> q;
+	FOR(r, N)
+		FOR(c, M) {
+		if (maps[r][c] == 1) {
+			q.push({ r, c });
+		}
+	}
+
+	while (!q.empty()) {
+		int size = q.size();
+		ret++;
+		while (size--) {
+			auto pos = q.front();
+			q.pop();
+
+			for (int i = 0; i < 4; i++) {
+				int nr = pos.first + dr[i];
+				int nc = pos.second + dc[i];
+
+				if (IsValid(nr, nc)) {
+					maps[nr][nc] = 1;
+					q.push({ nr, nc });
+				}
+			}
+		}
+	}
+
+
+	if (IsAllRipe()) {
+		cout << ret - 1 << '\n';
+	}
+	else {
+		cout << -1 << '\n';
+	}
+}
 
 int main() {
 
@@ -39,65 +106,12 @@ int main() {
 	cin.tie(NULL);
 	cout.tie(NULL);
 
-	int M, N;
-	cin >> M >> N;
-
-	vector<vector<int>> maps(N, vector<int>(M));
-	queue<Pos> q;
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < M; j++) {
-			cin >> maps[i][j];
-			if (maps[i][j] == 1) {
-				q.push({ i, j });
-			}
-		}
+	int T = 1;
+	//cin >> T;
+	while (T--) {
+		if (!Inputs()) break;
+		Solution();
 	}
-
-	int g_nrow[] = { 0, 1, 0, -1 };
-	int g_ncol[] = { 1, 0, -1, 0 };
-
-	int cnt = -1;
-	while (!q.empty()) {
-		cnt++;
-		int size = q.size();
-		while (size--) {
-			Pos curPos = q.front();
-			q.pop();
-
-			for (int i = 0; i < 4; i++) {
-				int nrow = curPos.row + g_nrow[i];
-				int ncol = curPos.col + g_ncol[i];
-
-				if (0 <= nrow && nrow < N && 0 <= ncol && ncol < M) {
-					if (maps[nrow][ncol] == 0) {
-						maps[nrow][ncol] = 1;
-						q.push({ nrow, ncol });
-					}
-				}
-			}
-		}
-
-	}
-
-
-	bool bFail = false;
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < M; j++) {
-			if (maps[i][j] == 0) {
-				bFail = true;
-				break;
-			}
-		}
-		if (bFail) break;
-	}
-
-	if (bFail) {
-		cout << -1 << ' ';
-	}
-	else {
-		cout << cnt << ' ';
-	}
-
 
 	return 0;
 }
