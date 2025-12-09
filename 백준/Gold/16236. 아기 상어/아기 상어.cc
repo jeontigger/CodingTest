@@ -31,120 +31,111 @@ void PrintVec(const vector<vector<T>>& vec) {
 		PrintVec(v);
 	}
 }
-
-// 현재 위치에서 잡을 수 있는 물고기 있는지 검색
-//
-// 
+#define FOR(idx, limit) for(int idx = 0; idx < limit; idx++)
+int dr[4] = { 0, 1, 0, -1 };
+int dc[4] = { 1, 0, -1, 0 };
 
 int N;
-int map[21][21];
-pair<int, int> sharkPos;
+vector<vector<int>> maps;
 
-void Inputs() {
+struct Pos {
+	int r;
+	int c;
+	int t;
+};
+
+Pos baby;
+int babySize, babyExp;
+
+bool Inputs() {
 	cin >> N;
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
-			cin >> map[i][j];
-			if (map[i][j] == 9) {
-				sharkPos = { i, j };
-				map[i][j] = 0;
-			}
+	maps.resize(N, vector<int>(N));
+	babySize = 2;
+	FOR(i, N)
+		FOR(j, N) {
+		cin >> maps[i][j];
+		if (maps[i][j] == 9) {
+			baby.r = i;
+			baby.c = j;
+			maps[i][j] = 0;
 		}
+	}
+
+	return true;
+}
+
+bool CanEat(Pos pos) {
+	return maps[pos.r][pos.c] != 0 && maps[pos.r][pos.c] < babySize;
+}
+
+void Eat(Pos pos) {
+	maps[pos.r][pos.c] = 0;
+	baby = pos;
+	baby.t = 0;
+	babyExp++;
+	if (babyExp == babySize) {
+		babySize++;
+		babyExp = 0;
 	}
 }
 
-struct PosData {
-	int row;
-	int col;
-	int cnt;
-};
+bool CanMove(int r, int c, const vector<vector<int>>& visited) {
+	return !(r < 0 || r >= N || c < 0 || c >= N) && !visited[r][c] && maps[r][c] <= babySize;
+}
 
 struct cmp {
-	bool operator()(const PosData& p1, const PosData& p2) {
-		if (p1.cnt != p2.cnt) {
-			return p1.cnt > p2.cnt;
+	bool operator()(const Pos& p1, const Pos& p2) {
+		if (p1.t != p2.t) {
+			return p1.t > p2.t;
 		}
-		else if (p1.row != p2.row) {
-			return p1.row > p2.row;
+		else if (p1.r != p2.r) {
+			return p1.r > p2.r;
 		}
 		else {
-			return p1.col > p2.col;
+			return p1.c > p2.c;
 		}
 	}
 };
 
-int BFS(pair<int, int>& shark, int sharkSize) {
 
-	int nrow[4] = { -1, 0, 0, 1 };
-	int ncol[4] = { 0, -1, 1, 0 };
-
-	int res = INF;
-	priority_queue<PosData, vector<PosData>, cmp> pq;
+int BFS() {
+	priority_queue<Pos, vector<Pos>, cmp> pq;
+	pq.push(baby);
 	vector<vector<int>> visited(N, vector<int>(N));
-	pq.push({ shark.first, shark.second, 0 });
-	visited[shark.first][shark.second] = true;
+	visited[baby.r][baby.c] = true;
 
-	int cnt = -1;
-	//pq.push({ 1, 1 });
-	//pq.push({ 0, 1 });
-	//pq.push({ 2, 3 });
-	//auto pos = pq.top();
-
+	int time = 0;
 	while (!pq.empty()) {
-		int size = pq.size();
-
-		auto pos = pq.top();
+		Pos pos = pq.top();
 		pq.pop();
 
-		if (map[pos.row][pos.col] != 0 && map[pos.row][pos.col] < sharkSize) {
-			shark = { pos.row, pos.col };
-			map[pos.row][pos.col] = 0;
-			//cout << pos.row << ' ' << pos.col << '\n';
-			return pos.cnt;
+		if (CanEat(pos)) {
+			Eat(pos);
+			//cout << pos.r << ' ' << pos.c << ' ' << pos.t << '\n';
+			return pos.t;
 		}
 
 		for (int i = 0; i < 4; i++) {
-			int _nrow = pos.row + nrow[i];
-			int _ncol = pos.col + ncol[i];
-
-			// 범위 조건
-			if (0 <= _nrow && _nrow < N && 0 <= _ncol && _ncol < N) {
-				// 방문 조건
-				if (!visited[_nrow][_ncol]) {
-					// 크기 조건
-					if (sharkSize >= map[_nrow][_ncol]) {
-						pq.push({ _nrow,_ncol, pos.cnt + 1 });
-						visited[_nrow][_ncol] = true;
-					}
-				}
+			int nr = pos.r + dr[i];
+			int nc = pos.c + dc[i];
+			if (CanMove(nr, nc, visited)) {
+				visited[nr][nc] = true;
+				pq.push({ nr, nc, pos.t + 1 });
 			}
 		}
-
 	}
 
-	return res;
+	return 0;
 }
 
 void Solution() {
-
-	int curSize = 2;
-	int curCnt = 0;
-	int time = 0;
-	while (true) {
-		int res = BFS(sharkPos, curSize);
-		if (res == INF) {
-			break;
-		}
-		else {
-			curCnt++;
-			time += res;
-			if (curCnt == curSize) {
-				curSize++;
-				curCnt = 0;
-			}
-		}
+	int ret = 0, time = 0;
+	while (ret = BFS()) {
+		time += ret;
 	}
+
 	cout << time << '\n';
+
 }
 
 int main() {
@@ -156,10 +147,9 @@ int main() {
 	int T = 1;
 	//cin >> T;
 	while (T--) {
-		Inputs();
+		if (!Inputs()) break;
 		Solution();
 	}
-
 
 	return 0;
 }
