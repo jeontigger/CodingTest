@@ -15,7 +15,6 @@ public:
         queue<string> q;
         q.push(beginWord);
         vector<int> visited(wordList.size());
-        unordered_set<string> sWordList(wordList.begin(), wordList.end());
 
         int ret = 0;
 
@@ -26,17 +25,17 @@ public:
                 string word = q.front();
                 q.pop();
 
-                if(word == endWord){
+                if (word == endWord) {
                     return ret;
                 }
 
-                for (auto iter = sWordList.begin(); iter != sWordList.end();) {
-                    if (AdjWord(word, *iter)) {
-                        q.push(*iter);
-                        iter = sWordList.erase(iter);
-                    } else {
-                        ++iter;
-                    }
+                for (int i = 0; i < visited.size(); i++) {
+                    if (visited[i])
+                        continue;
+                    if (AdjWord(word, wordList[i])) {
+                        visited[i] = true;
+                        q.push(wordList[i]);
+                    } 
                 }
             }
         }
