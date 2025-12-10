@@ -56,6 +56,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0493-reverse-pairs](https://github.com/jeontigger/CodingTest/tree/master/0493-reverse-pairs) |
 | [0494-target-sum](https://github.com/jeontigger/CodingTest/tree/master/0494-target-sum) |
 | [0518-coin-change-ii](https://github.com/jeontigger/CodingTest/tree/master/0518-coin-change-ii) |
+| [0542-01-matrix](https://github.com/jeontigger/CodingTest/tree/master/0542-01-matrix) |
 | [0643-maximum-average-subarray-i](https://github.com/jeontigger/CodingTest/tree/master/0643-maximum-average-subarray-i) |
 | [0695-max-area-of-island](https://github.com/jeontigger/CodingTest/tree/master/0695-max-area-of-island) |
 | [0698-partition-to-k-equal-sum-subsets](https://github.com/jeontigger/CodingTest/tree/master/0698-partition-to-k-equal-sum-subsets) |
@@ -155,6 +156,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0474-ones-and-zeroes](https://github.com/jeontigger/CodingTest/tree/master/0474-ones-and-zeroes) |
 | [0494-target-sum](https://github.com/jeontigger/CodingTest/tree/master/0494-target-sum) |
 | [0518-coin-change-ii](https://github.com/jeontigger/CodingTest/tree/master/0518-coin-change-ii) |
+| [0542-01-matrix](https://github.com/jeontigger/CodingTest/tree/master/0542-01-matrix) |
 | [0698-partition-to-k-equal-sum-subsets](https://github.com/jeontigger/CodingTest/tree/master/0698-partition-to-k-equal-sum-subsets) |
 | [0879-profitable-schemes](https://github.com/jeontigger/CodingTest/tree/master/0879-profitable-schemes) |
 | [0956-tallest-billboard](https://github.com/jeontigger/CodingTest/tree/master/0956-tallest-billboard) |
@@ -259,6 +261,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0329-longest-increasing-path-in-a-matrix](https://github.com/jeontigger/CodingTest/tree/master/0329-longest-increasing-path-in-a-matrix) |
 | [0417-pacific-atlantic-water-flow](https://github.com/jeontigger/CodingTest/tree/master/0417-pacific-atlantic-water-flow) |
 | [0463-island-perimeter](https://github.com/jeontigger/CodingTest/tree/master/0463-island-perimeter) |
+| [0542-01-matrix](https://github.com/jeontigger/CodingTest/tree/master/0542-01-matrix) |
 | [0547-number-of-provinces](https://github.com/jeontigger/CodingTest/tree/master/0547-number-of-provinces) |
 | [0617-merge-two-binary-trees](https://github.com/jeontigger/CodingTest/tree/master/0617-merge-two-binary-trees) |
 | [0695-max-area-of-island](https://github.com/jeontigger/CodingTest/tree/master/0695-max-area-of-island) |
@@ -280,6 +283,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0329-longest-increasing-path-in-a-matrix](https://github.com/jeontigger/CodingTest/tree/master/0329-longest-increasing-path-in-a-matrix) |
 | [0417-pacific-atlantic-water-flow](https://github.com/jeontigger/CodingTest/tree/master/0417-pacific-atlantic-water-flow) |
 | [0463-island-perimeter](https://github.com/jeontigger/CodingTest/tree/master/0463-island-perimeter) |
+| [0542-01-matrix](https://github.com/jeontigger/CodingTest/tree/master/0542-01-matrix) |
 | [0695-max-area-of-island](https://github.com/jeontigger/CodingTest/tree/master/0695-max-area-of-island) |
 | [0733-flood-fill](https://github.com/jeontigger/CodingTest/tree/master/0733-flood-fill) |
 | [1981-minimize-the-difference-between-target-and-chosen-elements](https://github.com/jeontigger/CodingTest/tree/master/1981-minimize-the-difference-between-target-and-chosen-elements) |
