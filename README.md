@@ -62,6 +62,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0698-partition-to-k-equal-sum-subsets](https://github.com/jeontigger/CodingTest/tree/master/0698-partition-to-k-equal-sum-subsets) |
 | [0733-flood-fill](https://github.com/jeontigger/CodingTest/tree/master/0733-flood-fill) |
 | [0752-open-the-lock](https://github.com/jeontigger/CodingTest/tree/master/0752-open-the-lock) |
+| [0773-sliding-puzzle](https://github.com/jeontigger/CodingTest/tree/master/0773-sliding-puzzle) |
 | [0879-profitable-schemes](https://github.com/jeontigger/CodingTest/tree/master/0879-profitable-schemes) |
 | [0904-fruit-into-baskets](https://github.com/jeontigger/CodingTest/tree/master/0904-fruit-into-baskets) |
 | [0956-tallest-billboard](https://github.com/jeontigger/CodingTest/tree/master/0956-tallest-billboard) |
@@ -161,6 +162,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0518-coin-change-ii](https://github.com/jeontigger/CodingTest/tree/master/0518-coin-change-ii) |
 | [0542-01-matrix](https://github.com/jeontigger/CodingTest/tree/master/0542-01-matrix) |
 | [0698-partition-to-k-equal-sum-subsets](https://github.com/jeontigger/CodingTest/tree/master/0698-partition-to-k-equal-sum-subsets) |
+| [0773-sliding-puzzle](https://github.com/jeontigger/CodingTest/tree/master/0773-sliding-puzzle) |
 | [0879-profitable-schemes](https://github.com/jeontigger/CodingTest/tree/master/0879-profitable-schemes) |
 | [0956-tallest-billboard](https://github.com/jeontigger/CodingTest/tree/master/0956-tallest-billboard) |
 | [1049-last-stone-weight-ii](https://github.com/jeontigger/CodingTest/tree/master/1049-last-stone-weight-ii) |
@@ -183,6 +185,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0257-binary-tree-paths](https://github.com/jeontigger/CodingTest/tree/master/0257-binary-tree-paths) |
 | [0494-target-sum](https://github.com/jeontigger/CodingTest/tree/master/0494-target-sum) |
 | [0698-partition-to-k-equal-sum-subsets](https://github.com/jeontigger/CodingTest/tree/master/0698-partition-to-k-equal-sum-subsets) |
+| [0773-sliding-puzzle](https://github.com/jeontigger/CodingTest/tree/master/0773-sliding-puzzle) |
 ## Queue
 |  |
 | ------- |
@@ -250,6 +253,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0241-different-ways-to-add-parentheses](https://github.com/jeontigger/CodingTest/tree/master/0241-different-ways-to-add-parentheses) |
 | [0329-longest-increasing-path-in-a-matrix](https://github.com/jeontigger/CodingTest/tree/master/0329-longest-increasing-path-in-a-matrix) |
 | [0698-partition-to-k-equal-sum-subsets](https://github.com/jeontigger/CodingTest/tree/master/0698-partition-to-k-equal-sum-subsets) |
+| [0773-sliding-puzzle](https://github.com/jeontigger/CodingTest/tree/master/0773-sliding-puzzle) |
 ## Two Pointers
 |  |
 | ------- |
@@ -273,6 +277,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0695-max-area-of-island](https://github.com/jeontigger/CodingTest/tree/master/0695-max-area-of-island) |
 | [0733-flood-fill](https://github.com/jeontigger/CodingTest/tree/master/0733-flood-fill) |
 | [0752-open-the-lock](https://github.com/jeontigger/CodingTest/tree/master/0752-open-the-lock) |
+| [0773-sliding-puzzle](https://github.com/jeontigger/CodingTest/tree/master/0773-sliding-puzzle) |
 | [0841-keys-and-rooms](https://github.com/jeontigger/CodingTest/tree/master/0841-keys-and-rooms) |
 | [1466-reorder-routes-to-make-all-paths-lead-to-the-city-zero](https://github.com/jeontigger/CodingTest/tree/master/1466-reorder-routes-to-make-all-paths-lead-to-the-city-zero) |
 ## Trie
@@ -293,6 +298,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0542-01-matrix](https://github.com/jeontigger/CodingTest/tree/master/0542-01-matrix) |
 | [0695-max-area-of-island](https://github.com/jeontigger/CodingTest/tree/master/0695-max-area-of-island) |
 | [0733-flood-fill](https://github.com/jeontigger/CodingTest/tree/master/0733-flood-fill) |
+| [0773-sliding-puzzle](https://github.com/jeontigger/CodingTest/tree/master/0773-sliding-puzzle) |
 | [1981-minimize-the-difference-between-target-and-chosen-elements](https://github.com/jeontigger/CodingTest/tree/master/1981-minimize-the-difference-between-target-and-chosen-elements) |
 ## Binary Search Tree
 |  |
