@@ -109,17 +109,21 @@ void BFS(int n) {
 	}
 }
 
-void DFS(int path, int idx, int sum) {
+int DFS(int path, int idx) {
+	int& ret = cache[path][idx];
+	if (ret != -1) return ret;
 	if (path == pow(2, D) - 1) {
-		minValue = min(minValue, sum);
-		return;
+		return ret = 0;
 	}
+	ret = INF;
 
 	for (int i = 0; i < D; i++) {
 		if ((path & (1 << i)) == 0) {
-			DFS(path | (1 << i), i, sum + dist[idx][i]);
+			ret = min(ret, DFS(path | (1 << i), i) + dist[idx][i]);
 		}
 	}
+
+	return ret;
 }
 
 void Solution() {
@@ -146,8 +150,8 @@ void Solution() {
 		BFS(i);
 	}
 
-	DFS(1 << roboIdx, roboIdx, 0);
-	cout << minValue << '\n';
+
+	cout << DFS(1 << roboIdx, roboIdx) << '\n';
 
 }
 
