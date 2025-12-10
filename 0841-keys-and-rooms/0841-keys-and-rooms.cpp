@@ -1,27 +1,28 @@
 class Solution {
 public:
-    vector<int> visited;
-    void DFS(int n, const vector<vector<int>>& rooms){
-        // cout << n << ' ';
-        for(int i = 0 ; i < rooms[n].size(); i++){
-            int next = rooms[n][i];
-            if(!visited[next]){
-                visited[next] = true;
-                DFS(next, rooms);
+int N;
+    bool canVisitAllRooms(vector<vector<int>>& rooms) {
+        N = rooms.size();
+        vector<int> visited(N);
+        visited[0] = true;
+        queue<int> q;
+        q.push(0);
+
+        int unlock = 1;
+        while(!q.empty()){
+            int cur = q.front();
+            q.pop();
+
+            for(int i = 0 ; i < rooms[cur].size(); i++){
+                int next = rooms[cur][i];
+                if(!visited[next]){
+                    visited[next] = true;
+                    q.push(next);
+                    unlock++;
+                }
             }
         }
-    }
 
-    bool canVisitAllRooms(vector<vector<int>>& rooms) {
-        visited.resize(rooms.size());
-        visited[0] = true;
-        DFS(0, rooms);
-
-        for(int i = 0; i < visited.size(); i++){
-            // cout << visited[i] << ' ' ;
-            if(!visited[i])return false;
-        }
-
-        return true;
+        return unlock == N;
     }
 };
