@@ -71,6 +71,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [1049-last-stone-weight-ii](https://github.com/jeontigger/CodingTest/tree/master/1049-last-stone-weight-ii) |
 | [1052-grumpy-bookstore-owner](https://github.com/jeontigger/CodingTest/tree/master/1052-grumpy-bookstore-owner) |
 | [1235-maximum-profit-in-job-scheduling](https://github.com/jeontigger/CodingTest/tree/master/1235-maximum-profit-in-job-scheduling) |
+| [1293-shortest-path-in-a-grid-with-obstacles-elimination](https://github.com/jeontigger/CodingTest/tree/master/1293-shortest-path-in-a-grid-with-obstacles-elimination) |
 | [1352-maximum-profit-in-job-scheduling](https://github.com/jeontigger/CodingTest/tree/master/1352-maximum-profit-in-job-scheduling) |
 | [1458-max-dot-product-of-two-subsequences](https://github.com/jeontigger/CodingTest/tree/master/1458-max-dot-product-of-two-subsequences) |
 | [1493-longest-subarray-of-1s-after-deleting-one-element](https://github.com/jeontigger/CodingTest/tree/master/1493-longest-subarray-of-1s-after-deleting-one-element) |
@@ -285,6 +286,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0841-keys-and-rooms](https://github.com/jeontigger/CodingTest/tree/master/0841-keys-and-rooms) |
 | [0847-shortest-path-visiting-all-nodes](https://github.com/jeontigger/CodingTest/tree/master/0847-shortest-path-visiting-all-nodes) |
 | [0864-shortest-path-to-get-all-keys](https://github.com/jeontigger/CodingTest/tree/master/0864-shortest-path-to-get-all-keys) |
+| [1293-shortest-path-in-a-grid-with-obstacles-elimination](https://github.com/jeontigger/CodingTest/tree/master/1293-shortest-path-in-a-grid-with-obstacles-elimination) |
 | [1466-reorder-routes-to-make-all-paths-lead-to-the-city-zero](https://github.com/jeontigger/CodingTest/tree/master/1466-reorder-routes-to-make-all-paths-lead-to-the-city-zero) |
 ## Trie
 |  |
@@ -306,6 +308,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0733-flood-fill](https://github.com/jeontigger/CodingTest/tree/master/0733-flood-fill) |
 | [0773-sliding-puzzle](https://github.com/jeontigger/CodingTest/tree/master/0773-sliding-puzzle) |
 | [0864-shortest-path-to-get-all-keys](https://github.com/jeontigger/CodingTest/tree/master/0864-shortest-path-to-get-all-keys) |
+| [1293-shortest-path-in-a-grid-with-obstacles-elimination](https://github.com/jeontigger/CodingTest/tree/master/1293-shortest-path-in-a-grid-with-obstacles-elimination) |
 | [1981-minimize-the-difference-between-target-and-chosen-elements](https://github.com/jeontigger/CodingTest/tree/master/1981-minimize-the-difference-between-target-and-chosen-elements) |
 ## Binary Search Tree
 |  |
