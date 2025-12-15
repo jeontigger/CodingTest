@@ -1,71 +1,58 @@
 class Solution {
 public:
-    vector<vector<int>> visited, m_heights, cnts, ret;
     int N, M;
-    int dr[4] = {0, 1, 0, -1};
-    int dc[4] = {1, 0, -1, 0};
-
-    bool IsValid(int r, int c, int cur) {
-        if (r < 0 || r >= N || c < 0 || c >= M)
-            return false;
-
-        return !visited[r][c] && cur <= m_heights[r][c];
+    inline bool IsValid(int r, int c, vector<vector<int>>& visited) {
+        return !(r < 0 || r >= N || c < 0 || c >= M) && !visited[r][c];
     }
 
-    void DFS(int r, int c) {
-        cnts[r][c]++;
-        for (int i = 0; i < 4; i++) {
-            int nr = r + dr[i];
-            int nc = c + dc[i];
+    vector<vector<int>> BFS(int r1, int c1, int r2, int c2,
+                            vector<vector<int>>& heights) {
+        vector<vector<int>> visited(N, vector<int>(M));
+        queue<pair<int, int>> q;
+        for (int i = 0; i < r1; i++) {
+            q.push({i, c1});
+            visited[i][c1] = true;
+        }
+        for (int i = 0; i < c2; i++) {
+            q.push({r2, i});
+            visited[r2][i] = true;
+        }
 
-            if (IsValid(nr, nc, m_heights[r][c])) {
-                visited[nr][nc] = true;
-                DFS(nr, nc);
+        int dr[4] = {1, 0, -1, 0};
+        int dc[4] = {0, 1, 0, -1};
+
+        while (!q.empty()) {
+            auto cur = q.front();
+            q.pop();
+
+            for (int i = 0; i < 4; i++) {
+                int nr = cur.first + dr[i];
+                int nc = cur.second + dc[i];
+
+                if (IsValid(nr, nc, visited)) {
+                    if (heights[cur.first][cur.second] <= heights[nr][nc]) {
+                        visited[nr][nc] = true;
+                        q.push({nr, nc});
+                    }
+                }
             }
         }
+
+        return visited;
     }
 
     vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
-        m_heights = heights;
-        N = m_heights.size(), M = m_heights[0].size();
+        N = heights.size(), M = heights[0].size();
+        auto visitedA = BFS(N, M - 1, N - 1, M, heights);
+        auto visitedP = BFS(N, 0, 0, M, heights);
 
-        visited.resize(N, vector<int>(M));
-        cnts.resize(N, vector<int>(M));
-
-        for(int i = 0 ; i < N; i++){
-            if(!visited[i][M-1]){
-                visited[i][M-1] = true;
-                DFS(i, M-1);
+        vector<vector<int>> ret;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < M; j++) {
+                if (visitedA[i][j] && visitedP[i][j]) {
+                    ret.push_back({i, j});
+                }
             }
-        }
-        for(int i = 0; i < M; i++){
-            if(!visited[N-1][i]){
-                visited[N-1][i] = true;
-                DFS(N-1, i);
-            }
-        }
-
-        visited.assign(N, vector<int>(M));
-
-        for(int i = 0 ; i < N; i++){
-            if(!visited[i][0]){
-                visited[i][0] = true;
-                DFS(i, 0);
-            }
-        }
-        for(int i = 0; i < M; i++){
-            if(!visited[0][i]){
-                visited[0][i] = true;
-                DFS(0, i);
-            }
-        }
-
-        for(int i = 0 ; i < N; i++){
-            for(int j = 0 ; j < M; j++){
-                if(cnts[i][j] == 2) ret.push_back({i, j});
-                // cout << cnts[i][j] << ' ';
-            }
-            // cout << '\n';
         }
 
         return ret;
