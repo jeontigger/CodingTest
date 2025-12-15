@@ -122,6 +122,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0222-count-complete-tree-nodes](https://github.com/jeontigger/CodingTest/tree/master/0222-count-complete-tree-nodes) |
 | [0257-binary-tree-paths](https://github.com/jeontigger/CodingTest/tree/master/0257-binary-tree-paths) |
 | [0617-merge-two-binary-trees](https://github.com/jeontigger/CodingTest/tree/master/0617-merge-two-binary-trees) |
+| [0958-check-completeness-of-a-binary-tree](https://github.com/jeontigger/CodingTest/tree/master/0958-check-completeness-of-a-binary-tree) |
 ## Binary Tree
 |  |
 | ------- |
@@ -135,6 +136,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0222-count-complete-tree-nodes](https://github.com/jeontigger/CodingTest/tree/master/0222-count-complete-tree-nodes) |
 | [0257-binary-tree-paths](https://github.com/jeontigger/CodingTest/tree/master/0257-binary-tree-paths) |
 | [0617-merge-two-binary-trees](https://github.com/jeontigger/CodingTest/tree/master/0617-merge-two-binary-trees) |
+| [0958-check-completeness-of-a-binary-tree](https://github.com/jeontigger/CodingTest/tree/master/0958-check-completeness-of-a-binary-tree) |
 ## String
 |  |
 | ------- |
@@ -286,6 +288,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0841-keys-and-rooms](https://github.com/jeontigger/CodingTest/tree/master/0841-keys-and-rooms) |
 | [0847-shortest-path-visiting-all-nodes](https://github.com/jeontigger/CodingTest/tree/master/0847-shortest-path-visiting-all-nodes) |
 | [0864-shortest-path-to-get-all-keys](https://github.com/jeontigger/CodingTest/tree/master/0864-shortest-path-to-get-all-keys) |
+| [0958-check-completeness-of-a-binary-tree](https://github.com/jeontigger/CodingTest/tree/master/0958-check-completeness-of-a-binary-tree) |
 | [1293-shortest-path-in-a-grid-with-obstacles-elimination](https://github.com/jeontigger/CodingTest/tree/master/1293-shortest-path-in-a-grid-with-obstacles-elimination) |
 | [1466-reorder-routes-to-make-all-paths-lead-to-the-city-zero](https://github.com/jeontigger/CodingTest/tree/master/1466-reorder-routes-to-make-all-paths-lead-to-the-city-zero) |
 ## Trie
