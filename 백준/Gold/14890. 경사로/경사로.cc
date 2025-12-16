@@ -1,221 +1,208 @@
-#include <iostream>
 #include <vector>
-#include <list>
+#include <iostream>
+#include <string>
 #include <algorithm>
 #include <queue>
+#include <cmath>
+#include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
+#include <iomanip>
+#include <cassert>
+#include <cstring>
+#include <list>
 #include <map>
 
 using namespace std;
 
-void input(int& clampLen, vector<vector<int>> &vec) {
-    int n;
-    cin >> n >> clampLen;
+#define INF 1e9
 
-    vec.resize(n);
-    for (int i = 0; i < n; i++) {
-        vec[i].resize(n);
-        for (int j = 0; j < n; j++) {
-            cin >> vec[i][j];
-        }
-    }
-}
-void leftCheck(int clampLen, const vector<vector<int>>& vec, vector<vector<int>>& vecCheck, int& disableCnt) {
-    int n = vec.size();
-    for (int i = 0; i < vec.size(); i++) {
-        for (int j = 0; j < vec.size() - 1; j++) {
-            int cur = vec[i][j];
-            int next = vec[i][j + 1];
-            int prevDisableCnt = disableCnt;
-            if (cur - 1 > next) {
-                disableCnt++;
-                break;
-            }
-            if (cur - 1 == next) {
-                int cnt = 0;
-                for (int k = j + 1; k < vec.size(); k++) {
-                    int chk = vec[i][k];
-                    if (chk != next)
-                        break;
-
-                    cnt++;
-
-                    if (cnt == clampLen)
-                        break;
-                }
-                for (int k = 0; k < clampLen; k++) {
-                    if (cnt == clampLen) {
-                        if (vecCheck[i][j + 1 + k] != 0)
-                        {
-                            disableCnt++; break;
-                        }
-                        vecCheck[i][j + 1 + k]++;
-                    }
-                    else if (cnt < clampLen) {
-                        disableCnt++;
-                        break;
-                    }
-                }
-                if (disableCnt != prevDisableCnt)
-                {
-                    break;
-                }
-            }
-
-            cur = vec[i][n - 1 - j];
-            next = vec[i][n - 2 - j];
-            if (cur - 1 > next) {
-                disableCnt++;
-                break;
-            }
-            if (cur - 1 == next) {
-                int cnt = 0;
-                for (int k = j + 1; k < n; k++) {
-                    int chk = vec[i][n - 1 - k];
-                    if (chk != next)
-                        break;
-
-                    cnt++;
-
-                    if (cnt == clampLen)
-                        break;
-                }
-                for (int k = 0; k < clampLen; k++) {
-                    if (cnt == clampLen) {
-                        if (vecCheck[i][n - 2 - j - k] != 0)
-                        {
-                            disableCnt++; break;
-                        }
-                        vecCheck[i][n - 2 - j - k]++;
-                    }
-                    else if (cnt < clampLen) {
-                        disableCnt++;
-                        break;
-                    }
-                }
-                if (disableCnt != prevDisableCnt)
-                {
-                    break;
-                }
-            }
-
-        }
-    }
-}void upCheck(int clampLen, const vector<vector<int>>& vec, vector<vector<int>>& vecCheck, int& disableCnt) {
-    int n = vec.size();
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n - 1; j++) {
-            int cur = vec[j][i];
-            int next = vec[j+1][i];
-            int prevDisableCnt = disableCnt;
-            if (cur - 1 > next) {
-                disableCnt++;
-                break;
-            }
-            if (cur - 1 == next) {
-                int cnt = 0;
-                for (int k = j + 1; k < n; k++) {
-                    int chk = vec[k][i];
-                    if (chk != next)
-                        break;
-
-                    cnt++;
-
-                    if (cnt == clampLen)
-                        break;
-                }
-                for (int k = 0; k < clampLen; k++) {
-                    if (cnt == clampLen) {
-                        if (vecCheck[j + 1 + k][i] != 0)
-                        {
-                            disableCnt++; break;
-                        }
-                        vecCheck[j + 1 + k][i]++;
-                    }
-                    else if (cnt < clampLen) {
-                        disableCnt++;
-                        break;
-                    }
-                }
-
-                if (disableCnt != prevDisableCnt)
-                    break;
-            }
-
-
-            cur = vec[n - 1 - j][i];
-            next = vec[n - 2 - j][i];
-            if (cur - 1 > next) {
-                disableCnt++;
-                break;
-            }
-            if (cur - 1 == next) {
-                int cnt = 0;
-                for (int k = j + 1; k < n; k++) {
-                    int chk = vec[n - 1 - k][i];
-                    if (chk != next)
-                        break;
-
-                    cnt++;
-
-                    if (cnt == clampLen)
-                        break;
-                }
-                for (int k = 0; k < clampLen; k++) {
-                    if (cnt == clampLen) {
-                        if (vecCheck[n - 2 - j - k][i] != 0)
-                        {
-                            disableCnt++; break;
-                        }
-                        vecCheck[n - 2 - j - k][i]++;
-                    }
-                    else if (cnt < clampLen) {
-                        disableCnt++;
-                        break;
-                    }
-                }
-
-                if (disableCnt != prevDisableCnt)
-                    break;
-            }
-        }
-    }
-}
-void solution(int clampLen, vector<vector<int>>& vec) {
-
-    vector<vector<int>> vecCheck;
-    vecCheck.resize(vec.size());
-    for (int i = 0; i < vec.size(); i++) {
-        vecCheck[i].resize(vec.size());
-    }
-
-    int disableCnt = 0;
-    // left -> right
-    leftCheck(clampLen, vec, vecCheck, disableCnt);
-
-    for (vector<int>& v : vecCheck) {
-        for (int& i : v) {
-            i = 0;
-        }
-    }
-
-    // right->left
-    upCheck(clampLen, vec, vecCheck, disableCnt);
-
-    /*for (vector<int> v : vecCheck) {
-        for (int i : v) {
-            cout << i << " ";
-        }
-        cout << endl;
-    }*/
-    cout << vec.size() * 2 - disableCnt << endl;
+template<typename T>
+void PrintVec(const vector<T>& v) {
+	for (T i : v) {
+		cout << i << " ";
+	}
+	cout << '\n';
 }
 
-int main()
-{
-    int clampLen;
-    vector<vector<int>> vec;
+template<typename T>
+void PrintVec(const vector<vector<T>>& vec) {
+	for (auto& v : vec) {
+		PrintVec(v);
+	}
+}
+#define FOR(idx, limit) for(int idx = 0; idx < limit; idx++)
 
-    input(clampLen, vec);
+int N, L;
+int maps[100][100];
 
-    solution(clampLen, vec);
+enum EDir { UP, RIGHT, DOWN, LEFT };
+int dr[4] = { -1, 0, 1, 0 }, dc[4] = { 0, 1, 0, -1 };
+
+bool Inputs() {
+	cin >> N >> L;
+	FOR(r, N)
+		FOR(c, N)
+		cin >> maps[r][c];
+
+	return true;
+}
+
+// 아예 경사로로 커버가 안되는지
+// 경사로가 필요한지
+// 경사로를 놓을 수 있는지
+
+bool CanCandidate(int idx, char type) {
+	if (type == 'v') {
+		for (int i = 0; i < N - 1; i++) {
+			if (abs(maps[i][idx] - maps[i + 1][idx]) > 1)return false;
+		}
+	}
+	else if (type == 'h') {
+		for (int i = 0; i < N - 1; i++) {
+			if (abs(maps[idx][i] - maps[idx][i + 1]) > 1)return false;
+		}
+	}
+	else {
+		cout << "Mistake Use\n";
+		return false;
+	}
+
+	return true;
+}
+
+inline bool Boundary(int r, int c) {
+	return !(r < 0 || r >= N || c < 0 || c >= N);
+}
+
+inline bool NeedRamp(int cr, int cc, int nr, int nc) {
+	return maps[cr][cc] - 1 == maps[nr][nc];
+}
+
+/// <summary>
+/// NeedRamp에서 true를 받은 cr, cc를 인자로 넣어야 합니다.
+/// </summary>
+bool CanInstall(int r, int c, EDir dir, const vector<int>& visited) {
+	int originValue = maps[r][c];
+	for (int i = 0; i < L; i++) {
+		r += dr[(int)dir];
+		c += dc[(int)dir];
+		int idx;
+		if ((int)dir % 2 == 0)
+			idx = r;
+		else
+			idx = c;
+		if (!Boundary(r, c))
+			return false;
+		if (visited[idx])
+			return false;
+		if (maps[r][c] != originValue - 1)
+			return false;
+	}
+
+	return true;
+}
+
+/// <summary>
+/// NeedRamp에서 true를 받은 cr, cc를 인자로 넣어야 합니다.
+/// </summary>
+void Install(int r, int c, EDir dir, vector<int>& visited) {
+	for (int i = 0; i < L; i++) {
+		r += dr[(int)dir];
+		c += dc[(int)dir];
+		int idx;
+		if ((int)dir % 2 == 0)
+			idx = r;
+		else
+			idx = c;
+		visited[idx] = true;
+	}
+}
+
+bool Check(int idx, char type) {
+	vector<int> visited(N);
+
+	// 아래, 오른쪽
+	for (int i = 0; i < N - 1; i++) {
+		int cr, cc, nr, nc;
+		EDir dir;
+		if (type == 'v') {
+			cr = i;
+			nc = cc = idx;
+			nr = i + 1;
+			dir = DOWN;
+		}
+		else {
+			cr = nr = idx;
+			cc = i;
+			nc = i + 1;
+			dir = RIGHT;
+		}
+		if (NeedRamp(cr, cc, nr, nc)) {
+			if (CanInstall(cr, cc, dir, visited)) {
+				Install(cr, cc, dir, visited);
+			}
+			else {
+				return false;
+			}
+		}
+	}
+
+	// 위 왼쪽
+	for (int i = N - 1; i > 0; i--) {
+		int cr, cc, nr, nc;
+		EDir dir;
+		if (type == 'v') {
+			cr = i;
+			nc = cc = idx;
+			nr = i - 1;
+			dir = UP;
+		}
+		else {
+			cr = nr = idx;
+			cc = i;
+			nc = i - 1;
+			dir = LEFT;
+		}
+		if (NeedRamp(cr, cc, nr, nc)) {
+			if (CanInstall(cr, cc, dir, visited)) {
+				Install(cr, cc, dir, visited);
+			}
+			else {
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
+
+void Solution() {
+	int ret = 0;
+	for (int i = 0; i < N; i++) {
+		if (CanCandidate(i, 'v')) {
+			ret += Check(i, 'v');
+		}
+		if (CanCandidate(i, 'h')) {
+			ret += Check(i, 'h');
+		}
+	}
+	cout << ret << '\n';
+}
+
+int main() {
+
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int T = 1;
+	//cin >> T;
+	while (T--) {
+		if (!Inputs()) break;
+		Solution();
+	}
+
+	return 0;
 }
