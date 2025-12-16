@@ -1,102 +1,180 @@
-#pragma once
-#include <iostream>
 #include <vector>
-#include <list>
+#include <iostream>
+#include <string>
 #include <algorithm>
 #include <queue>
-#include <string>
+#include <cmath>
+#include <stack>
+#include <unordered_map>
+#include <set>
+#include <sstream>
+#include <iomanip>
+#include <cassert>
+#include <cstring>
+#include <list>
+#include <map>
 
 using namespace std;
 
-int g_row;
-int g_col;
-int g_startRow;
-int g_startCol;
-int g_dir;
+#define INF 1e9
 
-int g_nRows[4] = {-1, 0, 1, 0};
-int g_nCols[4] = { 0, 1, 0, -1 };
-
-void input(vector<vector<int>>& grid) {
-    cin >> g_row >> g_col;
-    cin >> g_startRow >> g_startCol >> g_dir;
-
-    grid.resize(g_row);
-    for (size_t i = 0; i < g_row; i++)
-    {
-        grid[i].resize(g_col);
-        for (size_t j = 0; j < g_col; j++)
-        {
-            cin >> grid[i][j];
-        }
-    }
-
+template<typename T>
+void PrintVec(const vector<T>& v) {
+	for (T i : v) {
+		cout << i << " ";
+	}
+	cout << '\n';
 }
 
-void solution(vector<vector<int>> grid) {
-    if (grid[g_startRow][g_startCol] != 0) {
-        cout << 0 << endl;
-        return;
-    }
+template<typename T>
+void PrintVec(const vector<vector<T>>& vec) {
+	for (auto& v : vec) {
+		PrintVec(v);
+	}
+}
+#define FOR(idx, limit) for(int idx = 0; idx < limit; idx++)
 
-    pair<int, int> Pos = { g_startRow, g_startCol };
-    int cleanCnt = 0;
-    int curDir = g_dir;
-    grid[Pos.first][Pos.second] = 2;
-    int resCnt = 1;
-    while (true) {
-        //for (auto v : grid) {
-        //    for (auto i : v) {
-        //        cout << i << " ";
-        //    }
-        //    cout << endl;
-        //}
-        //cout << "====================" << endl;
-        //getchar();
+int N, M;
+int maps[50][50];
+pair<int, int> roboPos;
+enum EDir { UP, RIGHT, DOWN, LEFT };
+EDir dir;
 
-        pair<int, int> nPos ;
-        for (size_t i = 0; i < 4; i++)
-        {
-            curDir--;
-            if (curDir < 0)
-                curDir = 3;
+int dr[4] = { -1, 0, 1, 0 };
+int dc[4] = { 0, 1, 0, -1 };
+int cleanCnt = 0;
+// 현재 칸이 청소되었는지
+// 청소
+// 주변 4칸이 모두 청소되었는지
+// 후진
+// 후진할 수 없다면 작동 중지
+// 청소안된 칸이 있으면 반시계 방향 90도 회전
+// 앞쪽 칸이 청소되지 않았으면 빈 칸인경우 전진
+// 반복
 
-            nPos.first = Pos.first + g_nRows[curDir];
-            nPos.second = Pos.second + g_nCols[curDir];
+/// <summary>
+/// r과 c가 맵 범위 안에 들어오는지를 검사하는 함수
+/// </summary>
+inline bool Boundary(int r, int c) {
 
-            if (grid[nPos.first][nPos.second] == 0) {
-                break;
-            }
-        }
+	return !(r < 0 || r >= N || c < 0 || c >= M);
+}
 
-        if (grid[nPos.first][nPos.second] == 0) {
-            grid[nPos.first][nPos.second] = 2;
-            Pos = nPos;
-            resCnt++;
-        }
-        else {
-            nPos.first = Pos.first + g_nRows[(curDir + 2) % 4];
-            nPos.second = Pos.second + g_nCols[(curDir + 2) % 4];
+/// <summary>
+/// r과 c가 청소 안된 구역인지 검사하는 함수
+/// </summary>
+inline bool IsDirty(int r, int c) {
+	return Boundary(r, c) && maps[r][c] == 0;
+}
 
-            if (grid[nPos.first][nPos.second] == 1) {
-                break;
-            }
-            else if(grid[nPos.first][nPos.second] == 2){
-                Pos = nPos;
-            }
-        }
-    }
-    cout << resCnt << endl;
+/// <summary>
+/// 주변 4칸에 청소 안된 구역이 존재하는지 검사하는 함수
+/// </summary>
+bool DirtyAreaExsist(int r, int c) {
+	for (int i = 0; i < 4; i++) {
+		int nr = r + dr[i];
+		int nc = c + dc[i];
+		if (IsDirty(nr, nc)) return true;
+	}
+	return false;
+}
+
+/// <summary>
+/// dir을 반시계 방향으로 회전하는 함수입니다.
+/// </summary>
+EDir Rotate(EDir dir, int cnt = 1) {
+	return EDir(((int)dir - cnt + 4) % 4);
+}
+
+/// <summary>
+/// 후진이 가능한지 판단하는 함수입니다.
+/// </summary>
+inline bool CanReverse(int r, int c, EDir dir) {
+	dir = Rotate(dir, 2);
+	int nr = r + dr[(int)dir];
+	int nc = c + dc[(int)dir];
+
+	return Boundary(nr, nc) && maps[nr][nc] != 1;
+}
+
+inline void MoveForward(int r, int c, EDir dir) {
+	//cout << __FUNCTION__ << '\n';
+	int nr = r + dr[(int)dir];
+	int nc = c + dc[(int)dir];
+	roboPos.first = nr;
+	roboPos.second = nc;
+}
+
+inline void MoveBack(int r, int c, EDir dir) {
+	//cout << __FUNCTION__ << '\n';
+	dir = Rotate(dir, 2);
+	int nr = r + dr[(int)dir];
+	int nc = c + dc[(int)dir];
+	roboPos.first = nr;
+	roboPos.second = nc;
+}
+
+inline void Clean(int r, int c) {
+	maps[r][c] = 2;
+	cleanCnt++;
 }
 
 
-int main()
-{
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
 
-    vector<vector<int>> grid;
-    input(grid);
-    solution(grid);
-    
+bool Inputs() {
+	int _dir;
+	cin >> N >> M;
+	cin >> roboPos.first >> roboPos.second >> _dir;
+	dir = (EDir)_dir;
+	FOR(r, N)
+		FOR(c, M)
+		cin >> maps[r][c];
+
+	return true;
+}
+
+void Solution() {
+	while (true) {
+		//cout << roboPos.first << ' ' << roboPos.second << '\n';
+		if (IsDirty(roboPos.first, roboPos.second))
+			Clean(roboPos.first, roboPos.second);
+
+		if (DirtyAreaExsist(roboPos.first, roboPos.second)) {
+			for (int i = 0; i < 4; i++) {
+				dir = Rotate(dir);
+				int nr = roboPos.first + dr[(int)dir];
+				int nc = roboPos.second + dc[(int)dir];
+				if (IsDirty(nr, nc)) {
+					MoveForward(roboPos.first, roboPos.second, dir);
+					break;
+				}
+			}
+		}
+		else {
+			if (CanReverse(roboPos.first, roboPos.second, dir)) {
+				MoveBack(roboPos.first, roboPos.second, dir);
+			}
+			else {
+				break;
+			}
+		}
+	}
+
+	cout << cleanCnt << '\n';
+}
+
+int main() {
+
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int T = 1;
+	//cin >> T;
+	while (T--) {
+		if (!Inputs()) break;
+		Solution();
+	}
+
+	return 0;
 }
