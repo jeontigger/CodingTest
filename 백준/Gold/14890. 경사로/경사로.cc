@@ -123,55 +123,26 @@ void Install(int r, int c, EDir dir, vector<int>& visited) {
 bool Check(int idx, char type) {
 	vector<int> visited(N);
 
-	// 아래, 오른쪽
 	for (int i = 0; i < N - 1; i++) {
 		int cr, cc, nr, nc;
-		EDir dir;
 		if (type == 'v') {
-			cr = i;
-			nc = cc = idx;
-			nr = i + 1;
-			dir = DOWN;
+			cc = nc = idx;
+			cr = i, nr = i + 1;
 		}
 		else {
 			cr = nr = idx;
-			cc = i;
-			nc = i + 1;
-			dir = RIGHT;
+			cc = i, nc = i + 1;
 		}
-		if (NeedRamp(cr, cc, nr, nc)) {
-			if (CanInstall(cr, cc, dir, visited)) {
-				Install(cr, cc, dir, visited);
-			}
-			else {
-				return false;
-			}
-		}
-	}
 
-	// 위 왼쪽
-	for (int i = N - 1; i > 0; i--) {
-		int cr, cc, nr, nc;
-		EDir dir;
-		if (type == 'v') {
-			cr = i;
-			nc = cc = idx;
-			nr = i - 1;
-			dir = UP;
+		int delta = maps[nr][nc] - maps[cr][cc];
+		if (delta == 0) continue;
+		if (delta == 1) {
+			if (!CanInstall(nr, nc, type == 'v' ? UP : LEFT, visited)) return false;
+			Install(nr, nc, type == 'v' ? UP : LEFT, visited);
 		}
-		else {
-			cr = nr = idx;
-			cc = i;
-			nc = i - 1;
-			dir = LEFT;
-		}
-		if (NeedRamp(cr, cc, nr, nc)) {
-			if (CanInstall(cr, cc, dir, visited)) {
-				Install(cr, cc, dir, visited);
-			}
-			else {
-				return false;
-			}
+		else if (delta == -1) {
+			if (!CanInstall(cr, cc, type == 'v' ? DOWN : RIGHT, visited)) return false;
+			Install(cr, cc, type == 'v' ? DOWN : RIGHT, visited);
 		}
 	}
 
