@@ -12,6 +12,7 @@
 #include <cassert>
 #include <cstring>
 #include <list>
+#include <map>
 
 using namespace std;
 
@@ -31,139 +32,110 @@ void PrintVec(const vector<vector<T>>& vec) {
 		PrintVec(v);
 	}
 }
+#define FOR(idx, limit) for(int idx = 0; idx < limit; idx++)
 
-int N, M, K;
-int cache[65536 + 1];
-int map[8][8];
-int r[8], c[8], type[8];
+int N, M;
+int maps[8][8];
 
-void Inputs() {
+struct CCTV {
+	int r;
+	int c;
+	int type;
+};
+vector<CCTV> cctvs;
+
+bool Inputs() {
 	cin >> N >> M;
-
-	K = 0;
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < M; j++) {
-			cin >> map[i][j];
-			if (map[i][j] != 0 && map[i][j] != 6) {
-				r[K] = i;
-				c[K] = j;
-				type[K] = map[i][j] - 1;
-				K++;
-			}
-
-			if (map[i][j] == 6) {
-				map[i][j] = -1;
-			}
+	FOR(r, N)
+		FOR(c, M) {
+		cin >> maps[r][c];
+		if (1 <= maps[r][c] && maps[r][c] <= 5) {
+			cctvs.push_back({ r, c, maps[r][c] });
+			maps[r][c] = 0;
 		}
+
 	}
 
-	memset(cache, -1, sizeof(cache));
+	return true;
 }
 
-int CountInvisible() {
-	int res = 0;
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < M; j++) {
-			if (map[i][j] == 0) res++;
-		}
-	}
-	return res;
+inline bool Boundary(int r, int c) {
+	return !(r < 0 || r >= N || c < 0 || c >= M);
 }
 
-void Light(int _r, int _c, int dir, int delta) {
-	int dr[4] = { 0, 1, 0, -1 };
-	int dc[4] = { 1, 0, -1, 0 };
+inline bool IsValid(int r, int c) {
+	return Boundary(r, c) && maps[r][c] != 6;
+}
+enum EDir { RIGHT, UP, LEFT, DOWN };
+int dr[4] = { 0, -1, 0, 1 };
+int dc[4] = { 1, 0, -1, 0 };
 
+void DrawStraight(int r, int c, int dir, int delta) {
 	while (true) {
-		int nr = _r + dr[dir];
-		int nc = _c + dc[dir];
+		if (!IsValid(r, c))return;
 
-		// 범위
-		if (0 > nr || nr >= N || 0 > nc || nc >= M)break;
-		// 벽 만남
-		if (map[nr][nc] == -1) break;
+		maps[r][c] += 8 * delta;
 
-		map[nr][nc] += delta;
-
-		_r = nr;
-		_c = nc;
+		r += dr[dir];
+		c += dc[dir];
 	}
 }
 
-void Draw(int cctv, int dir, int delta) {
-	if (cctv == -1) return;
-	int _r = r[cctv];
-	int _c = c[cctv];
-	int _t = type[cctv];
-
-	// 우 하 좌 상
-	switch (_t)
-	{
-	case 0:
-		Light(_r, _c, (0 + dir) % 4, delta);
-		break;
-	case 1:
-		Light(_r, _c, (0 + dir) % 4, delta);
-		Light(_r, _c, (2 + dir) % 4, delta);
-		break;
-	case 2:
-		Light(_r, _c, (0 + dir) % 4, delta);
-		Light(_r, _c, (3 + dir) % 4, delta);
-		break;
-	case 3:
-		Light(_r, _c, (0 + dir) % 4, delta);
-		Light(_r, _c, (3 + dir) % 4, delta);
-		Light(_r, _c, (2 + dir) % 4, delta);
-		break;
-	case 4:
-		Light(_r, _c, (0 + dir) % 4, delta);
-		Light(_r, _c, (1 + dir) % 4, delta);
-		Light(_r, _c, (2 + dir) % 4, delta);
-		Light(_r, _c, (3 + dir) % 4, delta);
-		break;
-	default:
-		break;
+void Draw(CCTV cctv, int rotate, int delta) {
+	if (cctv.type == 1) {
+		DrawStraight(cctv.r, cctv.c, ((int)RIGHT + rotate) % 4, delta);
 	}
-
-
+	else if (cctv.type == 2) {
+		DrawStraight(cctv.r, cctv.c, ((int)RIGHT + rotate) % 4, delta);
+		DrawStraight(cctv.r, cctv.c, ((int)LEFT + rotate) % 4, delta);
+	}
+	else if (cctv.type == 3) {
+		DrawStraight(cctv.r, cctv.c, ((int)RIGHT + rotate) % 4, delta);
+		DrawStraight(cctv.r, cctv.c, ((int)UP + rotate) % 4, delta);
+	}
+	else if (cctv.type == 4) {
+		DrawStraight(cctv.r, cctv.c, ((int)LEFT + rotate) % 4, delta);
+		DrawStraight(cctv.r, cctv.c, ((int)UP + rotate) % 4, delta);
+		DrawStraight(cctv.r, cctv.c, ((int)RIGHT + rotate) % 4, delta);
+	}
+	else if (cctv.type == 5) {
+		DrawStraight(cctv.r, cctv.c, ((int)LEFT + rotate) % 4, delta);
+		DrawStraight(cctv.r, cctv.c, ((int)UP + rotate) % 4, delta);
+		DrawStraight(cctv.r, cctv.c, ((int)RIGHT + rotate) % 4, delta);
+		DrawStraight(cctv.r, cctv.c, ((int)DOWN + rotate) % 4, delta);
+	}
+	else {
+		cout << "잘못된 cctv type 입니다.\n";
+	}
 }
 
-void PrintMap() {
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < M; j++) {
-			cout << map[i][j] << ' ';
-		}
-		cout << '\n';
+int CountingUnvisibleArea() {
+	int ret = 0;
+	FOR(r, N)
+		FOR(c, M) {
+		ret += (maps[r][c] == 0);
 	}
-	cout << '\n';
+
+	return ret;
 }
 
-int DFS(int cctv, int visited) {
-	if (cctv == K) {
-		//PrintMap();
-		if (CountInvisible() == 3) {
-			//PrintMap();
-		}
-		return CountInvisible();
+int DFS(int idx) {
+	if (idx == cctvs.size()) {
+		return CountingUnvisibleArea();
 	}
 
-	int& ret = cache[visited];
-	if (ret != -1) return ret;
-
-	for (int i = 0; i < 4; i++) {
-		Draw(cctv, i, 1);
-		if (ret == -1)
-			ret = DFS(cctv + 1, visited + (i << (cctv * 2)));
-		else
-			ret = min(ret, DFS(cctv + 1, visited + (i << (cctv * 2))));
-		Draw(cctv, i, -1);
+	int ret = INF;
+	for (int rotate = 0; rotate < 4; rotate++) {
+		Draw(cctvs[idx], rotate, 1);
+		ret = min(ret, DFS(idx + 1));
+		Draw(cctvs[idx], rotate, -1);
 	}
 
 	return ret;
 }
 
 void Solution() {
-	cout << DFS(0, 0);
+	cout << DFS(0);
 }
 
 int main() {
@@ -175,10 +147,9 @@ int main() {
 	int T = 1;
 	//cin >> T;
 	while (T--) {
-		Inputs();
+		if (!Inputs()) break;
 		Solution();
 	}
-
 
 	return 0;
 }
