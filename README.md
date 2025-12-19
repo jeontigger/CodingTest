@@ -48,6 +48,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0212-word-search-ii](https://github.com/jeontigger/CodingTest/tree/master/0212-word-search-ii) |
 | [0219-contains-duplicate-ii](https://github.com/jeontigger/CodingTest/tree/master/0219-contains-duplicate-ii) |
 | [0239-sliding-window-maximum](https://github.com/jeontigger/CodingTest/tree/master/0239-sliding-window-maximum) |
+| [0283-move-zeroes](https://github.com/jeontigger/CodingTest/tree/master/0283-move-zeroes) |
 | [0315-count-of-smaller-numbers-after-self](https://github.com/jeontigger/CodingTest/tree/master/0315-count-of-smaller-numbers-after-self) |
 | [0322-coin-change](https://github.com/jeontigger/CodingTest/tree/master/0322-coin-change) |
 | [0327-count-of-range-sum](https://github.com/jeontigger/CodingTest/tree/master/0327-count-of-range-sum) |
@@ -270,6 +271,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Two Pointers
 |  |
 | ------- |
+| [0283-move-zeroes](https://github.com/jeontigger/CodingTest/tree/master/0283-move-zeroes) |
 | [0567-permutation-in-string](https://github.com/jeontigger/CodingTest/tree/master/0567-permutation-in-string) |
 ## Breadth-First Search
 |  |
