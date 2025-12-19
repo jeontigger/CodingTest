@@ -149,6 +149,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0003-longest-substring-without-repeating-characters](https://github.com/jeontigger/CodingTest/tree/master/0003-longest-substring-without-repeating-characters) |
 | [0022-generate-parentheses](https://github.com/jeontigger/CodingTest/tree/master/0022-generate-parentheses) |
+| [0038-count-and-say](https://github.com/jeontigger/CodingTest/tree/master/0038-count-and-say) |
 | [0076-minimum-window-substring](https://github.com/jeontigger/CodingTest/tree/master/0076-minimum-window-substring) |
 | [0079-word-search](https://github.com/jeontigger/CodingTest/tree/master/0079-word-search) |
 | [0127-word-ladder](https://github.com/jeontigger/CodingTest/tree/master/0127-word-ladder) |
