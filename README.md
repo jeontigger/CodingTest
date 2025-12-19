@@ -7,6 +7,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0050-powx-n](https://github.com/jeontigger/CodingTest/tree/master/0050-powx-n) |
+| [0066-plus-one](https://github.com/jeontigger/CodingTest/tree/master/0066-plus-one) |
 | [0069-sqrtx](https://github.com/jeontigger/CodingTest/tree/master/0069-sqrtx) |
 | [0168-excel-sheet-column-title](https://github.com/jeontigger/CodingTest/tree/master/0168-excel-sheet-column-title) |
 | [0241-different-ways-to-add-parentheses](https://github.com/jeontigger/CodingTest/tree/master/0241-different-ways-to-add-parentheses) |
@@ -33,6 +34,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0040-combination-sum-ii](https://github.com/jeontigger/CodingTest/tree/master/0040-combination-sum-ii) |
 | [0046-permutations](https://github.com/jeontigger/CodingTest/tree/master/0046-permutations) |
 | [0047-permutations-ii](https://github.com/jeontigger/CodingTest/tree/master/0047-permutations-ii) |
+| [0066-plus-one](https://github.com/jeontigger/CodingTest/tree/master/0066-plus-one) |
 | [0079-word-search](https://github.com/jeontigger/CodingTest/tree/master/0079-word-search) |
 | [0081-search-in-rotated-sorted-array-ii](https://github.com/jeontigger/CodingTest/tree/master/0081-search-in-rotated-sorted-array-ii) |
 | [0105-construct-binary-tree-from-preorder-and-inorder-traversal](https://github.com/jeontigger/CodingTest/tree/master/0105-construct-binary-tree-from-preorder-and-inorder-traversal) |
