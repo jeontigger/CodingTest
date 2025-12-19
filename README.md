@@ -8,6 +8,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0050-powx-n](https://github.com/jeontigger/CodingTest/tree/master/0050-powx-n) |
 | [0069-sqrtx](https://github.com/jeontigger/CodingTest/tree/master/0069-sqrtx) |
+| [0168-excel-sheet-column-title](https://github.com/jeontigger/CodingTest/tree/master/0168-excel-sheet-column-title) |
 | [0241-different-ways-to-add-parentheses](https://github.com/jeontigger/CodingTest/tree/master/0241-different-ways-to-add-parentheses) |
 | [0412-fizz-buzz](https://github.com/jeontigger/CodingTest/tree/master/0412-fizz-buzz) |
 ## Binary Search
@@ -147,6 +148,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0079-word-search](https://github.com/jeontigger/CodingTest/tree/master/0079-word-search) |
 | [0127-word-ladder](https://github.com/jeontigger/CodingTest/tree/master/0127-word-ladder) |
 | [0139-word-break](https://github.com/jeontigger/CodingTest/tree/master/0139-word-break) |
+| [0168-excel-sheet-column-title](https://github.com/jeontigger/CodingTest/tree/master/0168-excel-sheet-column-title) |
 | [0212-word-search-ii](https://github.com/jeontigger/CodingTest/tree/master/0212-word-search-ii) |
 | [0241-different-ways-to-add-parentheses](https://github.com/jeontigger/CodingTest/tree/master/0241-different-ways-to-add-parentheses) |
 | [0257-binary-tree-paths](https://github.com/jeontigger/CodingTest/tree/master/0257-binary-tree-paths) |
