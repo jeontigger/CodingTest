@@ -34,6 +34,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0040-combination-sum-ii](https://github.com/jeontigger/CodingTest/tree/master/0040-combination-sum-ii) |
 | [0046-permutations](https://github.com/jeontigger/CodingTest/tree/master/0046-permutations) |
 | [0047-permutations-ii](https://github.com/jeontigger/CodingTest/tree/master/0047-permutations-ii) |
+| [0054-spiral-matrix](https://github.com/jeontigger/CodingTest/tree/master/0054-spiral-matrix) |
 | [0066-plus-one](https://github.com/jeontigger/CodingTest/tree/master/0066-plus-one) |
 | [0079-word-search](https://github.com/jeontigger/CodingTest/tree/master/0079-word-search) |
 | [0081-search-in-rotated-sorted-array-ii](https://github.com/jeontigger/CodingTest/tree/master/0081-search-in-rotated-sorted-array-ii) |
@@ -307,6 +308,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Matrix
 |  |
 | ------- |
+| [0054-spiral-matrix](https://github.com/jeontigger/CodingTest/tree/master/0054-spiral-matrix) |
 | [0079-word-search](https://github.com/jeontigger/CodingTest/tree/master/0079-word-search) |
 | [0130-surrounded-regions](https://github.com/jeontigger/CodingTest/tree/master/0130-surrounded-regions) |
 | [0200-number-of-islands](https://github.com/jeontigger/CodingTest/tree/master/0200-number-of-islands) |
@@ -408,5 +410,6 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Simulation
 |  |
 | ------- |
+| [0054-spiral-matrix](https://github.com/jeontigger/CodingTest/tree/master/0054-spiral-matrix) |
 | [0412-fizz-buzz](https://github.com/jeontigger/CodingTest/tree/master/0412-fizz-buzz) |
 <!---LeetCode Topics End-->
