@@ -9,6 +9,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0050-powx-n](https://github.com/jeontigger/CodingTest/tree/master/0050-powx-n) |
 | [0069-sqrtx](https://github.com/jeontigger/CodingTest/tree/master/0069-sqrtx) |
 | [0241-different-ways-to-add-parentheses](https://github.com/jeontigger/CodingTest/tree/master/0241-different-ways-to-add-parentheses) |
+| [0412-fizz-buzz](https://github.com/jeontigger/CodingTest/tree/master/0412-fizz-buzz) |
 ## Binary Search
 |  |
 | ------- |
@@ -149,6 +150,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0212-word-search-ii](https://github.com/jeontigger/CodingTest/tree/master/0212-word-search-ii) |
 | [0241-different-ways-to-add-parentheses](https://github.com/jeontigger/CodingTest/tree/master/0241-different-ways-to-add-parentheses) |
 | [0257-binary-tree-paths](https://github.com/jeontigger/CodingTest/tree/master/0257-binary-tree-paths) |
+| [0412-fizz-buzz](https://github.com/jeontigger/CodingTest/tree/master/0412-fizz-buzz) |
 | [0438-find-all-anagrams-in-a-string](https://github.com/jeontigger/CodingTest/tree/master/0438-find-all-anagrams-in-a-string) |
 | [0474-ones-and-zeroes](https://github.com/jeontigger/CodingTest/tree/master/0474-ones-and-zeroes) |
 | [0567-permutation-in-string](https://github.com/jeontigger/CodingTest/tree/master/0567-permutation-in-string) |
@@ -397,4 +399,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0698-partition-to-k-equal-sum-subsets](https://github.com/jeontigger/CodingTest/tree/master/0698-partition-to-k-equal-sum-subsets) |
 | [0847-shortest-path-visiting-all-nodes](https://github.com/jeontigger/CodingTest/tree/master/0847-shortest-path-visiting-all-nodes) |
+## Simulation
+|  |
+| ------- |
+| [0412-fizz-buzz](https://github.com/jeontigger/CodingTest/tree/master/0412-fizz-buzz) |
 <!---LeetCode Topics End-->
