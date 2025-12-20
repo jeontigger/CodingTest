@@ -36,6 +36,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0047-permutations-ii](https://github.com/jeontigger/CodingTest/tree/master/0047-permutations-ii) |
 | [0054-spiral-matrix](https://github.com/jeontigger/CodingTest/tree/master/0054-spiral-matrix) |
 | [0066-plus-one](https://github.com/jeontigger/CodingTest/tree/master/0066-plus-one) |
+| [0068-text-justification](https://github.com/jeontigger/CodingTest/tree/master/0068-text-justification) |
 | [0073-set-matrix-zeroes](https://github.com/jeontigger/CodingTest/tree/master/0073-set-matrix-zeroes) |
 | [0079-word-search](https://github.com/jeontigger/CodingTest/tree/master/0079-word-search) |
 | [0081-search-in-rotated-sorted-array-ii](https://github.com/jeontigger/CodingTest/tree/master/0081-search-in-rotated-sorted-array-ii) |
@@ -151,6 +152,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0006-zigzag-conversion](https://github.com/jeontigger/CodingTest/tree/master/0006-zigzag-conversion) |
 | [0022-generate-parentheses](https://github.com/jeontigger/CodingTest/tree/master/0022-generate-parentheses) |
 | [0038-count-and-say](https://github.com/jeontigger/CodingTest/tree/master/0038-count-and-say) |
+| [0068-text-justification](https://github.com/jeontigger/CodingTest/tree/master/0068-text-justification) |
 | [0076-minimum-window-substring](https://github.com/jeontigger/CodingTest/tree/master/0076-minimum-window-substring) |
 | [0079-word-search](https://github.com/jeontigger/CodingTest/tree/master/0079-word-search) |
 | [0127-word-ladder](https://github.com/jeontigger/CodingTest/tree/master/0127-word-ladder) |
@@ -418,5 +420,6 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0054-spiral-matrix](https://github.com/jeontigger/CodingTest/tree/master/0054-spiral-matrix) |
+| [0068-text-justification](https://github.com/jeontigger/CodingTest/tree/master/0068-text-justification) |
 | [0412-fizz-buzz](https://github.com/jeontigger/CodingTest/tree/master/0412-fizz-buzz) |
 <!---LeetCode Topics End-->
