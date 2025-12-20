@@ -84,6 +84,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [1458-max-dot-product-of-two-subsequences](https://github.com/jeontigger/CodingTest/tree/master/1458-max-dot-product-of-two-subsequences) |
 | [1493-longest-subarray-of-1s-after-deleting-one-element](https://github.com/jeontigger/CodingTest/tree/master/1493-longest-subarray-of-1s-after-deleting-one-element) |
 | [1695-maximum-erasure-value](https://github.com/jeontigger/CodingTest/tree/master/1695-maximum-erasure-value) |
+| [1706-where-will-the-ball-fall](https://github.com/jeontigger/CodingTest/tree/master/1706-where-will-the-ball-fall) |
 | [1981-minimize-the-difference-between-target-and-chosen-elements](https://github.com/jeontigger/CodingTest/tree/master/1981-minimize-the-difference-between-target-and-chosen-elements) |
 ## Sliding Window
 |  |
@@ -331,6 +332,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0773-sliding-puzzle](https://github.com/jeontigger/CodingTest/tree/master/0773-sliding-puzzle) |
 | [0864-shortest-path-to-get-all-keys](https://github.com/jeontigger/CodingTest/tree/master/0864-shortest-path-to-get-all-keys) |
 | [1293-shortest-path-in-a-grid-with-obstacles-elimination](https://github.com/jeontigger/CodingTest/tree/master/1293-shortest-path-in-a-grid-with-obstacles-elimination) |
+| [1706-where-will-the-ball-fall](https://github.com/jeontigger/CodingTest/tree/master/1706-where-will-the-ball-fall) |
 | [1981-minimize-the-difference-between-target-and-chosen-elements](https://github.com/jeontigger/CodingTest/tree/master/1981-minimize-the-difference-between-target-and-chosen-elements) |
 ## Binary Search Tree
 |  |
@@ -422,4 +424,5 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0054-spiral-matrix](https://github.com/jeontigger/CodingTest/tree/master/0054-spiral-matrix) |
 | [0068-text-justification](https://github.com/jeontigger/CodingTest/tree/master/0068-text-justification) |
 | [0412-fizz-buzz](https://github.com/jeontigger/CodingTest/tree/master/0412-fizz-buzz) |
+| [1706-where-will-the-ball-fall](https://github.com/jeontigger/CodingTest/tree/master/1706-where-will-the-ball-fall) |
 <!---LeetCode Topics End-->
